@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>新文章</title>
+</head>
+
+<body>
+    <!--创建页眉-->
+    <header role="banner"></header>
+    <nav role="navigation">
+        <ol>
+            <li>the first web</li>
+            <li>the second web</li>
+            <li>the thead web</li>
+        </ol>
+    </nav>
+
+    <!--网页主体-->
+    <main role="main">
+        <article>
+            <h1>The Article&Text</h1>
+            <section>
+                <h2>浏览器</h2>
+                <ol>
+                    <li>google</li>
+                    <li>百度</li>
+                </ol>
+
+            </section>
+            <section>
+                <h2>搜索内容</h2>
+                <ol>
+                    <li>图片</li>
+                    <li>文字</li>
+                </ol>
+            </section>
+
+            <cite lang="zh">
+                cite用于对某内容源的引用
+            </cite>
+
+            <blockquote cite="https://www.baidu.com">用于块级文本的引述（块级文本默认缩进）</blockquote>
+            <q cite=url>用于行内文本的引述</q>
+            <figure>
+                <!--figcaption作为图的标题-->
+                <figcaption><b>图，用于文章中的插图、表格一类</b></figcaption>
+                <img src="images/parallax.png" width=100px>
+            </figure>
+
+            <p>氢气的分子式是H<sup>2</sup></p>
+            <!--sup创建上标-->
+            <p>水的分子式是H<sub>2</sub>O</p>
+            <!--sub创建下标-->
+            <!--aside可以作为侧栏或者与整体内容相关性不大的部分存在，也就是可以单独存在的部分-->
+
+            <del>删除文本内容</del>
+            <ins>下划线</ins><br/>
+            <s>标记不再准确或不再相关的文本</s>
+
+            <aside role="complementary">
+                <p>更多信息请访问
+                    <a href="https://www.baidu.com">百度</a></p>
+            </aside>
+
+            <!--页脚，通常包含版权声明，或者包含隐私的部分-->
+            <footer role="contentinfo" title="页脚">
+                <!--title是提示标签，可以在无障碍阅读器中阅读出来，类似于img元素的alt-->
+                <small>关注我请@2200522850@qq.com</small>
+                <small>本页面受中华人民共和国相关法律保护</small>
+                <!--small用于表示免责声明、注解、署名等类型的文本-->
+                <strong>strong用于输入想标记为重要内容的文本</strong>
+                <em>em用于想要强调的文本</em>
+                <b>b元素表示出于实用目的提醒读者注意的一块文字，不传达额外的重要性</b>
+                <i>i元素表示一块不同于其他文字的文字，具有不同的语态，或用于分类名称，技术名称等</i>
+            </footer>
+        </article>
+        <!--role表示地标角色，地标角色是为了适用无障碍网络应用技术而产生的-->
+    </main>
+</body>
+
+</html>
