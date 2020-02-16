@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="#" />
+    <style>
+        header {
+            text-align: center;
+        }
+        
+        .main {
+            height: 30px;
+            width: 100%;
+            text-align: center;
+            align-content: center;
+            align-items: center;
+            list-style-type: none;
+        }
+        
+        .second,
+        .main li {
+            background-color: aqua;
+            float: left;
+            margin: 0 0;
+            border: 1px solid;
+            width: 6rem;
+        }
+        
+        .second {
+            border: none;
+        }
+        
+        .second:hover~.chird-home {
+            display: block;
+            list-style-type: none;
+            position: relative;
+            width: 6rem;
+            margin-top: -7px;
+        }
+        
+        .chird-home {
+            display: none;
+        }
+        
+        .chird-home li {
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="main">
+            <div class="second">
+                <li>Home</li>
+            </div>
+
+            <li>First</li>
+            <li>内容三</li>
+            <li>内容四</li>
+            <li>内容五</li>
+            <div class="chird-home">
+                <li>home1</li>
+                <li>home2</li>
+                <li>home3</li>
+                <li>home4</li>
+            </div>
+        </div>
+    </header>
+</body>
+
+</html>

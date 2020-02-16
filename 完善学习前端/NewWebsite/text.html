@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .F {
+            width: 100%;
+            height: 5rem;
+            background-color: rgba(127, 255, 212, 0.664);
+            display: flex;
+            flex-direction: row;
+            vertical-align: super;
+            text-align: center;
+        }
+        
+        li {
+            background-color: blue;
+            list-style-type: none;
+            margin-right: 1rem;
+        }
+        
+        .S {
+            display: none;
+        }
+        
+        .F:hover .S {
+            display: block;
+            margin: 0rem;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="F">
+        <li>First</li>
+        <li>Second</li>
+    </div>
+    <div class="S">
+        <li>Third</li>
+        <li>Firth</li>
+    </div>
+</body>
+
+</html>

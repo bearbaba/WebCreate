@@ -3,10 +3,70 @@
 
 <head>
     <meta charset="utf-8">
+
+    <!--content="width=device-width"表示将大小自适应为屏幕的大小-->
+    <meta name="viewport" content="width=device-width">
     <title>新文章</title>
+
+    <!--以下表示以外联方式嵌入css样式-->
+    <link rel="stylesheet" href="">
+
+    <!--以下方式表示使用嵌入样式表的方式使用css样式-->
+
+    <style>
+        p {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        /*伪类的使用，first-letter表示第一个字母，first-line表示第一行 */
+        
+        li:first-letter {
+            color: red;
+        }
+        
+        table {
+            border-collapse: collapse;
+        }
+        
+        th,
+        td {
+            border-width: 1px;
+            border-style: solid;
+        }
+        
+        @media screen and (min-width: 320px) {
+            body {
+                background-color: blue;
+            }
+        }
+        
+        @media screen and (min-width:700px) {
+            body {
+                background-color: red;
+            }
+        }
+        
+        @media screen and (min-width:900px) {
+            body {
+                background-color: white;
+            }
+        }
+        
+        a[href="#bottom"]:visited {
+            color: rgb(255, 255, 0);
+        }
+        
+        #box1 {
+            width: 10em;
+            height: 10em;
+            background-color: aqua;
+        }
+    </style>
+
+    <!--在style或link中添加media表示指定与媒体相关的样式表
+        <style media="print">表示该样式在打印时使用 -->
 </head>
 
-<body>
+<body class="" id="">
     <!--创建页眉-->
     <header role="banner"></header>
     <nav role="navigation">
@@ -26,6 +86,7 @@
                 <ol>
                     <li>google</li>
                     <li>百度</li>
+                    <li><a href="#bottom">点击可移动到底部,该超链接创建了一个锚点，可以移动到底部</a></li>
                 </ol>
 
             </section>
@@ -37,6 +98,7 @@
                 </ol>
             </section>
 
+            <div id="box1"></div>
             <cite lang="zh">
                 cite用于对某内容源的引用
             </cite>
@@ -59,13 +121,75 @@
             <ins>下划线</ins><br/>
             <s>标记不再准确或不再相关的文本</s>
 
+            <!--pre能保持在HTML代码中的原有模样-->
+            <pre>
+                <code>
+                    #include&ltstdio&gt<!--&lt与&gt分别表示<>-->
+                    int main(){
+                        int a=2;
+                        int b=3;
+                        printf(a);
+                    }
+                </code>
+            </pre>
+            <p lang="he"><bdo dir="rtl">让文本文字从右往左</bdo></p>
+            <!--he表示希伯来语-->
+            progress用于表示进度<progress max=100 value=10></progress><br/>
+            <span>meter与progress类似<meter value=0.8></meter></span>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="2">属性选择器参考表</th>
+                    </tr>
+                    <tr>
+                        <th>选择器</th>
+                        <th>属性值</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>[attribute]</td>
+                        <td>匹配指定属性，不论具体值是多少</td>
+                    </tr>
+                    <tr>
+                        <td>[attribute="value"]</td>
+                        <td>完全匹配指定属性值</td>
+                    </tr>
+                    <tr>
+                        <td>[attribute|="value"</td>
+                        <td>匹配以value打头的属性值</td>
+                    </tr>
+                    <tr>
+                        <td>[attribute~="value"</td>
+                        <td>属性是以空格分隔的多个单词，其中有一个完全匹配的指定值</td>
+                    </tr>
+                    <tr>
+                        <td>[attribute^="value"</td>
+                        <td>属性值以value开头，value为完整的单词或单词的一部分</td>
+                    </tr>
+                    <tr>
+                        <td>[attribute$="value"</td>
+                        <td>属性值以value结尾，value为完整的单词或单词的一部分</td>
+
+                    </tr>
+                    <tr>
+                        <td>[attribute*="value"</td>
+                        <td>匹配属性值为指定值的字符串</td>
+                    </tr>
+                </tbody>
+            </table>
+
             <aside role="complementary">
                 <p>更多信息请访问
                     <a href="https://www.baidu.com">百度</a></p>
             </aside>
-
+            <mark>用于突出显示文本</mark>
+            <p style="margin-left:2em">margin-left:2em表示把将元素的左外边距设为元素字号的两倍</p>
+            <p>ps、pt磅值等绝对单位使用越来越少，更多地使用百分数、em这样的相对于父级元素字号大小的单位了</p>
+            <p style="background-color:rgba(80,0,170,0.6)">rgba是在rgb的基础上添加了一个alpha透明值的结果，0表示完全透明，1表示完全不透明</p>
             <!--页脚，通常包含版权声明，或者包含隐私的部分-->
-            <footer role="contentinfo" title="页脚">
+            <footer id="bottom" role="contentinfo" title="页脚">
                 <!--title是提示标签，可以在无障碍阅读器中阅读出来，类似于img元素的alt-->
                 <small>关注我请@2200522850@qq.com</small>
                 <small>本页面受中华人民共和国相关法律保护</small>
