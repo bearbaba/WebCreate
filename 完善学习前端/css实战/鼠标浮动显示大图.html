@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="#">
+    <style>
+        .img_box {
+            width: 200px;
+            height: 100px;
+        }
+        
+        .img1 {
+            width: 200px;
+            height: 100px;
+            margin: 1px;
+        }
+        
+        .lager_img1 {
+            width: 400px;
+            height: 200px;
+            position: absolute;
+            left: 212px;
+            top: 9.8px;
+            display: none;
+        }
+        
+        .img1:hover+.lager_img1 {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="img_box">
+        <img class="img1" src="img/175729-15504838491287.jpg" />
+        <img class="lager_img1" src="img/175729-15504838491287.jpg" />
+    </div>
+</body>
+
+</html>
