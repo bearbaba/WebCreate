@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>清除图片下方间隙</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <style>
+        .img_box {
+            width: 300px;
+            /*不设置与图片大小相同的高度时，会出现一个间隙*/
+            border: 1px solid black;
+        }
+        
+        img {
+            vertical-align: top;
+        }
+        /*设置一个图片的不透明度，当鼠标指针浮动在图片上时，不透明度降低*/
+        
+        img:hover {
+            filter: opacity(70%);
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="img_box">
+        <img src="img/截图.png" alt="图片">
+    </div>
+    <script src="" async defer></script>
+</body>
+
+</html>

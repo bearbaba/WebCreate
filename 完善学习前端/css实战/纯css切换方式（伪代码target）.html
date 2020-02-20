@@ -16,7 +16,6 @@
         .content {
             width: 200px;
             height: 200px;
-            overflow: hidden;
         }
         
         .box {
@@ -28,6 +27,10 @@
             position: relative;
             margin-left: 10px;
             margin-right: 35px;
+        }
+        
+        .content div {
+            position: absolute;
         }
         
         .content1 {
@@ -45,6 +48,14 @@
         #last {
             margin-left: 38px;
             margin-right: 0px
+        }
+        
+        #one:target,
+        #two:target,
+        #three:target {
+            z-index: 90;
+            background-color: white;
+            color: aquamarine;
         }
     </style>
 </head>
