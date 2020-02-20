@@ -2,23 +2,114 @@
 <html>
 
 <head>
+    <script>
+    </script>
     <style type="text/css">
         .out {
             width: 100%;
-            height: 500px;
-            border-style: solid;
-            border-width: 1px;
+            height: 100%;
         }
-        .box1{
-            width:450px;
-
+        
+        .box1 {
+            width: 450px;
+            height: 32px;
+            float: right;
+            position: relative;
+            top: 10px;
+            right: 10px;
+            padding: 6px;
+        }
+        
+        .box1_box1 {
+            height: 20px;
+            position: relative;
+            top: 5px;
+        }
+        
+        .normal_block {
+            font-size: 16px;
+            position: relative;
+            /*left: 14px;*/
+            margin-left: 12px;
+        }
+        
+        #letf_block {
+            float: right;
+        }
+        
+        .box2 {
+            position: relative;
+            top: 200px;
+            left: 450px;
+        }
+        
+        .search_block {
+            width: 428px;
+            height: 30px;
+            border-style: double;
+            border-width: 1px;
+            padding: 4px;
+        }
+        
+        input {
+            width: 338px;
+            height: 16px;
+        }
+        
+        #block_level {
+            position: relative;
+            top: 2px;
+            left: 5px;
+            border: none;
+            outline: none;
+        }
+        
+        #img_level {
+            position: relative;
+            top: 6px;
+            left: 5px;
+        }
+        
+        .baidu_word {
+            width: 60px;
+            height: 38px;
+            background-color: blue;
+            float: right;
+            position: relative;
+            left: 4px;
+            bottom: 4px;
+        }
+        
+        #font_level {
+            position: relative;
+            top: 25%;
+            color: white;
+            font-size: 12px;
+            left: 6px;
         }
     </style>
 </head>
 
 <body>
     <div class="out">
-        
+        <div class="box1">
+            <div class="box1_box1">
+                <span class="">新闻</span><span class="normal_block">hao123</span><span class="normal_block">学术</span><span class="normal_block">地图</span><span class="normal_block">视频</span><span class="normal_block">贴吧</span><span class="normal_block">用户</span>
+                <span class="normal_block">设置</span><span id="letf_block">更多产品</span>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="">
+                <img src="picture/下载.jpg">
+            </div>
+            <div class="search_block">
+                <input type="text" id="block_level">
+                <img src="picture/23e9e4c1-6f0e-42da-a4ea-759ca3a35482.png" id="img_level">
+                <div class="baidu_word">
+                    <div id="font_level">搜索一下</div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 
