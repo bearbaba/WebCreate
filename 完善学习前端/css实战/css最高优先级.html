@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS最高优先级的使用</title>
+
+
+    <style>
+        /*!important能使元素的某一个属性的优先级设置成最高，高于id选择器的设置*/
+        
+        .out_box {
+            color: red !important;
+        }
+        
+        #in_ele {
+            color: blue;
+            font: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="out_box">
+        <p id="in_ele" class="out_box">Hello</p>
+    </div>
+</body>
+
+</html>
