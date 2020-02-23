@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外边距击穿</title>
+    <!-- 
+    相邻的定义为:同级或者嵌套的盒元素，它们之间没有非空内容,并且父元素没有内边距和边框分隔
+
+    行级元素只有左右外边距，没有上下外边距
+
+    如果子元素不是块级元素，不会出现margin击穿问题
+
+    外边距击穿的处理方法：
+
+    > 1. 父元素设置溢出隐藏：`overflow:hidden`
+    > 2. 给父元素设置内边距，即使只有`1px`
+    > 3. 给父元素设置边框 
+    -->
+    <style>
+        .box {
+            background-color: blue;
+            width: 300px;
+            height: 500px;
+        }
+        
+        img {
+            margin-top: 100px;
+        }
+        
+        .in_box {
+            margin-top: 100px;
+            /*此时父级元素与此元素同时下移100px*/
+            background-color: red;
+            width: 100px;
+            height: 100px;
+        }
+        
+        p {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <p>hello</p>
+
+        <!--块级元素中-->
+        <!--img是行内替换元素拥有margin-top属性-->
+        <img src="img/截图.png" alt="">
+
+        <div class="in_box"></div>
+    </div>
+</body>
+
+</html>
