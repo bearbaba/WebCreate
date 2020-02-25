@@ -1,0 +1,51 @@
+{
+  "id": "1655695",
+  "name": "new",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "13125064",
+      "name": "004-owl-3",
+      "font_class": "-owl-",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "13125075",
+      "name": "015-lab-3",
+      "font_class": "-lab-",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "13125076",
+      "name": "016-book-6",
+      "font_class": "-book-",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "13125116",
+      "name": "064-student-1",
+      "font_class": "-student-",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "13125132",
+      "name": "088-school-bag",
+      "font_class": "-school-bag",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "13125165",
+      "name": "077-research-2",
+      "font_class": "-research-",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    }
+  ]
+}
