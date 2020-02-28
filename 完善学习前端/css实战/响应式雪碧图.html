@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>响应式雪碧图</title>
+    <style>
+        .box {
+            width: 500px;
+            height: 100px;
+        }
+        
+        .box a {
+            display: block;
+            width: 100px;
+            height: 100px;
+            float: left;
+            border-radius: 5px;
+            overflow: hidden;
+            background: url("img/实例-引入.png");
+            margin-right: 20px;
+        }
+        /* .box a:hover {
+            width: 110px;
+            height: 110px;
+            border: 2px;
+            border-style: dashed;
+            background-size: 110px 110px; -->
+        } */
+        
+        #img1 {
+            background-position: 0% 0%;
+        }
+        
+        #img2 {
+            background-position: 0 33.1%;
+        }
+        
+        #img3 {
+            background-position: 0 66.1%;
+        }
+        
+        #img4 {
+            background-position: 0 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <a href="" id="img1"></a>
+        <a href="" id="img2"></a>
+        <a href=" " id="img3"></a>
+        <a href=" " id="img4"></a>
+    </div>
+</body>
+
+</html>
