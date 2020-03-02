@@ -4,9 +4,39 @@
     background-color: bisque;
     display: -webkit-box;
     display: flex;
+    padding: 10px;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
+    /*表示flex以行方向进行排列*/
+    /*flex-direction: row;*/
+    /*表示flex以列方向排列*/
+    /*flex-direction:column;*/
+    /*表示以列方向进行反序排列*/
+    /* flex-direction: column-reverse; */
+    /*表示换行*/
+    flex-wrap: wrap;
+    /*表示不换行*/
+    /*flex-wrap: nowrap;*/
+    /*表示反顺序换行*/
+    /* flex-wrap: wrap-reverse; */
+    /*表示元素以主轴居起始方向排列*/
+    /* justify-content: flex-start; */
+    /*表示元素以主轴结束方向开始排列*/
+    /*在每行上均匀分配弹性元素。相邻元素间距离相同。每行第一个元素与行首对齐，每行最后一个元素与行尾对齐。*/
+    /* justify-content: space-between; */
+    /*在每行上均匀分配弹性元素。相邻元素间距离相同。每行第一个元素到行首的距离和每行最后一个元素到行尾的距离将会是相邻元素之间距离的一半。*/
+    /* justify-content: space-around; */
+    /*flex项都沿着主轴均匀分布在指定的对齐容器中。相邻flex项之间的间距，主轴起始位置到第一个flex项的间距,，主轴结束位置到最后一个flex项的间距，都完全一样。*/
+    /* justify-content: space-evenly; */
+    /* justify-content: flex-end; */
+    /*表示元素以主轴方向居中对齐*/
+    /* justify-content: center; */
+    /*表示沿文字基线方向对齐*/
+    /* align-items: baseline; */
+    /*在不设置子元素高度的前提下，表示子元素沿交叉轴方向延伸*/
+    /* align-items: stretch; */
+    /*表示子元素以交叉轴结束位置开始排列*/
+    /* align-items: flex-end; */
 }
 
 .out_box>.box {
@@ -14,5 +44,6 @@
     height: 50px;
     background-color: red;
     text-align: center;
-    margin: 20px 20px;
+    overflow: hidden;
+    margin: 10px 20px;
 }
