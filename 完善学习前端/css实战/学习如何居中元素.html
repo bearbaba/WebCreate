@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>学习如何居中元素</title>
+    <style>
+        .out_box {
+            width: 1000px;
+            height: 500px;
+            background-color: bisque;
+            /*设置内边距水平居中 (1000px-100px)/2*/
+            /*padding-left: 450px;*/
+            /*适用于行内元素*/
+            text-align: center;
+        }
+        
+        .in_box {
+            width: 100px;
+            height: 100px;
+            background-color: brown;
+            /*设置外边距水平居中法*/
+            /*margin: 0 auto;*/
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="out_box">
+        <div class="in_box">hello</div>
+    </div>
+</body>
+
+</html>
