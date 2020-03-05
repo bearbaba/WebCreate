@@ -12,8 +12,8 @@
             height: 500px;
             background-color: bisque;
             display: -webkit-box;
-            display: flex;
-            padding: 10px;
+            <!-- display: flex;
+            -->padding: 10px;
             -webkit-box-orient: horizontal;
             -webkit-box-direction: normal;
             /*表示flex以行方向进行排列*/
@@ -56,6 +56,8 @@
             /* align-items: flex-end; */
             /*align-items与align-content的区别：align-items只用于单行使用flex排列的子元素，而
         对于多行的子元素则无能为力，而align-content则可适用于多行子元素的情况下。*/
+            /*flex不仅适用块级元素，也适用行内元素及行内块级元素，且一般情况下行内元素无法设置宽度，但使用了flex布局后
+        行内元素也能设置宽度*/
         }
         
         .out_box>.box {
@@ -71,10 +73,14 @@
 
 <body>
     <div class="out_box">
-        <div class="box">box1</div>
+        <span class="box">box1</span>
+        <span class="box">box2</span>
+        <span class="box">box3</span>
+        <span class="box">box4</span>
+        <!-- <div class="box">box1</div>
         <div class="box">box2</div>
         <div class="box">box3</div>
-        <div class="box" style="font-size: 20px;">box4</div>
+        <div class="box" style="font-size: 20px;">box4</div> -->
         <!--<div class="box">box5</div>
         <div class="box">box6</div>
         <div class="box">box7</div>
