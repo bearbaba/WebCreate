@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单</title>
+</head>
+
+<body>
+    <form action="" method="GET" name="表单1">
+        <fieldset>
+            <legend>一个表单</legend>
+            <label name="name">姓名：<input type="text" id="text_name" placeholder="请输入您的姓名"></label>
+            <label name="password">密码：<input type="password" id="text_password" required></label>
+            <label name="status"> 身份：<input type="text" readonly value="学生"></label>
+            <label for="id-number"> 学号：<input type="text" pattern="[A-z]{12}" name="number" id="number" value="123" hidden>
+            <input type="text" pattern="[0-9]{12} required name="id-number" oninvalid="valid('学号为12位')"></label>
+            <input type="radio" value="girl"><label for="girl">女生</label>
+            <input type="radio" value="boy" checked><label for="boy">男生</label>
+            <input type="checkbox" name="program[]" value="12"><label for="12">12岁</label>
+            <input type="checkbox" name="program[]" value="13"><label for="13">13岁</label>
+        </fieldset>
+        <label>下拉列表
+            <select name="check-bar" id="" mulitple>
+                <optgroup>实事</optgroup>
+                <option value="1">新闻</option>
+                <optgroup>娱乐</optgroup>
+                <option value="2">游戏</option>
+                <option selected>默认被选中</option>
+            </select>
+        </label>
+        <textarea placeholder="提示信息" name="info" cols="20" rows="3">默认值</textarea>
+        <input type="submit" value="提交">
+        <fieldset>
+            <legend>文件上传</legend>
+            <input type="file" name="img[]" multiple>
+        </fieldset>
+        <input type="date" min="1984-02-11" max="2020-04-20">
+        <input type="search" list="fruits">
+        <form>
+            <datalist id="fruits">
+                <option value="orange">橘子</option>
+                <option value="apple">苹果</option>
+                <option value="banana">香蕉</option>
+            </datalist>
+        </form>
+    </form>
+</body>
+<script>
+    function valid(message) {
+        alert(message);
+    }
+</script>
+
+</html>
