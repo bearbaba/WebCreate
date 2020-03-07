@@ -42,6 +42,6 @@
 使用HTML中的`<ol><li>`进行设置
 2.  无序列表
 使用HTML中的`<ul><li>`设置  
-无序列表与有序列表的装饰都可以通过修改CSS中的`list-style:none;`取消掉，或者使用`list-style-type:cirle（这里是圆圈，还可以是别的样式）`设置成其他装饰。
+无序列表与有序列表的装饰都可以通过修改CSS中的`list-style:none;`取消掉，或者使用`list-style-type:cirle;/*这里是圆圈，还可以是别的样式*/`设置成其他装饰。
 3.  描述性列表
 `<dl><dt><dd>`，`dl`表示要描述的列表，`dt`表示定义名（definition title）， `dd`表示要描述的内容（definition data）。
