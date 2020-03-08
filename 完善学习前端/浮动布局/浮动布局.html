@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浮动布局</title>
+    <style>
+        main {
+            width: 300px;
+            margin: 0 auto;
+            border: 1px solid blue;
+        }
+        
+        div {
+            width: 150px;
+            height: 150px;
+            box-sizing: border-box;
+        }
+        
+        div:nth-of-type(1) {
+            border: 2px solid red;
+            float: left;
+        }
+        
+        div:nth-of-type(2) {
+            background-color: green;
+            float: right;
+        }
+        
+        .float_box {
+            width: 300px;
+            border: 2px solid black;
+        }
+        
+        span {
+            width: 50px;
+            height: 50px;
+            background-color: brown;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div></div>
+        <div></div>
+    </main>
+    <div class="float_box">
+        <span>
+            Hellow
+        </span>
+        <span>
+            World
+        </span>
+
+
+    </div>
+</body>
+
+</html>
