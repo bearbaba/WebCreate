@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>浮动布局</title>
+    <title>Document</title>
     <style>
         main {
             width: 300px;
-            height: 100px;
             margin: 0 auto;
             border: 1px solid blue;
         }
@@ -28,6 +27,12 @@
             background-color: green;
             float: right;
         }
+        
+        div.clearfix {
+            height: 1px;
+            border: 1px solid yellow;
+            clear: right;
+        }
     </style>
 </head>
 
@@ -35,6 +40,7 @@
     <main>
         <div></div>
         <div></div>
+        <div class="clearfix"></div>
     </main>
 </body>
 
