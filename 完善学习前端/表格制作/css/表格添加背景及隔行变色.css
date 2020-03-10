@@ -1,0 +1,13 @@
+table {
+  background: url(../../浮动布局/img/cat.png) center / 100px 50px no-repeat;
+}
+table tr:nth-of-type(odd) {
+  background-color: #ccc;
+}
+table td:hover {
+  border: 2px solid red;
+}
+table td {
+  padding: 25px;
+  border: 1px solid black;
+}

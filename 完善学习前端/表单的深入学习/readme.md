@@ -9,6 +9,7 @@
 `input`中设置`palceholder`表示设置一个"提示信息"，该"提示信息"文本内容，在输入框获得焦点时隐藏起来。  
 `input`的`hidden`表示将输入框隐藏起来，但在提交信息时，依然会被提交。  
 `input`的`pattern`可以为`input`设置一个正则表达式，用于javascript来验证`input`的输入内容是否符合正则的格式。  
+`input`的边框可以通过css样式`border`进行设置。  
 
 
 ###  `input`的`type`属性设置
