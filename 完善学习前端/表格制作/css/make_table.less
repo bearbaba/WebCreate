@@ -1,0 +1,27 @@
+.table{
+p{
+    display: table-caption;
+    text-align:center;
+    border:1px solid black;
+}
+section{
+    &:nth-of-type(1){
+        display:table-header-group;
+    }
+    &:nth-of-type(2){
+        display:table-row-group;
+
+    }
+    &:nth-of-type(3){
+        display:table-footer-group;
+    }
+    ul{
+        display: table-row;
+        li{
+            display: table-cell;
+            border:2px solid black;
+            padding:20px;
+        }
+    }
+}
+}
