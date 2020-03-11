@@ -1,0 +1,47 @@
+main{
+    width:200px;
+    height:100px;
+    border:2px red solid;
+    box-shadow: 0 0 10px #ccc;
+    position:relative;
+    left:100px;
+    top:100px;
+    div{
+        
+        position: absolute;
+        background-color: blue;
+        left:25%;
+        top:25%;
+        right:25%;
+        bottom:25%;
+    }
+}
+.content_area{
+
+    position: relative;
+    top:200px;
+    border:1px solid blueviolet;
+    height:200px;
+    width: 200px;
+    overflow-y:scroll;
+    h2{
+        margin-top:0px;
+        position:sticky;
+        top:0;
+    }    
+    h2:nth-of-type(even){
+        background-color: blue;
+        color:white;
+
+    }
+    h2:nth-of-type(odd){
+        background-color:black;
+        color:white;
+        
+    }
+    p {
+        position: relative;
+        margin-bottom: 50px;
+        z-index: -2;
+    }
+}
