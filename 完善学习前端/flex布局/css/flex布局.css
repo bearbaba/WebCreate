@@ -1,0 +1,21 @@
+main {
+  border: 1px solid blue;
+  display: flex;
+  flex-direction: row;
+  margin: 100px auto;
+  width: 500px;
+  height: 100px;
+  flex-wrap: wrap;
+}
+main div {
+  width: 40px;
+  height: 40px;
+  background-clip: content-box;
+  background-color: red;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+main div:nth-of-type(4) {
+  margin-left: auto;
+}
