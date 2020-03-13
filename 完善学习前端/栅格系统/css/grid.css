@@ -1,0 +1,13 @@
+header {
+  width: 200px;
+  height: 100px;
+  border: 2px solid skyblue;
+  display: grid;
+  grid-template-columns: repeat(4, 50px);
+  grid-template-rows: repeat(4, 50px);
+}
+header div {
+  background-color: red;
+  background-clip: content-box;
+  padding: 10px;
+}
