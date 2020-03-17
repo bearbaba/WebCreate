@@ -1,0 +1,35 @@
+ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 0px;
+    padding: 0;
+    transform: translate(50%, 50%);
+    text-align: center;
+}
+
+li {
+    text-transform: uppercase;
+    margin: 1%;
+}
+
+span {
+    background-color: aquamarine;
+}
+
+span:hover+div {
+    transform: scale(1, 1);
+    transition: 2s;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+    transform: scale(0);
+    transform-origin: center center;
+}
+
+a {
+    text-decoration: none;
+}
