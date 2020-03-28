@@ -89,7 +89,7 @@ console.log(app.a);//3
 </script>
 ```
 
-### Vue常用指令
+### Vue常用插值指令
 
 #### v-once
 
@@ -128,3 +128,99 @@ console.log(app.a);//3
 </script>
 ```
 
+### v-bind指令
+
+v-bind动态绑定HTML中的属性：
+
+```html
+<div id="app">
+    <a v-bind:href="aHref">百度一下</a>
+</div>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            aHref: "http://www.baidu.com",
+        }
+    })
+</script>
+```
+
+上例中`<a>`标签内的`href`属性被绑定了`v-bind`，`href`的值可以根据Vue中的data动态改变。
+
+语法糖：`v-bind`可以简写成`:`，添加到要绑定的属性前。
+
+#### v-bind绑定class并使用对象语法
+
+`v-bind`可以绑定class后使用对象语法来控制class的值，例：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .bgC {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+        }
+
+        #button {
+            display: flex;
+            width: 100px;
+        }
+
+        #green {
+            margin-left: auto;
+        }
+
+        .isRed {
+            background-color: red;
+        }
+
+        .isGreen {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="bgC" :class="{isRed:isRedValue,isGreen:isGreenValue}">改变背景色</div>
+        <div id="button">
+            <button v-on:click="changeColorRed">红色</button>
+            <button id="green" v-on:click="changeColorGreen">绿色</button>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                aHref: "http://www.baidu.com",
+                isRedValue: false,
+                isGreenValue: false,
+            },
+            methods: {
+                changeColorGreen: function() {
+                    this.isGreenValue = !this.isGreenValue;
+                },
+                changeColorRed: function() {
+                    this.isRedValue = !this.isRedValue;
+                }
+
+            }
+
+        })
+    </script>
+</body>
+
+</html>
+```
+
+以上案例通过点击按钮能够切换id为`#bgC`的背景色。关键在于`<div class="bgC" :class="{isRed:isRedValue,isGreen:isGreenValue}">改变背景色</div>`这句中，将class除`.bgC`外又绑定了`isRed`与`isGreen`，这两个的value值初始状态下为false，在点击相应按钮后，可以使它们的value值为true。
+除动态绑定的class外，还可以设置一个不绑定`v-bind`的class值，它们并不会冲突。

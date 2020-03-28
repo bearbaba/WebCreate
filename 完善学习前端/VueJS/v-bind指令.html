@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .bgC {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+        }
+        
+        #button {
+            display: flex;
+            width: 100px;
+        }
+        
+        #green {
+            margin-left: auto;
+        }
+        
+        .isRed {
+            background-color: red;
+        }
+        
+        .isGreen {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="bgC" :class="{isRed:isRedValue,isGreen:isGreenValue}">改变背景色</div>
+        <div id="button"><button v-on:click="changeColorRed">红色</button>
+            <button id="green" v-on:click="changeColorGreen">绿色</button></div>
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                aHref: "http://www.baidu.com",
+                isRedValue: false,
+                isGreenValue: false,
+            },
+            methods: {
+                changeColorGreen: function() {
+                    this.isGreenValue = !this.isGreenValue;
+                },
+                changeColorRed: function() {
+                    this.isRedValue = !this.isRedValue;
+                }
+
+            }
+
+        })
+    </script>
+</body>
+
+</html>
