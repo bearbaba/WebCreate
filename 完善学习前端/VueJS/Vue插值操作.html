@@ -9,16 +9,19 @@
 </head>
 
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <div>{{firstname+" "+lastname}}</div>
+        <div>{{number*10*3.1415926}}</div>
+    </div>
     <script>
-        var myData = {
-            a: 2
-        };
         var vm = new Vue({
             el: "#app",
-            data: myData,
+            data: {
+                firstname: "Hello",
+                lastname: "World!",
+                number: 512,
+            }
         })
-        console.log(myData.a);
     </script>
 </body>
 

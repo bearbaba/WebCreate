@@ -54,14 +54,77 @@ console.log(app.a);//3
 
 ```
 
-## 生命周期
+### Vue插值操作
 
-每个Vue实例创建时，都会经历一系列的初始化过程，同时会调用相应的生命周期钩子，我们可以在合适的时机利用这些钩子执行我们的业务逻辑。
+在Vue中使用{{}}来进行插值，在双大括号内可以对数据进行简单操作，如字符串拼接：
 
-Vue常用的生命周期钩子有：
-
-* created 实例创建完成后调用，此阶段完成了数据的观测等，但尚未挂载，需要初始化数据是会有用；
-* mounted el挂载到实例上调用，一般第一个业务逻辑从这里开始；
-* beforeDestroy 实例销毁之前调用，主要解绑一些使用`addEventListener`监听的事件等。
-
+```html
+<div id="app">
+    <div>{{firstname+lastname}}</div>
+</div>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            firstname: "Hello",
+            lastname: "World!",
+        }
+    })
+</script>
 ```
+
+还可以在双花括号内对变量进行四则运算：
+
+```javascript
+<div id="app">
+    <div>{{number*10*3.1415926}}</div>
+</div>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            number: 512,
+        }
+    })
+</script>
+```
+
+### Vue常用指令
+
+#### v-once
+
+`v-once`在html标签中添加后，会使该标签内的双花括号里的值固定，即无法二次改变该花括号内的值：
+
+```html
+    <div id="app">
+        <div>{{first}}</div>
+        <div v-once>{{first}}</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                first: "first",
+            }
+        })
+    </script>
+```
+
+#### v-html
+
+在HTML标签内使用该指令后能使在Vue内声明的HTML样式被添加到该标签内：
+
+```html
+<div id="once">
+    <div v-html="vueHtml"></div>
+</div>
+<script>
+    var vm = new Vue({
+        el: "#once",
+        data: {
+            vueHtml: "<h1>标题</h1>"
+        }
+    })
+</script>
+```
+
