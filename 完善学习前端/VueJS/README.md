@@ -224,3 +224,5 @@ v-bind动态绑定HTML中的属性：
 
 以上案例通过点击按钮能够切换id为`#bgC`的背景色。关键在于`<div class="bgC" :class="{isRed:isRedValue,isGreen:isGreenValue}">改变背景色</div>`这句中，将class除`.bgC`外又绑定了`isRed`与`isGreen`，这两个的value值初始状态下为false，在点击相应按钮后，可以使它们的value值为true。
 除动态绑定的class外，还可以设置一个不绑定`v-bind`的class值，它们并不会冲突。
+
+也可以使用数组语法动态绑定class

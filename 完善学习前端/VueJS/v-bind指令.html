@@ -59,6 +59,28 @@
 
         })
     </script>
+    <div id="yel">
+        <div :class="[bgSize,color]"></div>
+    </div>
+    <style>
+        .bgSize {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .color {
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        var vm1 = new Vue({
+            el: "#yel",
+            data: {
+                bgSize: "bgSize",
+                color: "color"
+            }
+        })
+    </script>
 </body>
 
 </html>
