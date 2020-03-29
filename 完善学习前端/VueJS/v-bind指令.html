@@ -81,6 +81,71 @@
             }
         })
     </script>
+    <div id="fontCont">
+        <div :style="{fontSize:finalFont}">Hello World！</div>
+    </div>
+    <script>
+        var vm2 = new Vue({
+            el: "#fontCont",
+            data: {
+                finalFont: "50px",
+            }
+        })
+    </script>
+    <div id="app1">
+        <div :style="fontC">
+            Hello World!
+        </div>
+    </div>
+    <script>
+        var vm3 = new Vue({
+            el: "#app1",
+            data: {
+                finalSize: 100,
+                fontC: {
+                    fontSize: "100px",
+                    color: "red"
+                }
+            }
+        })
+    </script>
+    <div id="app3">
+        <div :style="getFontSize()">{{text}}</div>
+    </div>
+    <script>
+        var vm4 = new Vue({
+            el: "#app3",
+            data: {
+                text: "你好，世界！",
+                finalSize: '100px',
+                fontColor: 'red'
+            },
+            methods: {
+                getFontSize: function() {
+                    return {
+                        fontSize: this.finalSize,
+                        color: this.fontColor
+                    };
+                }
+            }
+
+        })
+    </script>
+    <div id="app4">
+        <div :style="[baseStyle]">{{message}}</div>
+    </div>
+    <script>
+        vm5 = new Vue({
+            el: "#app4",
+            data: {
+                message: "hello World!",
+                baseStyle: {
+                    fontSize: '50px',
+                    color: 'blue'
+                }
+            }
+        })
+    </script>
 </body>
 
 </html>

@@ -225,4 +225,145 @@ v-bind动态绑定HTML中的属性：
 以上案例通过点击按钮能够切换id为`#bgC`的背景色。关键在于`<div class="bgC" :class="{isRed:isRedValue,isGreen:isGreenValue}">改变背景色</div>`这句中，将class除`.bgC`外又绑定了`isRed`与`isGreen`，这两个的value值初始状态下为false，在点击相应按钮后，可以使它们的value值为true。
 除动态绑定的class外，还可以设置一个不绑定`v-bind`的class值，它们并不会冲突。
 
-也可以使用数组语法动态绑定class
+#### v-bind动态绑定class数组语法
+
+也可以使用数组语法动态绑定class，例：
+
+```html
+<div id="yel">
+    <div :class="[bgSize,color]"></div>
+</div>
+<style>
+    .bgSize {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .color {
+        background-color: yellow;
+    }
+</style>
+<script>
+    var vm1 = new Vue({
+        el: "#yel",
+        data: {
+            bgSize: "bgSize",
+            color: "color"
+        }
+    })
+</script>
+```
+
+以上例子通过数组的方式将`bgSize`与`color`class样式动态传递给div标签，使div拥有了动态的class样式。
+
+#### v-bind动态绑定style属性
+
+与动态绑定class类似也有对象写法，例：
+
+```html
+<div :style={属性名:属性值}><div>
+```
+
+在绑定中的HTML标签内写上绑定css样式的对象写法，其中对象名实际是css中的属性名，如对象名可以用`fontSize`，`fontSize`实际是css中的`font-size`的驼峰写法。对象的`value`可以直接明确标出css中的样式对应的属性值，或者使用变量名的方式，在构造的vue内的`data`中再写出变量对应的属性值，例：
+
+```html
+<div id="fontCont">
+    <div :style="{fontSize:finalFont}">Hello World！</div>
+</div>
+<script>
+    var vm2 = new Vue({
+        el: "#fontCont",
+        data: {
+            finalFont: "50px",
+        }
+    })
+</script>
+```
+
+还可以用字符串拼接的方式，将传递的int值拼接成字符串，例：
+
+```html
+<div id="app1">
+    <div :style="{fontSize:finalSize+'px'}">
+        Hello World!
+    </div>
+</div>
+<script>
+    var vm3 = new Vue({
+        el: "#app1",
+        data: {
+            finalSize: 100,
+        }
+    })
+</script>
+```
+
+可以将要绑定的css对象在data中声明后用对象名的方式来动态绑定style，例：
+
+```html
+<div id="app1">
+    <div :style="fontC">
+        Hello World!
+    </div>
+</div>
+<script>
+    var vm3 = new Vue({
+        el: "#app1",
+        data: {
+            finalSize: 100,
+            fontC: {
+                fontSize: "100px",
+                color: "red"
+            }
+        }
+    })
+</script>
+```
+
+也可以将对象封装到方法中，然后以方法名的方式绑定到style上，例：
+
+```html
+<div id="app3">
+    <div :style="getFontSize()">{{text}}</div>
+</div>
+<script>
+    var vm4 = new Vue({
+        el: "#app3",
+        data: {
+            text: "你好，世界！",
+            finalSize: '100px',
+            fontColor: 'red'
+        },
+        methods: {
+            getFontSize: function() {
+                return {
+                    fontSize: this.finalSize,
+                    color: this.fontColor
+                };
+            }
+        }
+    })
+</script>
+```
+
+#### 数组方式动态绑定style
+
+将总的css样式写成对象后，再将对象放置在数组中绑定到style上，例：
+
+```html
+<div id="app4">
+    <div :style="[baseStyle]">{{message}}</div>
+</div>
+<script>
+    vm5 = new Vue({
+        el: "#app4",
+        data: {
+            message: "hello World!",
+            baseStyle: {
+                fontSize: '50px',
+                color: 'blue'
+            }
+        }
+    })
+</script>
+```
