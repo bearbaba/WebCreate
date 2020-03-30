@@ -146,6 +146,40 @@
             }
         })
     </script>
+    <div id="app5">
+        <div>{{getFullname()}}</div>
+    </div>
+    <script>
+        var vm6 = new Vue({
+            el: "#app5",
+            data: {
+                firstName: "Hello",
+                lastName: "World!"
+            },
+            methods: {
+                getFullname() {
+                    return this.firstName + " " + this.lastName;
+                }
+            }
+        })
+    </script>
+    <div id="app6">
+        <div>{{fullName}}</div>
+    </div>
+    <script>
+        var app6 = new Vue({
+            el: "#app6",
+            data: {
+                firstName: "Hello",
+                lastName: "World!"
+            },
+            computed: {
+                fullName: function() {
+                    return this.firstName + ' ' + this.lastName;
+                }
+            }
+        })
+    </script>
 </body>
 
 </html>

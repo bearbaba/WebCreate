@@ -367,3 +367,34 @@ v-bind动态绑定HTML中的属性：
     })
 </script>
 ```
+
+#### 计算属性computed
+
+我们可以使用封装成方法的方式，传值给双大括号内的方法，例：
+
+```html
+<div id="app5">
+    <div>{{getFullname()}}</div>
+</div>
+<script>
+    var vm6 = new Vue({
+        el: "#app5",
+        data: {
+            firstName: "Hello",
+            lastName: "World!"
+        },
+        methods: {
+            getFullname() {
+                return this.firstName + " " + this.lastName;
+            }
+        }
+    })
+</script>
+```
+
+上例中花括号内的`getFullname()`是一个方法，返回值是data内的`firstName`与`lastName`的拼接。
+
+也可以使用计算属性的方式，把值传递给双大括号内的属性。例：
+
+```html
+
