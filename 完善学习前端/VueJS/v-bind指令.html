@@ -180,6 +180,45 @@
             }
         })
     </script>
+    <div id="objectUse">
+        <div>{{booki}} total price: {{totalPrice}}</div>
+    </div>
+    <script>
+        const v = new Vue({
+            el: "#objectUse",
+            data: {
+                books: [{
+                    id: 1,
+                    name: "book1",
+                    price: 100
+                }, {
+                    id: 2,
+                    name: "book2",
+                    price: 120
+                }, {
+                    id: 3,
+                    name: "book3",
+                    price: 89
+                }]
+            },
+            computed: {
+                booki: function() {
+                    let book = "";
+                    for (let i in this.books) {
+                        book += "id: " + this.books[i].id + " book name: " + this.books[i].name;
+                    }
+                    return book;
+                },
+                totalPrice: function() {
+                    let price = 0;
+                    for (let i of this.books) {
+                        price += i.price;
+                    }
+                    return price.toString();
+                }
+            }
+        })
+    </script>
 </body>
 
 </html>

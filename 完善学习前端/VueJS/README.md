@@ -238,7 +238,7 @@ v-bind动态绑定HTML中的属性：
         width: 100px;
         height: 100px;
     }
-    
+
     .color {
         background-color: yellow;
     }
@@ -397,4 +397,98 @@ v-bind动态绑定HTML中的属性：
 也可以使用计算属性的方式，把值传递给双大括号内的属性。例：
 
 ```html
+<div id="app6">
+    <div>{{fullName}}</div>
+</div>
+<script>
+    var app6 = new Vue({
+        el: "#app6",
+        data: {
+            firstName: "Hello",
+            lastName: "World!"
+        },
+        computed: {
+            fullName: function() {
+                return this.firstName + ' ' + this.lastName;
+            }
+        }
+    })
+</script>
+```
 
+计算属性不需要像方法那样加上括号，只需要属性名即可。
+
+一个例子，计算属性调用对象：
+
+```html
+<div id="objectUse">
+    <div>{{booki}}</div>
+</div>
+<script>
+    const v = new Vue({
+        el: "#objectUse",
+        data: {
+            books: [{
+                id: 1,
+                name: "book1",
+                price: 100
+            }, {
+                id: 2,
+                name: "book2",
+                price: 120
+            }, {
+                id: 3,
+                name: "book3",
+                price: 89
+            }]
+        },
+        computed: {
+            booki: function() {
+                let book = "";
+                for (let i in this.books) {
+                    book += "id: " + this.books[i].id + " book name: " + this.books[i].name;
+                }
+                return book;
+            }
+        }
+    })
+</script>
+```
+
+这里的计算属性中的`function()`用的是`for..in..`写法，`for.. in..`每次迭代时，从要迭代的对象中取出索引值，
+也可以使用`for..of..`写法，`for..of..`每次迭代取出的是迭代对象的值，而不是索引值，例：
+
+```html
+<div id="objectUse">
+    <div>total price: {{totalPrice}}</div>
+</div>
+<script>
+    const v = new Vue({
+        el: "#objectUse",
+        data: {
+            books: [{
+                id: 1,
+                name: "book1",
+                price: 100
+            }, {
+                id: 2,
+                name: "book2",
+                price: 120
+            }, {
+                id: 3,
+                name: "book3",
+                price: 89
+            }]
+        },
+        computed: {
+            totalPrice: function() {
+                let price = 0;
+                for (let i of this.books) {
+                    price += i.price;
+                }
+                return price.toString();
+            }
+        }
+    })
+</script>
+```
