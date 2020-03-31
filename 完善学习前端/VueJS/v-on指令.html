@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{message}}</div>
+        <button @click="addMethod(message,$event)">+</button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                message: 0,
+            },
+            methods: {
+                addMethod: function(message, $event) {
+                    this.message++;
+                    console.log(message);
+                    console.log($event);
+                }
+            }
+        })
+    </script>
+    <div id="app1" @click="clickA('clickA')">
+        <button @click.stop="clickB('clickB')">B</button>
+    </div>
+    <script>
+        const vm1 = new Vue({
+            el: "#app1",
+            methods: {
+                clickA: function(string) {
+                    console.log(string);
+                },
+                clickB: function(string) {
+                    console.log(string)
+                }
+            }
+        })
+    </script>
+    <div id="app2">
+        <a href="http://www.baidu.com" @click.prevent="printEvent">点击后不跳转</a>
+    </div>
+    <script>
+        const vm2 = new Vue({
+            el: "#app2",
+            methods: {
+                printEvent: function() {
+                    console.log("不跳转");
+                }
+            }
+        })
+    </script>
+    <div id="app4">
+        <input type="text" name="输入框" @keyup.enter="print">
+    </div>
+    <script>
+        const vm3 = new Vue({
+            el: "#app4",
+            methods: {
+                print: function() {
+                    console.log("抬起键盘");
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

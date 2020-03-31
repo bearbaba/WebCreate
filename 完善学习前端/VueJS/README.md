@@ -54,7 +54,7 @@ console.log(app.a);//3
 
 ```
 
-### Vue插值操作
+## Vue插值操作
 
 在Vue中使用{{}}来进行插值，在双大括号内可以对数据进行简单操作，如字符串拼接：
 
@@ -89,9 +89,9 @@ console.log(app.a);//3
 </script>
 ```
 
-### Vue常用插值指令
+## Vue常用插值指令
 
-#### v-once
+### v-once
 
 `v-once`在html标签中添加后，会使该标签内的双花括号里的值固定，即无法二次改变该花括号内的值：
 
@@ -110,7 +110,7 @@ console.log(app.a);//3
     </script>
 ```
 
-#### v-html
+### v-html
 
 在HTML标签内使用该指令后能使在Vue内声明的HTML样式被添加到该标签内：
 
@@ -128,7 +128,7 @@ console.log(app.a);//3
 </script>
 ```
 
-### v-bind指令
+## v-bind指令
 
 v-bind动态绑定HTML中的属性：
 
@@ -150,7 +150,7 @@ v-bind动态绑定HTML中的属性：
 
 语法糖：`v-bind`可以简写成`:`，添加到要绑定的属性前。
 
-#### v-bind绑定class并使用对象语法
+### v-bind绑定class并使用对象语法
 
 `v-bind`可以绑定class后使用对象语法来控制class的值，例：
 
@@ -225,7 +225,7 @@ v-bind动态绑定HTML中的属性：
 以上案例通过点击按钮能够切换id为`#bgC`的背景色。关键在于`<div class="bgC" :class="{isRed:isRedValue,isGreen:isGreenValue}">改变背景色</div>`这句中，将class除`.bgC`外又绑定了`isRed`与`isGreen`，这两个的value值初始状态下为false，在点击相应按钮后，可以使它们的value值为true。
 除动态绑定的class外，还可以设置一个不绑定`v-bind`的class值，它们并不会冲突。
 
-#### v-bind动态绑定class数组语法
+### v-bind动态绑定class数组语法
 
 也可以使用数组语法动态绑定class，例：
 
@@ -256,7 +256,7 @@ v-bind动态绑定HTML中的属性：
 
 以上例子通过数组的方式将`bgSize`与`color`class样式动态传递给div标签，使div拥有了动态的class样式。
 
-#### v-bind动态绑定style属性
+### v-bind动态绑定style属性
 
 与动态绑定class类似也有对象写法，例：
 
@@ -346,7 +346,7 @@ v-bind动态绑定HTML中的属性：
 </script>
 ```
 
-#### 数组方式动态绑定style
+### 数组方式动态绑定style
 
 将总的css样式写成对象后，再将对象放置在数组中绑定到style上，例：
 
@@ -368,7 +368,7 @@ v-bind动态绑定HTML中的属性：
 </script>
 ```
 
-#### 计算属性computed
+### 计算属性computed
 
 我们可以使用封装成方法的方式，传值给双大括号内的方法，例：
 
@@ -492,3 +492,106 @@ v-bind动态绑定HTML中的属性：
     })
 </script>
 ```
+
+## v-on事件监听
+
+v-on用于监听事件，例如v-on:click=""用于指向`methods`中的方法。
+语法糖：在绑定的事件前加@，例`@click`，
+使用@click调用`methods`中的函数时要注意参数问题。
+
+* 情况一：如果该方法不需要额外参数，那么方法后的()可以不用加，
+  * 但是要注意的是，如果方法本事中有一个参数，尽管这个参数并没有明确指定它所要指向的对象，但系统会默认将原生事件event参数传递进去。
+  
+* 情况二，如果需要名同时传入某个参数，同时还需要event时，可以通过$event传入事件。例：
+
+```html
+<div id="app">
+    <div>{{message}}</div>
+    <button @click="addMethod(message,$event)">+</button>+</button>
+</div>
+<script>
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            message: 0,
+        },
+        methods: {
+            addMethod(message, $event) {
+                this.message++;
+                console.log(message);
+                console.log($event);
+            }
+        }
+    })
+</script>
+```
+
+上例中每次调用`addMethod`方法时，打印`message`值与`event`事件对象。
+
+### v-on修饰符的使用
+
+`.stop`能阻止事件冒泡，所谓事件冒泡就是一个父子元素同时拥有方法时，点击子元素，父元素的方法也会进行。例：
+
+```html
+<div id="app1" @click="clickA('clickA')">
+    <button @click="clickB('clickB')">B</button>
+</div>
+<script>
+    const vm1 = new Vue({
+        el: "#app1",
+        methods: {
+            clickA: function(string) {
+                console.log(string);
+            },
+            clickB: function(string) {
+                console.log(string)
+            }
+        }
+    })
+</script>
+```
+
+以上生成了一个B按钮，当B按钮被点击时，控制台会出现“clickA”与“clickB”，说明B被按下时，父元素的方法也会被调用，这就是事件冒泡，当我们只想要B被按下只出现`clickB`方法而不出现父元素方法时，就可以用`.stop`修饰符。例：
+
+```html
+<div id="app1" @click="clickA('clickA')">
+    <button @click.stop="clickB('clickB')">B<button>
+</div>
+<script>
+    const vm1 = new Vue({
+        el: "#app1",
+        methods: {
+            clickA: function(string) {
+                console.log(string);
+            },
+            clickB: function(string) {
+                console.log(string)
+            }
+        }
+    })
+</script>
+```
+
+显然，v-on的修饰符只需要在v-on所修饰的事件监听后添加就可以使用了。
+
+`.prevent`阻止默认事件，一些元素本身含有默认时间，比如`<a>`被点击时会跳转到设置的链接页面上，添加一个方法后，在`click`后添加`.prevent`即可阻止点击后默认跳转的事件。
+
+```html
+<div id="app2">
+    <a href="http://www.baidu.com" @click.prevent="printEvent">点击后不跳转</a>
+</div>
+<script>
+    const vm2 = new Vue({
+        el: "#app2",
+        methods: {
+            printEvent: function() {
+                console.log("不跳转");
+            }
+        }
+    })
+</script>
+```
+
+`.{keyCode|keyAlias}`只当事件是从特定键触发时才能回调，例：
+
+```html
