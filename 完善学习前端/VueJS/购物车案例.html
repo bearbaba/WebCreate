@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <table>
+            <tr>
+                <th>商品货号</th>
+                <th>商品名称</th>
+                <th>商品单价</th>
+                <th>购买数量</th>
+            </tr>
+            <tbody v-for="(value,index) in tool">
+                <tr>
+                    <td>{{value.id}}</td>
+                    <td>{{value.name}}</td>
+                    <td>{{value.price}}</td>
+                    <td><button @click="add(index)">+</button>{{value.cout}}<button @click="sub(index)" :disabled="value.cout<=0?true:false">-</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div v-if="totalPrice>0?true:false">书的总价格是：{{totalPrice}}</div>
+        <div v-else>购物车空空如也</div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                tool: [{
+                    id: 0,
+                    name: "《疯狂Java》",
+                    price: 78.25,
+                    cout: 0
+                }, {
+                    id: 1,
+                    name: "《疯狂Python》",
+                    price: 88.50,
+                    cout: 0
+                }, {
+                    id: 2,
+                    name: "《疯狂Ajax》",
+                    price: 64.00,
+                    cout: 0
+                }, {
+                    id: 3,
+                    name: "《疯狂Anroid》",
+                    price: 100.25,
+                    cout: 0
+                }]
+            },
+            computed: {
+                totalPrice: function() {
+                    let i;
+                    let sum = 0;
+                    for (i in this.tool) {
+                        sum += this.tool[i].price * this.tool[i].cout;
+                    }
+                    return sum;
+                }
+            },
+            methods: {
+                add: function(index) {
+                    this.tool[index].cout++;
+                },
+                sub: function(index) {
+                    this.tool[index].cout--;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
