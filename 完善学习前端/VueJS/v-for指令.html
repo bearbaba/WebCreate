@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-for="(item,index) in items">{{item}}--{{index}}</div>
+        <div v-for="(value,key,index) in objects">{{key}}--{{value}}--{{index}}</div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                items: [1, 2, 4, 5, 6, 6, 2],
+                objects: {
+                    color: "red",
+                    fruits: "vegetable",
+                    food: "beef",
+                }
+            }
+
+        })
+    </script>
+    <div id="changelist">
+        <div v-for="value in items" :key="value">{{value}}</div>
+        <button @click="change()">修改数组</button>
+    </div>
+    <script>
+        const vm1 = new Vue({
+            el: "#changelist",
+            data: {
+                items: ["red", "blue", "yellow", "green"],
+            },
+            methods: {
+                change: function() {
+                    // this.items.pop();
+                    //this.items.push("black");
+                    // this.items.shift();
+                    // this.items.unshift("black", "white");
+                    this.items.splice(1, 0, "black");
+                    //this.items.splice(1, 3);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

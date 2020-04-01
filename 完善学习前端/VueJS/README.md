@@ -595,3 +595,233 @@ v-on用于监听事件，例如v-on:click=""用于指向`methods`中的方法。
 `.{keyCode|keyAlias}`只当事件是从特定键触发时才能回调，例：
 
 ```html
+<div id="app4">
+    <input type="text" name="输入框" @keyup.enter="print">
+</div>
+<script>
+    const vm3 = new Vue({
+        el: "#app4",
+        methods: {
+            print: function() {
+                console.log("抬起键盘");
+            }
+        }
+    })
+</script>
+```
+
+上例中`@keyup`表示监听键盘抬起的事件，`@keyup.enter`表示只监听Enter键被抬起的事件。
+
+`.once`只调用一次，使用`.once`修饰的事件监听方法时，方法只能使用一次。
+
+`.native`，自定义HTML组件的方法一般是监听不到的，只能在使用`.native`后才能被监听到。
+
+## v-for指令
+
+v-for可以遍历数组与对象，语法格式：`v-for="item in items"`。
+遍历数组时，如果设置了两个参数要从遍历的数组中取出，那么第一个参数是取出的值，第二个参数是索引值。例：
+
+```html
+<div id="app">
+    <div v-for="(item,index) in items">{{item}}--{{index}}</div>
+</div>
+<script>
+    const vm = new Vue({
+        el: "#app",
+        data: {
+            items: [1, 2, 4, 5, 6, 6, 2],
+        }
+    })
+</script>
+```
+
+`v-for`遍历对象时，可以设置三个参数，这三个参数分别对应对象的值，对象名和对象的索引值。例：
+
+```html
+    <div id="app">
+        <div v-for="(value,key,index) in objects">{{key}}--{{value}}--{{index}}</div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                objects: {
+                    color: "red",
+                    fruits: "vegetable",
+                    food: "beef",
+                }
+            }
+        })
+    </script>
+```
+
+### 数组中的响应式方法
+
+1.push方法，在数组最后面添加元素，
+
+2.pop方法，删除数组最后面一个元素，
+
+3.shift方法，删除数组第一个元素，
+
+4.unshift方法，在数组前面添加元素，
+
+5.splice方法，可以更改指定索引位置的内容，
+
+splice的第一个参数是第一个要被修改的元素的索引值。
+
+splice作用一：删除元素，第二个参数传入要删除元素的个数（如果没有传，就会删除之后所有元素。
+
+splice作用二：替换元素，第二个参数，表示要替换的元素个数，后面的参数是用来替换的元素，如果第二个参数设置为0，就表示要将之后的参数插入到第一个参数所指向的元素之前。
+
+对数组元素增、删、改的操作例子：
+
+点击button按钮弹出数组最后一个元素：
+
+```html
+    <div id="changelist">
+        <div v-for="value in items">{{value}}</div>
+        <button @click="change()">修改数组</button>
+    </div>
+    <script>
+        const vm1 = new Vue({
+            el: "#changelist",
+            data: {
+                items: ["red", "blue", "yellow", "green"],
+            },
+            methods: {
+                change: function() {
+                    this.items.pop();
+                }
+            }
+        })
+    </script>
+```
+
+点击button按钮在数组最后面添加元素：
+
+```html
+    <div id="changelist">
+        <div v-for="value in items">{{value}}</div>
+        <button @click="change()">修改数组</button>
+    </div>
+    <script>
+        const vm1 = new Vue({
+            el: "#changelist",
+            data: {
+                items: ["red", "blue", "yellow", "green"],
+            },
+            methods: {
+                change: function() {
+                    // this.items.pop();
+                    this.items.push("black");
+                }
+            }
+        })
+    </script>
+```
+
+点击button按钮弹出数组第一个元素：
+
+```html
+    <div id="changelist">
+        <div v-for="value in items">{{value}}</div>
+        <button @click="change()">修改数组</button>
+    </div>
+    <script>
+        const vm1 = new Vue({
+            el: "#changelist",
+            data: {
+                items: ["red", "blue", "yellow", "green"],
+            },
+            methods: {
+                change: function() {
+                    // this.items.pop();
+                    //this.items.push("black");
+                    this.items.shift();
+                }
+            }
+        })
+    </script>
+```
+
+点击button按钮弹出数组第一个元素前添加元素：
+
+```html
+    <div id="changelist">
+        <div v-for="value in items">{{value}}</div>
+        <button @click="change()">修改数组</button>
+    </div>
+    <script>
+        const vm1 = new Vue({
+            el: "#changelist",
+            data: {
+                items: ["red", "blue", "yellow", "green"],
+            },
+            methods: {
+                change: function() {
+                    // this.items.pop();
+                    //this.items.push("black");
+                    // this.items.shift();
+                    this.items.unshift("black", "white");
+                }
+            }
+        })
+    </script>
+```
+
+点击button按钮在数组第二个元素前添加元素：
+
+```html
+    <div id="changelist">
+        <div v-for="value in items">{{value}}</div>
+        <button @click="change()">修改数组</button>
+    </div>
+    <script>
+        const vm1 = new Vue({
+            el: "#changelist",
+            data: {
+                items: ["red", "blue", "yellow", "green"],
+            },
+            methods: {
+                change: function() {
+                    // this.items.pop();
+                    //this.items.push("black");
+                    // this.items.shift();
+                    // this.items.unshift("black", "white");
+                    this.items.splice(1, 0, "black");
+                }
+            }
+        })
+    </script>
+```
+
+删除第二、三、四个元素：
+
+```html
+    <div id="changelist">
+        <div v-for="value in items">{{value}}</div>
+        <button @click="change()">修改数组</button>
+    </div>
+    <script>
+        const vm1 = new Vue({
+            el: "#changelist",
+            data: {
+                items: ["red", "blue", "yellow", "green"],
+            },
+            methods: {
+                change: function() {
+                    // this.items.pop();
+                    //this.items.push("black");
+                    // this.items.shift();
+                    // this.items.unshift("black", "white");
+                    //this.items.splice(1, 0, "black");
+                    this.items.splice(1, 3);
+                }
+            }
+        })
+    </script>
+```
+
+为了提升修改数组的效率，最好要为数组的值绑定一个`:key`，例：
+
+```html
