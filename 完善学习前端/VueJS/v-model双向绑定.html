@@ -27,6 +27,31 @@
             }
         })
     </script>
+    <div id="sex-radio">
+        <input type="radio" value="男" v-model="sex">man
+        <input type="radio" value="女" v-model="sex">woman
+        <div>选中的性别是：{{sex}}</div>
+    </div>
+
+    <script>
+        const vm1 = new Vue({
+            el: "#sex-radio",
+            data: {
+                sex: "男",
+            }
+        })
+    </script>
+    <div id="agreement">
+        <label for="check"><input type="checkbox" name="" id="check" value="同意"  v-model="argee"/>同意协议</label>
+    </div>
+    <script>
+        const agreement = new Vue({
+            el: "#agreement",
+            data: {
+                argee: false,
+            }
+        })
+    </script>
 </body>
 
 </html>
