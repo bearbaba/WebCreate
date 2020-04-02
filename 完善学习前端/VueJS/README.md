@@ -822,6 +822,25 @@ splice作用二：替换元素，第二个参数，表示要替换的元素个�
     </script>
 ```
 
-为了提升修改数组的效率，最好要为数组的值绑定一个`:key`，例：
+为了提升修改数组的效率，最好要为数组的值绑定一个`:key`，`:key="item"`
+
+## v-model双向绑定
+
+我们可以使用`v-model`对一个变量进行双向绑定。例如，给`input`输入框设置一个`v-model`绑定一个变量，通过输入内容的改变，来动态改变变量的值：
 
 ```html
+    <div id="app">
+        <input type="text" name="input" v-model="message">
+        <div>{{message}}</div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                message: null,
+            }
+        })
+    </script>
+```
+
+进行双向绑定的值，可以通过改变Vue实例data中变量的值进行该改变。
