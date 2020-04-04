@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="lazyUsed">
+        <input type="text" id="" v-model.lazy="message">
+        <div>{{message}}</div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#lazyUsed",
+            data: {
+                message: "",
+            }
+        })
+    </script>
+    <div id="numberUsed">
+        <input type="text" id="" v-model.number="message">
+        <div>{{message}}</div>
+        <button @click="isNumber">是否为数字</button>
+    </div>
+    <script>
+        const vm1 = new Vue({
+            el: "#numberUsed",
+            data: {
+                message: " ",
+            },
+            methods: {
+                isNumber: function() {
+                    console.log(typeof this.message);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

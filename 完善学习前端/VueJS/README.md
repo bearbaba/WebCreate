@@ -923,4 +923,51 @@ splice作用二：替换元素，第二个参数，表示要替换的元素个�
 
 #### 多选情况
 
-多选情况时，要手动为`select`元素添加`multiple`属性，
+多选情况时，要手动为`select`元素添加`multiple`属性，与`checkbox`相似多选时会动态添加到`data`内的数组，例：
+
+```html
+    <div id="multipleBox">
+        <select name="" id="" multiple v-model="fruit">
+            <option value="apple">苹果</option>
+            <option value="banana">香蕉</option>
+            <option value="orange">橘子</option>
+            <option value="grane">葡萄</option>
+        </select>
+        <div>{{fruit}}</div>
+    </div>
+    <script>
+        const vm2 = new Vue({
+            el: "#multipleBox",
+            data: {
+                fruit: [],
+            }
+        })
+    </script>
+```
+
+### v-model修饰符
+
+#### lazy修饰符
+
+默认情况下，`v-model`默认是在input事件中同步输入框的数据的，`v-model`在使用`lazy`修饰符后，可以让数据在失去焦点或者回车时才会更新，例：
+
+```html
+    <div id="lazyUsed">
+        <input type="text" id="" v-model.lazy="message">
+        <div>{{message}}</div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#lazyUsed",
+            data: {
+                message: "",
+            }
+        })
+    </script>
+```
+
+#### number修饰符
+
+默认情况下，在输入框中无论我们输入的是字母还是数字，都会被当做字符串类型进行处理。`number`修饰符可以将输入内容转换成数字，例：
+
+```html
