@@ -52,6 +52,51 @@
             }
         })
     </script>
+    <div id="checkBox">
+        <label v-for="value in hobbies"><input type="checkbox" :value="value" v-model="list">{{value}}</label> {{list}}
+    </div>
+    <script>
+        const selectBox = new Vue({
+            el: "#checkBox",
+            data: {
+                hobbies: ["篮球", "足球", "排球", "羽毛球"],
+                list: [],
+            }
+        })
+    </script>
+    <div id="selectBox">
+        <select v-model="fruit">
+            <option value="apple">苹果</option>
+            <option value="banana">香蕉</option>
+            <option value="orange">橘子</option>
+            <option value="grane">葡萄</option>
+        </select>
+    </div>
+    <script>
+        const fruitBox = new Vue({
+            el: "#selectBox",
+            data: {
+                fruit: "banana",
+            }
+        })
+    </script>
+    <div id="multipleBox">
+        <select name="" id="" multiple v-model="fruit">
+            <option value="apple">苹果</option>
+            <option value="banana">香蕉</option>
+            <option value="orange">橘子</option>
+            <option value="grane">葡萄</option>
+        </select>
+        <div>{{fruit}}</div>
+    </div>
+    <script>
+        const vm2 = new Vue({
+            el: "#multipleBox",
+            data: {
+                fruit: [],
+            }
+        })
+    </script>
 </body>
 
 </html>

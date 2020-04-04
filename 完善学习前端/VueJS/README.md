@@ -854,8 +854,73 @@ splice作用二：替换元素，第二个参数，表示要替换的元素个�
 
 在checkbox上的使用分为两种情况：单个复选框与多个复选框。
 
+#### 单选框
+
 单个复选框的使用范围包含某个协议的同意与否。
 例：
 
 ```html
+<div id="agreement">
+        <label for="check"><input type="checkbox" name="" id="check" value="同意"  v-model="argee"/>同意协议</label>
+    </div>
+    <script>
+        const agreement = new Vue({
+            el: "#agreement",
+            data: {
+                argee: false,
+            }
+        })
+    </script>
+```
 
+以上例子将会出现一个同意协议的复选框，默认情况下复选框没有被选中。
+
+#### 多选框
+
+当`v-model`使用在多选框内，`v-model`所对应的data属性是个数组类型，当选中多选框按钮时，`v-model`所绑定的属性会被添加到数组中，例：
+
+```html
+    <div id="checkBox">
+        <label v-for="value in hobbies"><input type="checkbox" :value="value" v-model="list">{{value}}</label> {{list}}
+    </div>
+    <script>
+        const selectBox = new Vue({
+            el: "#checkBox",
+            data: {
+                hobbies: ["篮球", "足球", "排球", "羽毛球"],
+                list: [],
+            }
+        })
+    </script>
+```
+
+### v-model在元素`select`上的使用
+
+和`checkbox`类似，`v-model`在`select`上的使用也分为单选和多选。
+
+#### 单选情况
+
+单选时，`v-model`绑定的是一个值，当浏览器被刷新时，`v-model`绑定的那个值依然是默认被选中的。例：
+
+```html
+    <div id="selectBox">
+        <select v-model="fruit">
+            <option value="apple">苹果</option>
+            <option value="banana">香蕉</option>
+            <option value="orange">橘子</option>
+            <option value="grane">葡萄</option>
+        </select>
+    </div>
+    <script>
+        const fruitBox = new Vue({
+            el: "#selectBox",
+            data: {
+                fruit: "banana",
+            }
+        })
+    </script>
+```
+
+#### 多选情况
+
+多选情况时，要手动为`select`元素添加`multiple`属性，
