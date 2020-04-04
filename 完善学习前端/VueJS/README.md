@@ -971,3 +971,31 @@ splice作用二：替换元素，第二个参数，表示要替换的元素个�
 默认情况下，在输入框中无论我们输入的是字母还是数字，都会被当做字符串类型进行处理。`number`修饰符可以将输入内容转换成数字，例：
 
 ```html
+    <div id="numberUsed">
+        <input type="text" id="" v-model.number="message">
+        <div>{{message}}</div>
+        <button @click="isNumber">是否为数字</button>
+    </div>
+    <script>
+        const vm1 = new Vue({
+            el: "#numberUsed",
+            data: {
+                message: " ",
+            },
+            methods: {
+                isNumber: function() {
+                    console.log(typeof this.message);
+                }
+            }
+        })
+    </script>
+```
+
+上例中的`<button>`动态绑定了`isNumber`方法，用于判断输入的字符串是否转换为数字，在控制台中可以看到确实转为了数字。
+
+#### trim修饰符
+
+`trim`修饰符可以去除输入的字符串左右两侧的空格。
+
+## Vue组件化
+
