@@ -10,22 +10,24 @@
 
 <body>
     <div id="app">
-        <cpn></cpn>
+        <new-style></new-style>
     </div>
     <script>
-        const vm = Vue.extend({
+        let newStyle = Vue.extend({
             template: `
             <div>
-            <span>HELLO WORLD</span>
-            </div>`
+                <span>Hello World!</span>
+            </div>
+            `
         })
-        Vue.component("cpn", vm);
-        const vm1 = new Vue({
+        const vm = new Vue({
             el: "#app",
-            data: {}
+            components: {
+                newStyle: newStyle,
+            }
+
         })
     </script>
-
 </body>
 
 </html>

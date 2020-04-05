@@ -999,3 +999,112 @@ splice作用二：替换元素，第二个参数，表示要替换的元素个�
 
 ## Vue组件化
 
+组件是可复用的 Vue 实例，Vue组件化类似于面向对象的开发思路，它提供了一种抽象，让我们可以开发出一个个独立可复用的小组件来构造我们的应用。
+
+### 组件的基本使用
+
+组件的使用分成三个步骤：
+
+1. 创建组件构造器
+2. 注册组件
+3. 使用组件
+
+#### 创建组件构造器
+
+```javascript
+const vm = Vue.extend({
+            template: `
+            <div>
+            <span>HELLO WORLD</span>
+            </div>`
+        })
+```
+
+以上例子创建了一个名为`vm`的组件构造器，
+``写法是ES6新增的写法，它允许包含的字符串能够换行。
+
+#### 注册组件
+
+ ```javascript
+  Vue.component("cpn", vm);
+  ```
+
+这句话是将vm的组件构造注册成名为“cpn”的组件，
+
+#### 使用组件
+
+```html
+<div id="app">
+    <cpn></cpn>
+</div>
+```
+
+在`id="app"`的元素中使用了构造出来的`cpn`组件，注意这个`id="app"`必须是Vue的实例，即需要在`div`外添加
+
+```javascript
+const vm1 = new Vue({
+        el: "#app",
+        data: {}
+    })
+```
+
+实际上完整的`<script>`标签的js代码为：
+
+```javascript
+const vm = Vue.extend({
+    template: `
+    <div>
+    <span>HELLO WORLD</span>
+    </div>`
+})
+Vue.component("cpn", vm);
+const vm1 = new Vue({
+    el: "#app",
+    data: {}
+})
+```
+
+#### Vue.extend()的含义
+
+调用Vue.extend()创建的是一个组件构造器。
+通常在创建组件构造器时，传入template代表我们自定义组件的模板。
+该模板就是在使用到组件的地方，要显示的HTML代码。
+
+#### Vue.component()的含义
+
+调用Vue.component()是将刚才的组件构造器注册为一个组件，并且给它起一个组件的标签名称。
+所以需要传递两个参数：1、注册组件的标签名 2、组件构造器
+组件必须挂载在某个Vue实例下，否则它不会生效。
+
+### 全局组件和局部组件
+
+#### 全局组件
+
+实际上，在Vue组件化基本使用中所创建的组件是全局组件。
+当我们通过调用Vue.component()注册组件时，组件的注册是全局的，这意味着该组件可以在任意Vue示例下使用。
+
+#### 局部组件
+
+如果我们注册的组件是挂载在某个实例中, 那么就是一个局部组件，例：
+
+```html
+    <div id="app">
+        <new-style></new-style>
+    </div>
+    <script>
+        let newStyle = Vue.extend({
+            template: `
+            <div>
+                <span>Hello World!</span>
+            </div>
+            `
+        })
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                newStyle: newStyle,
+            }
+
+        })
+    </script>
+```
