@@ -1108,3 +1108,56 @@ const vm1 = new Vue({
         })
     </script>
 ```
+
+### Vue父子组件
+
+讲一个组件在另一个组件中，那么这个组件就是另一个组件的子组件，这个组件要想被使用，必须通过先使用父组件才能使用子组件，而另一个组件需要在Vue实例中被注册，Vue实例是所有组件的根组件。例：
+
+```html
+    <div id="app">
+        <new-style></new-style>
+    </div>
+    <script>
+        let newStyle = Vue.extend({
+            template: `
+            <div>
+                <span>Hello World!</span>
+            </div>
+            `
+        })
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                newStyle: newStyle,
+            }
+
+        })
+    </script>
+```
+
+以子标签的形式直接使用子组件时会报错。
+
+### 注册组件的语法糖
+
+#### 全局组件注册的语法糖
+
+如下是使用全局组件注册的语法糖：
+
+```javascript
+let newModule = Vue.component("newHtml", {
+    template: `
+    <div>
+    <h1>标题1</h1>
+    </div>
+    `,
+});
+const vm = new Vue({
+    el: "#app",
+    newHtml: newModule,
+})
+```
+
+可以看到语法糖不再使用`extend`构造方式，直接将注册与构造合并了。
+
+#### 局部组件语法糖
+

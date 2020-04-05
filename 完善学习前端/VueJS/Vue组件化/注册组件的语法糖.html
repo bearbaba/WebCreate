@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <new-html></new-html>
+    </div>
+    <script>
+        let newModule = Vue.component("newHtml", {
+            template: `
+            <div>
+            <h1>标题1</h1>
+            </div>
+            `,
+        });
+        const vm = new Vue({
+            el: "#app",
+            newHtml: newModule,
+        })
+    </script>
+    <div id="app1">
+        <new-html2></new-html2>
+    </div>
+    <script>
+        const vm1 = new Vue({
+            el: "#app1",
+            components: {
+                'newHtml2': {
+                    template: `
+                    <div>
+                        <span>标题2</span>
+                    </div>
+                    `
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
