@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <module2></module2>
+    </div>
+    <script>
+        let moduleFirst = Vue.extend({
+            template: `
+			<div>
+				<span>标题1</span>
+			</div>
+			`
+        });
+        let moduleSecond = Vue.extend({
+            template: `
+			<div>
+				<span>标题2</span>
+			</div>
+			`,
+            components: {
+                module1: moduleFirst,
+            }
+        })
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                module2: moduleSecond,
+            }
+        })
+    </script>
+
+
+</body>
+
+</html>
