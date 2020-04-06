@@ -1263,3 +1263,35 @@ Vue组件中也能含有data，但与Vue实例不同的是，data不能是对象
 而使用函数时，每次调用这个函数都会创建新的内存地址，保证了每个模板的相互独立性。
 
 ```html
+    <div id="compute">
+        <compute></compute>
+        <compute></compute>
+    </div>
+    <template id="module2">
+        <div>
+            <div>{{num}}</div>
+            <button @click="addbutton">+</button>
+        </div>
+    </template>
+    <script>
+        let moduleForVm = Vue.component("compute", {
+            template: "#module2",
+            data: function() {
+                return {
+                    num: 2,
+                }
+            },
+            methods: {
+                addbutton: function() {
+                    this.num++;
+                }
+            },
+        });
+        const vm1 = new Vue({
+            el: "#compute",
+        })
+    </script>
+```
+
+注意组件模板中的所有标签除了自定义的标签包裹外，还需要一个标签作为所有标签的父标签。
+

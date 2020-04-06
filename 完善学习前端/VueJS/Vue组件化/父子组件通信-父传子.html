@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <new-content :c-title="title"></new-content>
+    </div>
+    <template id="template">
+        <div>
+            <h1>
+                {{cTitle}}
+            </h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ea. Quia, tempore repellendus dicta tenetur quos saepe necessitatibus velit nemo sint accusamus autem soluta ea maiores aliquam itaque neque placeat!</p>
+        </div>
+    </template>
+    <script>
+        const newContent = {
+            template: "#template",
+            props: ["cTitle"],
+
+        }
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                title: "标题1",
+            },
+            components: {
+                newContent,
+            }
+        })
+    </script>
+</body>
+
+</html>
