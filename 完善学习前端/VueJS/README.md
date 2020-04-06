@@ -1153,7 +1153,6 @@ let newModule = Vue.component("newHtml", {
 });
 const vm = new Vue({
     el: "#app",
-    newHtml: newModule,
 })
 ```
 
@@ -1161,3 +1160,106 @@ const vm = new Vue({
 
 #### 局部组件语法糖
 
+```javascript
+const vm1 = new Vue({
+    el: "#app1",
+    components: {
+        'newHtml2': {
+            template: `
+            <div>
+                <span>标题2</span>
+            </div>
+            `
+        }
+    },
+})
+```
+
+将注册组件的方法写进了根组件中，就是局部组件注册的语法糖。
+
+### Vue组件模板抽离写法
+
+可以将组件模板抽离以方便调用，类似于将值赋给变量，然后使用变量的方式。
+
+组件模板抽离写法有两种，一种通过`<script>`标签来写，另一种通过`<template>`。
+
+#### `<script>`写法
+
+```html
+<div id="app">
+        <new-html></new-html>
+    </div>
+    <script type="text/x-template" id="template">
+        <div>
+            <h1>标题1</div>
+        </h1>
+    </script>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                'newHtml': {
+                    template: "#template",
+                }
+            }
+        })
+    </script>
+```
+
+将模板被包裹在一个名为`<script type="text/x-template>`的标签内，再为该标签设置好一个`id`，在构造组件时，将`template`指向该`id`，就能类似于调用变量似的，调用模板。
+
+#### `<template>写法`
+
+```html
+    <template id="template1">
+        <div>
+            <h1>标题2</h1>
+        </div>
+    </template>
+    <script>
+        const vm1 = new Vue({
+            el: "#new",
+            components: {
+                'newHtml': {
+                    template: "#template1",
+                }
+            }
+        })
+    </script>
+```
+
+`<template>`写法与`<script>`写法类似，只不过把冗长的`<script>`换成了`<template>`。
+
+### Vue组件中的data
+
+Vue组件不能访问Vue实例中的data（即使能访问，Vue实例也会因为含有太多数据而臃肿），
+Vue组件中也能含有data，但与Vue实例不同的是，data不能是对象，组件中的data必须是一个函数。例：
+
+```html
+    <div id="app">
+        <new-html></new-html>
+    </div>
+    <template id="template1">
+        <div>
+            <h1>{{message}}</h1>
+        </div>
+    </template>
+    <script>
+        let module1 = Vue.component("newHtml", {
+            template: "#template1",
+            data: function() {
+                return {
+                    message: "标题1",
+                }
+            }
+        });
+        let vm = new Vue({
+            el: "#app",
+        })
+    </script>
+```
+
+可以返回一个对象，用对象保存属性。因为data如果是对象时，所有构造的模板都在使用同一个data，每个模板都会相互影响。
+而使用函数时，每次调用这个函数都会创建新的内存地址，保证了每个模板的相互独立性。
+
+```html

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <new-html></new-html>
+    </div>
+    <template id="template1">
+        <div>
+            <h1>{{message}}</h1>
+        </div>
+    </template>
+    <script>
+        let module1 = Vue.component("newHtml", {
+            template: "#template1",
+            data: function() {
+                return {
+                    message: "标题1",
+                }
+            }
+        });
+        let vm = new Vue({
+            el: "#app",
+        })
+    </script>
+    <div id="compute">
+        <compute></compute>
+        <compute></compute>
+    </div>
+    <template id="module2">
+        <div>
+            <div>{{num}}</div>
+            <button @click="addbutton">+</button>
+        </div>
+    </template>
+    <script>
+        let moduleForVm = Vue.component("compute", {
+            template: "#module2",
+            data: function() {
+                return {
+                    num: 2,
+                }
+            },
+            methods: {
+                addbutton: function() {
+                    this.num++;
+                }
+            },
+        });
+        const vm1 = new Vue({
+            el: "#compute",
+        })
+    </script>
+
+</body>
+
+</html>

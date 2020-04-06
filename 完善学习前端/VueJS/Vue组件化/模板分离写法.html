@@ -12,33 +12,38 @@
     <div id="app">
         <new-html></new-html>
     </div>
+    <script type="text/x-template" id="template">
+        <div>
+            <h1>标题1 </h1>
+        </div>
+
+    </script>
     <script>
-        let newModule = Vue.component("newHtml", {
-            template: `
-            <div>
-            <h1>标题1</h1>
-            </div>
-            `,
-        });
         const vm = new Vue({
             el: "#app",
+            components: {
+                'newHtml': {
+                    template: "#template",
+                }
+            }
         })
     </script>
-    <div id="app1">
-        <new-html2></new-html2>
+    <div id="new">
+        <new-html></new-html>
     </div>
+    <template id="template1">
+        <div>
+            <h1>标题2</h1>
+        </div>
+    </template>
     <script>
         const vm1 = new Vue({
-            el: "#app1",
+            el: "#new",
             components: {
-                'newHtml2': {
-                    template: `
-                    <div>
-                        <span>标题2</span>
-                    </div>
-                    `
+                'newHtml': {
+                    template: "#template1",
                 }
-            },
+            }
         })
     </script>
 </body>
