@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <new-html :clist="list" @son-clicked="sonFun"></new-html>
+    </div>
+    <template id="template">
+        <div>
+            <button v-for="item in clist" @click="childFun(item)">{{item.name}}</button>
+        </div>
+    </template>
+    <script>
+        const newHtml = {
+            template: "#template",
+            props: {
+                clist: {
+                    type: Array,
+                }
+            },
+            methods: {
+                childFun: function(item) {
+                    this.$emit("son-clicked");
+                }
+            }
+        };
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                list: [{
+                    name: "商品1",
+                    id: 1,
+                }, {
+                    name: "商品2",
+                    id: 2
+                }, {
+                    name: "商品3",
+                    id: 3
+                }]
+            },
+            components: {
+                newHtml,
+            },
+            methods: {
+                sonFun: function() {
+                    console.log("被点击了");
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

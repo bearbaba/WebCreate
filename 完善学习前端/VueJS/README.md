@@ -1233,7 +1233,7 @@ const vm1 = new Vue({
 ### Vue组件中的data
 
 Vue组件不能访问Vue实例中的data（即使能访问，Vue实例也会因为含有太多数据而臃肿），
-Vue组件中也能含有data，但与Vue实例不同的是，data不能是对象，组件中的data必须是一个函数。例：
+Vue组件中也能含有data，但与Vue实例不同的是，data不是对象，组件中的data必须是一个函数。例：
 
 ```html
     <div id="app">
@@ -1295,7 +1295,7 @@ Vue组件中也能含有data，但与Vue实例不同的是，data不能是对象
 
 注意组件模板中的所有标签除了自定义的标签包裹外，还需要一个标签作为所有标签的父标签。
 
-### 父子组件通信
+### 父子组件通信（父传子）
 
 子组件不能直接引用父组件或Vue实例的数据，但是可以通过`组件通信`来互相传递数据。
 父组件可以通过`props`向子组件传递数据。例
@@ -1384,3 +1384,57 @@ props的值有两种方式：
 
 `props`可以为以下类型进行验证：
 String、Number、Boolean、Array、Object、Date、Function、Symbol、
+
+### 父子通信（子传父）
+
+```html
+<div id="app">
+        <new-html :clist="list" @son-clicked="sonFun"></new-html>
+    </div>
+    <template id="template">
+        <div>
+            <button v-for="item in clist" @click="childFun(item)">{{item.name}}</button>
+        </div>
+    </template>
+    <script>
+        const newHtml = {
+            template: "#template",
+            props: {
+                clist: {
+                    type: Array,
+                }
+            },
+            methods: {
+                childFun: function(item) {
+                    this.$emit("son-clicked");
+                }
+            }
+        };
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                list: [{
+                    name: "商品1",
+                    id: 1,
+                }, {
+                    name: "商品2",
+                    id: 2
+                }, {
+                    name: "商品3",
+                    id: 3
+                }]
+            },
+            components: {
+                newHtml,
+            },
+            methods: {
+                sonFun: function() {
+                    console.log("被点击了");
+                }
+            }
+        })
+    </script>
+```
+
+如上所见，子组件`<new-html>`中的点击事件`childFun`函数要想被检测到，并且能把子组件中的数据传递给父组件，就需要使用子传父的通信方法，
+首先要为`childFun`中增加一个`this.$emit()`，以把数据传递给父组件中的方法，括号里是要接收数据的父组件方法名绑定的自定义Vue属性，再为新构建的元素使用`v-bind`绑定上自定义的Vue属性，该方法等于号右边是处理数据的父组件方法。
