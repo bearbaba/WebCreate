@@ -1295,3 +1295,92 @@ Vue组件中也能含有data，但与Vue实例不同的是，data不能是对象
 
 注意组件模板中的所有标签除了自定义的标签包裹外，还需要一个标签作为所有标签的父标签。
 
+### 父子组件通信
+
+子组件不能直接引用父组件或Vue实例的数据，但是可以通过`组件通信`来互相传递数据。
+父组件可以通过`props`向子组件传递数据。例
+
+```html
+<div id="app">
+        <new-content :c-title="title"></new-content>
+    </div>
+    <template id="template">
+        <div>
+            <h1>
+                {{cTitle}}
+            </h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ea. Quia, tempore repellendus dicta tenetur quos saepe necessitatibus velit nemo sint accusamus autem soluta ea maiores aliquam itaque neque placeat!</p>
+        </div>
+    </template>
+    <script>
+        const newContent = {
+            template: "#template",
+            props: ["cTitle"],
+
+        }
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                title: "标题1",
+            },
+            components: {
+                 newContent,//对象已在实例外定义好了
+            }
+        })
+    </script>
+```
+
+这里的`props`采用数组写法，数组里的是自定义属性，自定义属性是写在构造组件的html标签内的，将父组件需要传给子组件的data绑定到这个自定义属性上，然后在构造组件的模板内就能够使用自定义的属性值（实际上与父组件要传给该组件的属性值相等同），
+由于HTML不能识别大写字母，在HTML内的驼峰写法应更换成短横线连接的写法。
+
+props的值有两种方式：
+方式一：字符串数组，数组中的字符串就是传递时的名称。
+方式二：对象写法，对象写法时可以设置值传递时的类型以及设置默认值，例：
+
+```html
+    <div id="parent">
+        <child-module :son-data="title" :son-list="list2"></child-module>
+    </div>
+    <template id="template1">
+        <div>
+            <h1>{{sonData}}</h1>
+            <li v-for="item in sonList"><a href="http://">{{item}}</a></li>
+        </div>
+    </template>
+    <script>
+        const childModule = {
+            template: "#template1",
+            props: {
+                sonData: String,
+                sonList: {
+                    type: Array,
+                    default: [2, 5, 6],
+                    required: false,
+                }
+            }
+        };
+        const vm1 = new Vue({
+            el: "#parent",
+            data: {
+                title: "标题2",
+                list: ["商品1", "商品2", "商品3"],
+            },
+            components: {
+                childModule,
+            }
+        })
+    </script>
+```
+
+使用对象写法可以再为传递的变量设置几个属性，
+
+* `type`类型验证，即判定变量是否为限定的类型，
+
+* `default`默认值，
+
+* `required`决定父组件是否必要为该子组件传值，为`true`为必要，为`false`为不必要，
+
+* 还可以自定义构造函数等。
+
+`props`可以为以下类型进行验证：
+String、Number、Boolean、Array、Object、Date、Function、Symbol、
