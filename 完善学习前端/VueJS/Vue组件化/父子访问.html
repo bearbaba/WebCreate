@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <child-module></child-module>
+        <child-module ref="child2"></child-module>
+        <child-module></child-module>
+        <button @click="visitChild">点击</button>
+    </div>
+    <template id="template">
+        <div>
+            {{message}}
+        </div>
+    </template>
+    <script>
+        const childModule = {
+            template: "#template",
+            data() {
+                return {
+                    message: "hello",
+                }
+            }
+        };
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                childModule,
+            },
+            methods: {
+                visitChild: function() {
+                    console.log(this.$children[0].message);
+                    for (let i of this.$children) {
+                        console.log(i);
+                    }
+                    console.log(this.$refs.child2.message)
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

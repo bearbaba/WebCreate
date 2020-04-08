@@ -1438,3 +1438,59 @@ String、Number、Boolean、Array、Object、Date、Function、Symbol、
 
 如上所见，子组件`<new-html>`中的点击事件`childFun`函数要想被检测到，并且能把子组件中的数据传递给父组件，就需要使用子传父的通信方法，
 首先要为`childFun`中增加一个`this.$emit()`，以把数据传递给父组件中的方法，括号里是要接收数据的父组件方法名绑定的自定义Vue属性，再为新构建的元素使用`v-bind`绑定上自定义的Vue属性，该方法等于号右边是处理数据的父组件方法。
+
+## 组件访问
+
+### 父组件访问子组件
+
+父组件访问子组件有两种方法：
+
+1. $chirldren
+
+2. $ref
+
+#### 父组件访问子组件（$chirdren）
+
+```html
+    <div id="app">
+        <child-module></child-module>
+        <child-module></child-module>
+        <child-module></child-module>
+        <button @click="visitChild">点击</button>
+    </div>
+    <template id="template">
+        <div>
+            {{message}}
+        </div>
+    </template>
+    <script>
+        const childModule = {
+            template: "#template",
+            data() {
+                return {
+                    message: "hello",
+                }
+            }
+        };
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                childModule,
+            },
+            methods: {
+                visitChild: function() {
+                    console.log(this.$children[0].message);
+                    for (let i of this.$children) {
+                        console.log(i);
+                    }
+                }
+            },
+        })
+    </script>
+```
+
+使用该方法时，返回值是数组，数组中包含的是每个子组件，因此只能通过索引值查找到某个子组件，对于实际开发并不方便。
+
+#### 父组件访问子组件（$refs）
+
+`this.$refs`默认返回的是一个对象类型，要想具体返回某个组件，只需为这个组件添加`ref`属性。例
