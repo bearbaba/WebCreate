@@ -1494,3 +1494,41 @@ String、Number、Boolean、Array、Object、Date、Function、Symbol、
 #### 父组件访问子组件（$refs）
 
 `this.$refs`默认返回的是一个对象类型，要想具体返回某个组件，只需为这个组件添加`ref`属性。例
+
+```html
+    <div id="app">
+        <child-module></child-module>
+        <child-module ref="child2"></child-module>
+        <child-module></child-module>
+        <button @click="visitChild">点击</button>
+    </div>
+    <template id="template">
+        <div>
+            {{message}}
+        </div>
+    </template>
+    <script>
+        const childModule = {
+            template: "#template",
+            data() {
+                return {
+                    message: "hello",
+                }
+            }
+        };
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                childModule,
+            },
+            methods: {
+                visitChild: function() {
+                    console.log(this.$refs.child2.message)
+                }
+            },
+        })
+    </script>
+```
+
+以上就用`visitChild`方法输出了第二个子组件的`message`，而第二个子组件上由于添加了`ref="child2`，因此能被方法中的`this.$refs.child2`检查到。
+

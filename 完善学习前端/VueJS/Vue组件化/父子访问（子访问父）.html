@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <child-module></child-module>
+    </div>
+    <template id="template">
+        <child-child-module></child-child-module>
+    </template>
+    <template id="template2">
+        <div>
+            <button @click="fun">点击</button>
+            <button @click="root">根组件</button>
+        </div>
+        
+    </template>
+    <script>
+        const childChildModule = {
+            template: "#template2",
+            data() {
+                return {
+                    message: "hello",
+                }
+            },
+            methods: {
+                fun: function() {
+                    console.log(this.$parent.message);
+                },
+                root: function() {
+                    console.log(this.$root.message)
+                }
+            }
+        };
+        const childModule = {
+            template: "#template",
+            data() {
+                return {
+                    message: "World",
+                }
+            },
+            components: {
+                childChildModule,
+            }
+        }
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                childModule,
+            },
+            data: {
+                message: "root",
+            }
+        })
+    </script>
+</body>
+
+</html>
