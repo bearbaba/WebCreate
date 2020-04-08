@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <new-html :child-data="num" @parent-num="funNum"></new-html>
+        {{num}}
+    </div>
+    <template id="template">
+        <div>
+            <input v-model.number="numData" type="number" step="1" @input="childNum"/>
+            <div>{{numData}}</div>
+        </div>
+    </template>
+    <script>
+        const newHtml = {
+            template: "#template",
+            props: {
+                childData: Number,
+            },
+            data() {
+                return {
+                    numData: this.childData,
+                }
+            },
+            methods: {
+                childNum: function(event) {
+                    this.numData = event.target.value;
+                    console.log(this.numData);
+                    this.$emit("parentNum", this.numData);
+                }
+            }
+        };
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                num: 0,
+            },
+            components: {
+                newHtml,
+            },
+            methods: {
+                funNum: function(value) {
+                    this.num = value;
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
