@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <cpn>
+            <template slot-scope="slot">
+                <span v-for="item in slot.list">{{item}}-</span>
+            </template>
+        </cpn>
+    </div>
+    <template id="template">
+        <div>
+            <slot :list="list">
+                <li v-for="item in list">{{item}}</li>
+            </slot>
+        </div>
+    </template>
+    <script>
+        const cpn = {
+            template: "#template",
+            data() {
+                return {
+                    list: ["Java", "Python", "C++", "PHP", "JavaScript"],
+                }
+            }
+        };
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                cpn,
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1629,4 +1629,37 @@ String、Number、Boolean、Array、Object、Date、Function、Symbol、
 
 如上，每个组件默认含有一个点击按钮，如果想要修改只需在已构造的标签内包含其他标签即可，上述是将第二个组件的默认插槽内容从按钮修改成了`<p>`文本内容。
 
+当组件中含有多个插槽时，我们希望构建的标签中包含的标签的具体修改某一个插槽时，就需要使用具名插槽。
+具名插槽只需要在插槽`<slot>`中设置一个`name`属性，然后在要替代插槽的标签上设置`slot`属性，`slot`属性的值与`name`属性的值一致时就能具体修改某一个插槽。
 
+```html
+    <div id="app">
+        <cpn><input type="text" slot="center" id=""></cpn>
+        <cpn>
+
+        </cpn>
+        <cpn></cpn>
+    </div>
+    <template id="template">
+        <div>
+            <slot name="left">左边</slot>
+            <slot name="center">中间</slot>
+            <slot name="right">右边</slot>
+        </div>
+    </template>
+    <script>
+        const cpn = {
+            template: "#template",
+        };
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                cpn,
+            }
+        })
+    </script>
+```
+
+#### 插槽作用域
+
+如果
