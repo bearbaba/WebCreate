@@ -1532,3 +1532,101 @@ String、Number、Boolean、Array、Object、Date、Function、Symbol、
 
 以上就用`visitChild`方法输出了第二个子组件的`message`，而第二个子组件上由于添加了`ref="child2`，因此能被方法中的`this.$refs.child2`检查到。
 
+### 子组件访问父组件（parent，root）
+
+在实际开发中并不常用`parent`或`root`子组件访问父组件
+
+```html
+    <div id="app">
+        <child-module></child-module>
+    </div>
+    <template id="template">
+        <child-child-module></child-child-module>
+    </template>
+    <template id="template2">
+        <div>
+            <button @click="fun">点击</button>
+            <button @click="root">根组件</button>
+        </div>
+    </template>
+    <script>
+        const childChildModule = {
+            template: "#template2",
+            data() {
+                return {
+                    message: "hello",
+                }
+            },
+            methods: {
+                fun: function() {
+                    console.log(this.$parent.message);
+                },
+                root: function() {
+                    console.log(this.$root.message)
+                }
+            }
+        };
+        const childModule = {
+            template: "#template",
+            data() {
+                return {
+                    message: "World",
+                }
+            },
+            components: {
+                childChildModule,
+            }
+        }
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                childModule,
+            },
+            data: {
+                message: "root",
+            }
+        })
+    </script>
+```
+
+类似于父访问子使用`this.$children`，子访问父使用`this.$parent`，子访问根组件用`this.$root`。
+
+### 插槽
+
+在子组件中，使用特殊的元素`<slot>`就可以为子组件开启一个插槽。
+该插槽插入什么内容取决于父组件如何使用。
+每个组件的内容及功能大体上相似，但在一些具体功用上存在不同就能使用`插槽`，插槽的作用类似于占位符。例：
+
+```html
+    <div id="app">
+        <cpn></cpn>
+        <cpn>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga delectus eius omnis mollitia at voluptatum quidem soluta hic aspernatur rem similique nemo veritatis, officiis error, molestias maxime sapiente repudiandae expedita.
+            </p>
+        </cpn>
+        <cpn></cpn>
+        <cpn></cpn>
+    </div>
+    <template id="template">
+        <div>
+            <h1>标题</h1>
+    <slot><button>点击</button></slot>
+        </div>
+    </template>
+    <script>
+        const cpn = {
+            template: "#template",
+        };
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                cpn,
+            }
+        })
+    </script>
+```
+
+如上，每个组件默认含有一个点击按钮，如果想要修改只需在已构造的标签内包含其他标签即可，上述是将第二个组件的默认插槽内容从按钮修改成了`<p>`文本内容。
+
+

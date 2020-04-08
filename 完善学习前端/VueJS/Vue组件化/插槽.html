@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <cpn></cpn>
+        <cpn>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga delectus eius omnis mollitia at voluptatum quidem soluta hic aspernatur rem similique nemo veritatis, officiis error, molestias maxime sapiente repudiandae expedita.
+            </p>
+        </cpn>
+        <cpn></cpn>
+        <cpn></cpn>
+    </div>
+    <template id="template">
+        <div>
+            <h1>标题</h1>
+    <slot><button>点击</button></slot>
+        </div>
+    </template>
+    <script>
+        const cpn = {
+            template: "#template",
+        };
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                cpn,
+            }
+        })
+    </script>
+</body>
+
+</html>
