@@ -1662,4 +1662,38 @@ String、Number、Boolean、Array、Object、Date、Function、Symbol、
 
 #### 插槽作用域
 
-如果
+```html
+    <div id="app">
+        <cpn>
+            <template slot-scope="slot">
+                <span v-for="item in slot.data">{{item}}-</span>
+            </template>
+        </cpn>
+    </div>
+    <template id="template">
+        <div>
+            <slot :data="list">
+                <li v-for="item in list">{{item}}</li>
+            </slot>
+        </div>
+    </template>
+    <script>
+        const cpn = {
+            template: "#template",
+            data() {
+                return {
+                    list: ["Java", "Python", "C++", "PHP", "JavaScript"],
+                }
+            }
+        };
+        const vm = new Vue({
+            el: "#app",
+            components: {
+                cpn,
+            }
+        })
+    </script>
+```
+
+以上代码中的子组件原本是要以列表的形式展现`list`内容的，但我们修改了插槽的内容，方法是在新构造的`cpn`内添加了`template`，又在`template`中添加了`slot-scope`属性，该属性用于接收子组件中插槽的所有值，然后遍历数组输出`<span>`，`span`标签用于重新改写`list`内容，由于`list`属于子组件中`slot`，故我们是从`slot`中获取`list`用于遍历的：`slot.data`。
+子组件内的`slot`上也要动态绑定一个属性，该属性值是要重新展示的值，故写成`:data="list"`

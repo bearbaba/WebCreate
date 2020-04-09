@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="article">
+        <fu></fu>
+    </div>
+    <template id="template">
+        <div>
+            <textarea  id="" cols="30" rows="10" v-model="content">{{content}}</textarea>
+            <button @click="submit">提交</button>
+        </div>
+    </template>
+    <template id="templatefun">
+        <div>
+            <p>
+                {{contentParent}}
+            </p>
+            <cpn @getmessage="changeContent"></cpn>
+        </div>
+    </template>
+    <script>
+        const childModule = {
+            template: "#template",
+            data() {
+                return {
+                    content: " ",
+                }
+            },
+            methods: {
+                submit: function() {
+                    console.log(this.content);
+                    this.$emit("getmessage", this.content);
+                }
+            },
+
+        };
+        const fu = {
+            template: "#templatefun",
+            components: {
+                cpn: childModule,
+            },
+            data() {
+                return {
+                    contentParent: "默认值",
+                }
+            },
+            methods: {
+                changeContent: function(value) {
+                    this.contentParent = value;
+                }
+            }
+        };
+        const vm = new Vue({
+            el: "#article",
+            components: {
+                fu,
+            }
+        })
+    </script>
+</body>
+
+</html>
