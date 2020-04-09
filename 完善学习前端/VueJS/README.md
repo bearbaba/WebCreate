@@ -1697,3 +1697,56 @@ String、Number、Boolean、Array、Object、Date、Function、Symbol、
 
 以上代码中的子组件原本是要以列表的形式展现`list`内容的，但我们修改了插槽的内容，方法是在新构造的`cpn`内添加了`template`，又在`template`中添加了`slot-scope`属性，该属性用于接收子组件中插槽的所有值，然后遍历数组输出`<span>`，`span`标签用于重新改写`list`内容，由于`list`属于子组件中`slot`，故我们是从`slot`中获取`list`用于遍历的：`slot.data`。
 子组件内的`slot`上也要动态绑定一个属性，该属性值是要重新展示的值，故写成`:data="list"`
+
+## webpack的使用
+
+### webpack的安装
+
+在安装了`node.js`的基础上，使用`npm install webpack@3.6.0 -g`即可安装3.6.0版本的webpack，`-g`表示全局安装。
+
+### webpack的文件结构
+
+* dist文件夹：用于存放之后打包的文件
+* src文件夹：用于存放我们写的源文件
+* index.html：浏览器打开展示的首页html
+
+在我们的源文件写完后，就可以使用`webpack src/main.js dist/bundle.js`来打包并在dist中生成`bundle.js`文件。
+
+### ES6导入与导出
+
+实际开发使用模块化的开发方式，因此需要导入与导出模块，方便实用。
+
+#### 导出
+
+```javascript
+export function sum(a, b) {
+    return a + b;
+};
+```
+
+以上直接导出sum方法。
+
+或者可以使用以下方式：
+
+```javascript
+sum:function(a,b){
+    return a+b;
+}
+export default sum;
+```
+
+export default每次只能导出一个值或函数，导出函数与值是一样的用法。
+
+#### 导入
+
+导入使用import语法：
+
+```javascript
+import {sum,a} from "./math"
+```
+
+import语法与其他编程语言的用法大同小异，此处不再赘述。
+
+
+
+
