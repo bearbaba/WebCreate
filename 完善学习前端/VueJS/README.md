@@ -1700,11 +1700,13 @@ String、Number、Boolean、Array、Object、Date、Function、Symbol、
 
 ## webpack的使用
 
+在webpack的世界里，一张图片、一个css甚至一个字体，都被称为模块（Module），彼此存在依赖关系，webpack就是来处理模块间的依赖关系的，并把它们进行打包。
+
 ### webpack的安装
 
 在安装了`node.js`的基础上，使用`npm install webpack@3.6.0 -g`即可安装3.6.0版本的webpack，`-g`表示全局安装。
 
-### webpack的文件结构
+### vue项目文件的基本结构
 
 * dist文件夹：用于存放之后打包的文件
 * src文件夹：用于存放我们写的源文件
@@ -1745,8 +1747,99 @@ export default每次只能导出一个值或函数，导出函数与值是一样
 import {sum,a} from "./math"
 ```
 
+如果使用了npm安装了一些库，在webpack中可以直接导入，如
+
+```javascript
+import Vue from 'vue';
+import $ from 'jquery';
+```
+
 import语法与其他编程语言的用法大同小异，此处不再赘述。
 
+import是ES2015的语法，也可以写成`require('src/style/index.css)`，在打包是，index.css会被打包进一个js文件里，通过动态创建`<style>`的形式来加载css样式，也可以进一步配置，在打包时把所有的css都提取出来，生成一个css的文件。
 
+webpack的主要使用场景是单页面富应用（SPA）。SPA通常是由一个html文件和一堆加载的js组成。
 
+### webpack基础配置
 
+首先，创建一个目录，比如demo，使用npm初始化配置：
+
+```powershell
+npm init
+```
+
+执行后，会有一系列选项，可以按回车键快速确认，完成后会在demo目录生成一个`package.json`的文件。
+之后在本地局部安装webpack：
+
+```powershell
+npm install webpack --save-dev
+```
+
+--save-dev会作为开发依赖安装webpack，安装后，在package.json会多一项配置：
+
+```json
+    "devDependencies": {
+        "webpack": "^4.42.1"
+    }
+```
+
+接着安装`webpack-dev-server`，它可以在开发环境中提供很多服务，比如启动一个服务器、热更新、接口代理等。在本地局部安装：
+
+```powershell
+npm install webpack-dev-server --save-dev
+```
+
+webpack就是一个`.js`配置文件，
+首先在目录demo下创建一个js文件：webpack.config.js，并初始化它的内容：
+
+```js
+var config = {
+
+};
+module.exports = config;
+```
+
+`module.exports = config;`是`commonJS`的导出语法，相当于`export default config`。
+
+然后在`package.json`的`scripts`里增加一个快速启动`webpack-dev-server`服务的脚本：
+
+```json
+{
+    //...
+    "scripts":{
+        "test":"echo\"Error: no test specified\" && exit 1",
+        "dev": "webpack-dev-server --open --config webpack:config.js"
+    },
+    // ...
+}
+```
+
+当运行`npm run dev`命令时，就会执行`webpack-dev-server --open --config webpack.config.js`命令，其中`--config`是指向`webpack-dev-server`读取的配置文件路径，这里直接读取我们在上一步创建的`webpack.config.js`文件。`--open`会在执行命令时自动在浏览器打开页面，默认地址是`127.0.0.1:8080`,IP和端口都是可以配置的，例：
+
+```json
+{
+    "scripts":{
+        "dev":"webpack-dev-server --host 172.172.172.1 --port 8888 --open --config webpack.config.js"
+    }
+}
+```
+
+此处访问地址就被改成了`172.172.172.1:8888`。
+
+webpack配置中最重要的也是必选的两项是入口（Entry）和出口（Output）。入口的作用是webpack从哪里开始寻找依赖，并且编译，出口则用来配置编译后的文件存储位置和文件名。
+在demo目录下新建一个空的`main.js`作为入口的文件，然后在`webpack.config.js`中进行入口和输出的配置：
+
+```js
+var path = require('path');
+var config = {
+    entry:{
+        main:"./main"
+    },
+    output:{
+        path:path.join{_dirname,"./dist"},
+        publicPath:"/dist/",
+        filename:"main.js"
+    }
+};
+module.exports=config;
+```
