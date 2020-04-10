@@ -1841,5 +1841,4 @@ var config = {
         filename:"main.js"
     }
 };
-module.exports=config;
-```
+module.exports=co
