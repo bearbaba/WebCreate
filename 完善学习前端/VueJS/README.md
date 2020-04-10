@@ -1437,6 +1437,7 @@ String、Number、Boolean、Array、Object、Date、Function、Symbol、
 ```
 
 如上所见，子组件`<new-html>`中的点击事件`childFun`函数要想被检测到，并且能把子组件中的数据传递给父组件，就需要使用子传父的通信方法，
+
 首先要为`childFun`中增加一个`this.$emit()`，以把数据传递给父组件中的方法，括号里是要接收数据的父组件方法名绑定的自定义Vue属性，再为新构建的元素使用`v-bind`绑定上自定义的Vue属性，该方法等于号右边是处理数据的父组件方法。
 
 ## 组件访问
@@ -1594,7 +1595,9 @@ String、Number、Boolean、Array、Object、Date、Function、Symbol、
 ### 插槽
 
 在子组件中，使用特殊的元素`<slot>`就可以为子组件开启一个插槽。
+
 该插槽插入什么内容取决于父组件如何使用。
+
 每个组件的内容及功能大体上相似，但在一些具体功用上存在不同就能使用`插槽`，插槽的作用类似于占位符。例：
 
 ```html
@@ -1630,6 +1633,7 @@ String、Number、Boolean、Array、Object、Date、Function、Symbol、
 如上，每个组件默认含有一个点击按钮，如果想要修改只需在已构造的标签内包含其他标签即可，上述是将第二个组件的默认插槽内容从按钮修改成了`<p>`文本内容。
 
 当组件中含有多个插槽时，我们希望构建的标签中包含的标签的具体修改某一个插槽时，就需要使用具名插槽。
+
 具名插槽只需要在插槽`<slot>`中设置一个`name`属性，然后在要替代插槽的标签上设置`slot`属性，`slot`属性的值与`name`属性的值一致时就能具体修改某一个插槽。
 
 ```html
@@ -1696,6 +1700,7 @@ String、Number、Boolean、Array、Object、Date、Function、Symbol、
 ```
 
 以上代码中的子组件原本是要以列表的形式展现`list`内容的，但我们修改了插槽的内容，方法是在新构造的`cpn`内添加了`template`，又在`template`中添加了`slot-scope`属性，该属性用于接收子组件中插槽的所有值，然后遍历数组输出`<span>`，`span`标签用于重新改写`list`内容，由于`list`属于子组件中`slot`，故我们是从`slot`中获取`list`用于遍历的：`slot.data`。
+
 子组件内的`slot`上也要动态绑定一个属性，该属性值是要重新展示的值，故写成`:data="list"`
 
 ## webpack的使用
@@ -1827,6 +1832,7 @@ module.exports = config;
 此处访问地址就被改成了`172.172.172.1:8888`。
 
 webpack配置中最重要的也是必选的两项是入口（Entry）和出口（Output）。入口的作用是webpack从哪里开始寻找依赖，并且编译，出口则用来配置编译后的文件存储位置和文件名。
+
 在demo目录下新建一个空的`main.js`作为入口的文件，然后在`webpack.config.js`中进行入口和输出的配置：
 
 ```js
@@ -1841,4 +1847,81 @@ var config = {
         filename:"main.js"
     }
 };
-module.exports=co
+module.exports=config
+```
+
+## vue Cli开发学习
+
+如今的vue cli已经默认集成了webpack，在实际开发中也不需要手动配置太过复杂的webpack结构，
+
+### 开发环境搭建
+
+在安装nodejs、vue与vue cli的前提下，我们在终端中执行以下命令就能创建vue cli2项目文件：
+
+```powershell
+vue init webpack project
+```
+
+就能创建一个名为`project`的vue cli2项目，
+
+#### vue cli2项目文件结构
+
+全局文件结构：
+>build/   //编译用到的脚本
+>
+>config/  //各种配置
+>
+>dist/   //打包后的文件夹
+>
+>src/   //源代码
+>
+>static   //静态文件
+>
+>index.html  //最外层文件
+>
+>package.json  //node项目配置文件
+
+build文件夹结构:
+
+保留各种打包脚本，不可或缺，不能随意修改。
+
+展开后如下：
+
+```text
+build/
+    build.js
+    check-versions.js
+    dev-client.js
+    dev-server.js
+    utils.js
+    vue-loader.conf.js
+    webpack.base.conf.js
+    webpack.prod.conf.js
+```
+
+* build.js：打包使用
+
+* check-version.js：检查npm的版本
+
+* dev-client.js和dev-server.js：是在开发时使用的服务器脚本，在做开发时，可以通过`$npm run dev`这个命令，打开一个小的server。
+
+* utils.js：不作修改表，做一些css/sass等文件的生成
+
+* vue-loader.conf.js：用来辅助加载vuejs用到的css source map等内容。
+
+* vue-loader.conf.js、webpack.base.conf.js、webpack.prod.conf.js：这三个都是基本的配置文件。
+
+config中的文件跟部署和配置有关，其中index.js定义了开发时的端口（默认是8080），定义了图片文件夹（默认static），定义了开发模式下的代理服务器。
+
+dist是打包之后的文件所在目录
+
+node_modules是node项目所用到的第三方包。
+
+src是最核心的代码所在的目录，其中`assets`是要用到的图片，`components`是要用到的“视图”和“组件”所在的文件夹，`router/index.js`是路由文件，定义了各个页面对应的url。`App.vue`想到于二级页面模板，所有的其他vuejs页面，都作为改模板的一部分被渲染出来。
+
+#### vue cli3项目创建
+
+vue cli3与vue cli2有很大的不同，使用`vue create project`创建一个名为project的vue cli3项目。
+
+vue cli3的项目目录中的public相当于vue cli2的static目录，
+
