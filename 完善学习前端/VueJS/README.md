@@ -1942,4 +1942,44 @@ Router对象中的`routes`用来配置路由和组件的应用关系。
 然后将router对象导出到主目录下`main.js`中的Vue实例内，即在main.js的基础上加上`import router from './router';`并在main.js中的Vue实例上添加router，表示使用导入的router。`import router from './router';`注意这句话实际上是`import router from './router/index.js`的简写。
 
 想要创建组件就要在components文件下添加后缀为`.vue`的vue文件。这里创建一个名为`home`的文件。
+在home文件中构造一个vue组件，如果想要使用该组件就要到router下的`index.js`内，为`route`添加一个路由对象。
+
+```js
+import Vue from 'vue';
+import Router from 'vue-router';
+import home from '../components/home';
+
+Vue.use(Router);
+
+const router = new Router({
+  routes: [
+    {
+    path: '/home',
+    component: home,
+  }],
+});
+export default router;
+```
+
+由于此处是想让`home`组件作为首页中的一个超链接，所以我们在`App.vue`中设置`<template>`为：
+
+```html
+<template>
+  <div id="app">
+    <router-link to="/home">首页</router-link>
+    <router-view/>
+  </div>
+</template>
+```
+
+我们要想让`home`组件被渲染出来，就需要使用`<router-view>`元素。
+我们想要修改组件的url路径，只需要在router路由对象内修改path就可以了，例如将首页路径修改为默认路径，只需修改path为`path:'/'`。
+
+vue cli2组件在浏览器的url加载模式默认为hash模式，如果想使用`history`，只修改`router`设置，即修改在`index.js`内的`router`实例下增加一个`mode`属性，将`mode`设为`history`就能以`history`模式加载url。
+
+在`router-link`元素内设置`tag`属性为`button`，就能把`router-link`渲染成`button`元素。
+
+在`router-link`元素内设置`active-class`属性就能为`router-link`元素设置`class`名称。
+
+
 

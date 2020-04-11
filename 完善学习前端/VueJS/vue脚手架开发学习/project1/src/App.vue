@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <router-link to="/home">首页</router-link>
-    <router-view/>
+    <router-link to="/home" tag="button" active-class="home">首页</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -11,6 +11,14 @@ export default {
 };
 </script>
 
-<style>
-
+<style lang="css" scoped>
+.home{
+  color:yellow;
+}
+.home:active{
+  color:red;
+}
+.home:target{
+  color:#ccc;
+}
 </style>
