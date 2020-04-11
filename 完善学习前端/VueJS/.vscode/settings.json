@@ -1,3 +1,7 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "vscode-janus-debug.uploadOnSave": [
+        "index"
+    ],
+    "editor.tabSize": 2
 }

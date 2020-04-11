@@ -1923,5 +1923,23 @@ src是最核心的代码所在的目录，其中`assets`是要用到的图片，
 
 vue cli3与vue cli2有很大的不同，使用`vue create project`创建一个名为project的vue cli3项目。
 
-vue cli3的项目目录中的public相当于vue cli2的static目录，
+vue cli3的项目目录中的public相当于vue cli2的static目录。
+
+### 路由配置及使用
+
+首先我们在src/router下创建`index.js`文件，在`index.js`中通过`import Router from 'vue-router';`导入路由相关模块，然后通过`Vue.use(Router)`使用该模块。
+
+在然后创建router对象：
+
+```js
+const router = new Router({
+    routes
+})
+```
+
+Router对象中的`routes`用来配置路由和组件的应用关系。
+
+然后将router对象导出到主目录下`main.js`中的Vue实例内，即在main.js的基础上加上`import router from './router';`并在main.js中的Vue实例上添加router，表示使用导入的router。`import router from './router';`注意这句话实际上是`import router from './router/index.js`的简写。
+
+想要创建组件就要在components文件下添加后缀为`.vue`的vue文件。这里创建一个名为`home`的文件。
 
