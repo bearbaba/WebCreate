@@ -2039,3 +2039,38 @@ data(){
 
 * `$route`为当前`router`跳转对象里面可以获取`name`、`path`、`query`、`params`等
 * `$router为VueRouter`实例，想要导航到不同URL，则使用`$router.push`方法
+
+#### 路由懒加载
+
+当打包构建应用时，Javascript 包会变得非常大，影响页面加载。
+
+如果我们能把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就更加高效了。因此使用路由懒加载的方式导入组件模块，在使用各个组件时，再进行组件的加载，而不是一开始就加载好所有组件。
+
+路由懒加载的主要作用就是将路由对应的组件打包成一个个的js代码块。
+只有在这个路由被访问到的时候, 才加载对应的组件。
+
+懒加载的方式：
+>
+>1.结合Vue的异步组件和Webpack的代码分析：
+>
+>```js
+>const Home = resolve => { require.ensure(['../components/Home.vue'], () => { resolve(require('../components/Home.>vue')) })};
+>```
+>
+>2.AMD写法
+>
+>```js
+>const About = resolve => require(['../components/About.vue'], resolve);
+>```
+>
+>3.在ES6中, 我们可以有更加简单的写法来组织Vue异步组件和Webpack的代码分割.
+>
+>```js
+>const Home = () => import('../components/Home.vue')
+>```
+>
+>```js
+>const Home = () => import('../components/Home.vue')
+>```
+
+通常情况下使用方式3，节省代码量。

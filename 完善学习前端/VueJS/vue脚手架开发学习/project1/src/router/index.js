@@ -1,8 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import home from '../components/home';
-import about from '../components/about';
-import user from '../components/user';
+// import home from '../components/home';
+// import about from '../components/about';
+// import user from '../components/user';
+
+const home = () => import('../components/home.vue');
+const about = () => import('../components/about.vue');
+const user = () => import('../components/user.vue');
 
 Vue.use(Router);
 const routes = [
