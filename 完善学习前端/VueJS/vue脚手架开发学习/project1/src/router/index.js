@@ -9,6 +9,7 @@ const about = () => import('../components/about.vue');
 const user = () => import('../components/user.vue');
 const homeMessage = () => import('../components/homeMessage.vue');
 const news = () => import('../components/news.vue');
+const fileAbout = () => import('../components/fileAbout.vue');
 
 Vue.use(Router);
 const routes = [
@@ -34,8 +35,12 @@ const routes = [
   {
     path: '/about',
     component: about,
-
-
+    children: [
+      {
+        path: 'fileAbout',
+        component: fileAbout,
+      },
+    ],
   },
   {
     path: '/user/:userId',
