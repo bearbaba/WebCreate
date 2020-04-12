@@ -18,13 +18,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
 .home{
-  color:yellow;
-}
-.home:active{
   color:red;
 }
-.home:target{
+.home:visited{
   color:#ccc;
 }
 </style>

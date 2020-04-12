@@ -4,18 +4,21 @@ import home from '../components/home';
 import about from '../components/about';
 
 Vue.use(Router);
-const routes = [{
-  path: '/',
-  component: home,
-},
-{
-  path: '/home',
-  component: home,
-},
-{
-  path: '/about',
-  component: about,
-},
+const routes = [
+  // {
+  //   path: '/',
+  //   component: home,
+  //   redirect: '/about',
+  // },
+  {
+    path: '/home',
+    component: home,
+    redirect: '/about',
+  },
+  {
+    path: '/about',
+    component: about,
+  },
 ];
 const router = new Router({
   routes,
