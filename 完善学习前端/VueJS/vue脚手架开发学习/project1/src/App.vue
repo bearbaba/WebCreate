@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <router-link to="/home" tag="button" active-class="home" replace>首页</router-link>
-    <router-view></router-view>
     <button @click="goToAbout">关于</button>
     <router-link :to="'/user/'+Id">用户界面</router-link>
+    <router-view></router-view>
+
   </div>
 </template>
 

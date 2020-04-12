@@ -2074,3 +2074,48 @@ data(){
 >```
 
 通常情况下使用方式3，节省代码量。
+
+#### 路由嵌套
+
+嵌套路由是一个很常见的功能
+比如在home页面中, 我们希望通过/home/news和/home/homeMessage访问一些内容.
+一个路径映射一个组件, 访问这两个路径也会分别渲染两个组件。
+
+实现嵌套路由有两个步骤:
+
+* 创建对应的子组件, 并且在路由映射中配置对应的子路由。子路由配置例：
+
+```javascript
+{
+    path: '/home',
+    component: home,
+    children: [
+      {
+        path: 'homeMessage',
+        component: homeMessage,
+      },
+      {
+        path: 'news',
+        component: news,
+      },
+    ],
+  },
+```
+
+如上子路由配置只需在原有路由基础上添加`children`对象即可。注意子路由的`path`是没有“/”的，只有根组件才有“/”。
+
+* 在组件内部使用`<router-view>`标签.
+
+```html
+<template>
+  <div>
+    <h1>{{title}}</h1>
+    <p>{{msg}}</p>
+    <router-link to="/home/homeMessage">首页内容</router-link>
+    <router-link to="/home/news">首页新闻</router-link>
+    <router-view></router-view>
+  </div>
+</template>
+```
+
+to所指向的路径与path不同，是一个url的层级结构路径，`home`前要有"/"。

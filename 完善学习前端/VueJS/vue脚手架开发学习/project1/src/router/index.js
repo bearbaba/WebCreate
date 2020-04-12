@@ -7,6 +7,8 @@ import Router from 'vue-router';
 const home = () => import('../components/home.vue');
 const about = () => import('../components/about.vue');
 const user = () => import('../components/user.vue');
+const homeMessage = () => import('../components/homeMessage.vue');
+const news = () => import('../components/news.vue');
 
 Vue.use(Router);
 const routes = [
@@ -18,10 +20,22 @@ const routes = [
   {
     path: '/home',
     component: home,
+    children: [
+      {
+        path: 'homeMessage',
+        component: homeMessage,
+      },
+      {
+        path: 'news',
+        component: news,
+      },
+    ],
   },
   {
     path: '/about',
     component: about,
+
+
   },
   {
     path: '/user/:userId',
