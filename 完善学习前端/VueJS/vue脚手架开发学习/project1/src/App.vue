@@ -3,12 +3,18 @@
     <router-link to="/home" tag="button" active-class="home" replace>首页</router-link>
     <router-view></router-view>
     <button @click="goToAbout">关于</button>
+    <router-link :to="'/user/'+Id">用户界面</router-link>
   </div>
 </template>
 
 <script>
 export default {
   name: 'App',
+  data() {
+    return {
+      Id: 123,
+    };
+  },
   methods: {
     goToAbout() {
       this.$router.push('/about');
