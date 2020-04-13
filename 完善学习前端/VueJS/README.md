@@ -2172,3 +2172,45 @@ methods: {
 5. 文件名部分：从域名后的最后一个“/”开始到“？”为止，是文件名部分，如果没有“?”,则是从域名后的最后一个“/”开始到“#”为止，是文件部分，如果没有“？”和“#”，那么从域名后的最后一个“/”开始到结束，都是文件名部分。本例中的文件名是“index.asp”。文件名部分也不是一个URL必须的部分，如果省略该部分，则使用默认的文件名
 6. 锚部分：从“#”开始到最后，都是锚部分。本例中的锚部分是“name”。锚部分也不是一个URL必须的部分
 7. 参数部分：从“？”开始到“#”为止之间的部分为参数部分，又称搜索部分、查询部分。本例中的参数部分为`“boardID=5&ID=24618&page=1”`。参数可以允许有多个参数，参数与参数之间用“&”作为分隔符。
+
+### vue全局导航守卫
+
+每个vue的组件都含有生命周期函数`created()`，当这个组件被使用时，这个函数才会被使用。我们可以通过该函数来改变加载到不同页面时的`title`名。例：
+
+```js
+<script>
+export default {
+  name: 'fileAbout',
+  created() {
+    document.title = 'fileAbout';
+  },
+  computed: {
+    urlData() {
+      return this.$route.query;
+    },
+  },
+};
+</script>
+```
+
+我们也可以通过在路由配置文件`index.js`中添加`router.beforeEach`来动态改变每个页面的`title`。
+
+```js
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title;
+  next();
+});
+```
+
+同时还要为每个路由添加`meta`对象，例：
+
+```js
+{
+    path: '/user/:userId',
+    component: user,
+    meta: {
+      title: '用户',
+    },
+},
+```
+

@@ -12,6 +12,10 @@
 <script>
 export default {
   name: 'user',
+  created() {
+    // eslint-disable-next-line no-console
+    console.log('created');
+  },
   computed: {
     userId() {
       return this.$route.params.userId;

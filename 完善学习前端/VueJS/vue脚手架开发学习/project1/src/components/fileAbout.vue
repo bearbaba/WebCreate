@@ -10,6 +10,7 @@
 <script>
 export default {
   name: 'fileAbout',
+
   computed: {
     urlData() {
       return this.$route.query;
