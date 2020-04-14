@@ -26,20 +26,20 @@ const routes = [
     meta: {
       title: '首页',
     },
-    // children: [{
-    //   path: 'homeMessage',
-    //   component: homeMessage,
-    //   meta: {
-    //     title: '主页信息',
-    //   },
-    // },
-    // {
-    //   path: 'news',
-    //   component: news,
-    //   meta: {
-    //     title: '新闻',
-    //   },
-    // }],
+    children: [{
+      path: 'homeMessage',
+      component: homeMessage,
+      meta: {
+        title: '主页信息',
+      },
+    },
+    {
+      path: 'news',
+      component: news,
+      meta: {
+        title: '新闻',
+      },
+    }],
   },
   {
     path: '/user/:userId',
@@ -77,6 +77,7 @@ const routes = [
         component: fileAbout,
         meta: {
           title: 'fileAbout',
+          keepalive: true,
         },
       },
     ],

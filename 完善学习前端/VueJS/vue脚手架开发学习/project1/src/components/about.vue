@@ -5,7 +5,9 @@
     <!-- <router-link :to="{path:'/about/fileAbout',query:{name:'hello',id:'2333'}}">click
     </router-link> -->
     <button @click="toClick">click</button>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 <script>

@@ -3,7 +3,9 @@
     <router-link to="/home" tag="button" active-class="home" replace>首页</router-link>
     <button @click="goToAbout">关于</button>
     <router-link :to="'/user/'+Id">用户界面</router-link>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
 
   </div>
 </template>
