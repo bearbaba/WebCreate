@@ -5,7 +5,7 @@ body {
   padding: 0px;
 }
 body #main {
-  background-color: #ccc;
+  background-color:white;
   opacity: 70%;
   margin: 0 100px;
   height: 100%;
@@ -18,7 +18,8 @@ body #main #button {
   height: 100px;
   border-radius: 50px;
   box-sizing: border-box;
-  background-color: #1bf014;
+  background-color: #1af513;
+  box-shadow:2px 2px 10px rgb(17, 16, 16);
   margin: 1rem auto;
   display: flex;
 }
@@ -26,6 +27,28 @@ body #main #button #on {
   background-color: white;
   width: 85px;
   height: 85px;
-  border-radius: 50%;
+  border-radius: 42.5px;
   margin: auto 5px;
+  position: relative;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 10px black;
+  animation-name:none;
+  animation-duration:10s;
+
 }
+
+    @keyframes button{
+      0%{
+
+      }
+      50%{
+        
+      }
+      75%{
+
+      }
+      100%{
+        transform: scaleX(2);
+      }
+    }
+  
