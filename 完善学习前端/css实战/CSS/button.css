@@ -34,6 +34,7 @@ body #main #button #on {
   box-shadow: 1px 1px 10px black;
   animation-name:none;
   animation-duration:10s;
+  
 
 }
 
@@ -42,13 +43,14 @@ body #main #button #on {
 
       }
       50%{
-        
+        width:188px;
       }
       75%{
-
+        
       }
       100%{
-        transform: scaleX(2);
+        float:right;
+        width:85px;
       }
     }
   
