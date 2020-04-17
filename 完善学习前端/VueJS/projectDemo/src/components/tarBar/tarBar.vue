@@ -1,6 +1,6 @@
 <template>
   <div id="tar-bar">
-    <slot></slot>
+    <slot name='tar-bar-item'></slot>
   </div>
 </template>
 

@@ -1,24 +1,26 @@
-#tar-bar {
-  position: fixed;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-direction: row;
-  bottom: 0;
-  width: 100%;
-  background-color: #ccc;
-  justify-content: space-around;
-  margin: 0;
-  left: -2px;
+
+#tar-bar div .img {
+    height: 20px;
+    width: 30px;
+    margin-top: 20px;
+}
+#tar-bar{
+    position: fixed;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+            flex-direction: row;
+    bottom:0;
+    width:100%;
+    background-color: #ccc;
+    justify-content: space-evenly;
+    margin:0;
+    left:-2px;
 }
 
-#tar-bar .tar-bar-item .img {
-  margin-top: 10px;
-  height: 20px;
-  width: 30px;
-}
-
-#tar-bar>.tar-bar-item {
-  text-align: center;
+#tar-bar>div{
+    text-align: center;
+        /* -webkit-box-pack: space-evenly;
+        justify-content: space-evenly;*/ 
 }
