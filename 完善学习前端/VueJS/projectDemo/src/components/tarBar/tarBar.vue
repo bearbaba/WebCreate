@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import tarBarItem from './tarBarItem';
+import TarBarItem from './tarBarItem';
 
 export default {
   name: 'TarBar',
   components: {
-    tarBarItem,
+    TarBarItem,
   },
 };
 </script>
