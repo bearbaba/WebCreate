@@ -1,23 +1,24 @@
 <template>
   <div id="app">
+      <router-view></router-view>
       <tar-bar id="tar-bar">
-        <tar-bar-item class='tar-bar-item' slot="tar-bar-item">
+        <tar-bar-item class='tar-bar-item' slot="tar-bar-item" path='/news'>
           <img src="./assets/img/tarBar/icon-test.svg" class="img" slot="item-img">
           <img src="./assets/img/tarBarActive/3.svg" class="img" slot="item-img-active">
           <p slot="item-text">消息</p>
         </tar-bar-item>
-        <tar-bar-item class='tar-bar-item' slot="tar-bar-item">
+        <tar-bar-item class='tar-bar-item' slot="tar-bar-item" path='/cart'>
           <img src="./assets/img/tarBar/icon-test_1.svg" alt="" class="img" slot="item-img">
           <img src="./assets/img/tarBarActive/gouwuche_tianchong.svg"
            class="img" slot="item-img-active">
           <p slot="item-text">购物车</p>
         </tar-bar-item>
-        <tar-bar-item class='tar-bar-item' slot="tar-bar-item">
+        <tar-bar-item class='tar-bar-item' slot="tar-bar-item" path='/list'>
           <img src="./assets/img/tarBar/icon-test_3.svg" class="img" slot="item-img">
           <img src="./assets/img/tarBarActive/11.svg" class="img" slot="item-img-active">
           <p slot="item-text">分类</p>
         </tar-bar-item>
-        <tar-bar-item class='tar-bar-item' slot="tar-bar-item">
+        <tar-bar-item class='tar-bar-item' slot="tar-bar-item" path='/send'>
           <img src="./assets/img/tarBar/icon-test_2.svg" class="img" slot="item-img">
           <img src="./assets/img/tarBarActive/fenxiang.svg" class="img" slot="item-img-active">
           <p slot="item-text">分享</p>
