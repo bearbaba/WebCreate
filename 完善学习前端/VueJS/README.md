@@ -2282,3 +2282,25 @@ export default {
     </router-view>
 </keep-alive>
 ```
+
+### webpack配置别名alias
+
+在webpack.config.js中，能够设置别名alias。设置别名能够让后续引用的地方减小路径的复杂度。
+
+vue-cli 2.0 在\build\webpack.base.conf.js文件下配置。
+
+vue-cli 3.0 在vue.config.js下配置别名alias。
+
+```json
+ alias: {
+      '@': resolve('src'),
+      '_c': resolve('src/components')
+    }
+```
+
+这样配置后 @ 能够指向 src 目录。
+
+`import utils math from "@/utils/utils"; // 由于设置了alias，因此引入utils.js时候能够这样简写`
+
+在HTML和css中使用别名，要在别名前添加`~`。
+

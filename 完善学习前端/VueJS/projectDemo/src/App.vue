@@ -3,8 +3,8 @@
       <router-view></router-view>
       <tar-bar id="tar-bar">
         <tar-bar-item class='tar-bar-item' slot="tar-bar-item" path='/news' activeColor='pink'>
-          <img src="./assets/img/tarBar/icon-test.svg" class="img" slot="item-img">
-          <img src="./assets/img/tarBarActive/3.svg" class="img" slot="item-img-active">
+          <img src="~img/tarBar/icon-test.svg" class="img" slot="item-img">
+          <img src="~img/tarBarActive/3.svg" class="img" slot="item-img-active">
           <p slot="item-text">消息</p>
         </tar-bar-item>
         <tar-bar-item class='tar-bar-item' slot="tar-bar-item" path='/cart' activeColor='blue'>
