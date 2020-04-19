@@ -1,8 +1,9 @@
 <template>
   <div @click="clickItem">
-    <div v-if="!isflase"><slot name="item-img"></slot></div>
+    <div v-if="!isActive"><slot name="item-img"></slot></div>
     <div v-else><slot name="item-img-active"></slot></div>
-    <div :class="{active:isflase}"><slot name="item-text"></slot></div>
+    <div v-if="!isActive"><slot name="item-text"></slot></div>
+    <div v-else :style="{color: activeColor}"><slot name="item-text"></slot></div>
   </div>
 </template>
 
@@ -12,12 +13,19 @@ export default {
   props:
     {
       path: String,
+      activeColor: {
+        default: 'black',
+        type: String,
+      },
     },
-
+  computed: {
+    // isActive函数确认是否为活动状态，是则返回true
+    isActive() {
+      if (this.$route.path.indexOf(this.path) !== -1) { return true; }
+      return false;
+    },
+  },
   methods: {
-    isflase() {
-      this.isflase = true;
-    },
     clickItem() {
       this.$router.push(this.path);
     },
