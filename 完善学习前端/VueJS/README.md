@@ -2304,3 +2304,5 @@ vue-cli 3.0 在vue.config.js下配置别名alias。
 
 在HTML和css中使用别名，要在别名前添加`~`。
 
+## 异步编程 promise使用
+
