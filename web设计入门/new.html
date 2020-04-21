@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script>
+        function clickme() {
+            document.getElementById("out").src = "picture/微信图片_20181103203628.jpg";
+
+        }
+
+        function clickme2() {
+            document.getElementById("out").src = "picture/微信图片_20181103203640.jpg";
+        }
+    </script>
+    <style type="text/css">
+        #out {
+            width: 100px;
+            height: 150px;
+            border-style: groove;
+            border-width: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div>
+            <img id="out" src="picture/微信图片_20181113225842.jpg">
+        </div>
+        <div><input type="button" value="点击" onclick="clickme()" style="float:left"></div>
+        <div><input type="button" value="恢复" onclick="clickme2()" style="position:relative;left:10px"></div>
+    </div>
+</body>
+
+</html>

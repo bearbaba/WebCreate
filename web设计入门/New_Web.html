@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>new web</title>
+</head>
+
+<body>
+    <title>New Web</title>
+    <h3>北京你好</h3>
+    <hr>
+    <h3>世界你好</h3>
+    <h2>Hello World!</h2>
+    <div>
+        <a href="https://www.baidu.com"><img src="picture\baidu_logo.jpg" width="200" height="50" alt="百度logo" align="center"></img>
+        </a>
+    </div>
+    <table border="1">
+        <tr>
+            <td>姓名</td>
+            <td>邮件</td>
+        </tr>
+        <tr>
+            <td>张明</td>
+            <td>zhangming@qq.com</td>
+        </tr>
+        <tr>
+            <td>王芳</td>
+            <td>wangfang@qq.com</td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                共两人
+            </td>
+        </tr>
+    </table>
+    <div>
+        <table border="1">
+            <tr>
+                <td>分类</td>
+                <td>书名</td>
+                <td>册数</td>
+            </tr>
+            <tr>
+                <td rowspan="3">数据库</td>
+                <td>《数据库原理》</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>《Oracle10g基础原理》</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>《Oracle数据库管理与开发》</td>
+                <td>2</td>
+            </tr>
+
+            <tr>
+                <td>Java</td>
+                <td>《Java实用程序设计》</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td colspan="2">总结</td>
+                <td>9</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table border="1">
+            <tr>
+                <td>姓名</td>
+                <td colspan="2">电话</td>
+            </tr>
+            <tr>
+                <td>王成</td>
+                <td>18298255026</td>
+                <td>17324655024</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table border="1">
+            <tr>
+                <td>姓名</td>
+                <td>张立</td>
+            </tr>
+            <tr>
+                <td rowspan="2">电话</td>
+                <td>15322467890</td>
+            </tr>
+            <tr>
+                <td>15524455026</td>
+            </tr>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <form>
+            First name:<input type="password" name="passwd" /> The Last name:<input type="password" name="passwd" />
+        </form>
+    </div>
+    <div>
+        <form>
+            姓名：<input type="text" name="name" /><br/>密码：<input type="password" name="passwd" />
+        </form>
+    </div>
+    <div>
+        <form>
+            性别：
+            <input type="radio" name="sex" value="male">男
+            <input type="radio" name="sex" value="female">女
+        </form>
+    </div>
+    <div>
+        <form>
+            爱好：
+            <input type="checkbox" name="hobby" value="1" />运动
+            <input type="checkbox" name="hobby" value="2" />音乐
+            <input type="checkbox" name="hobby" value="3" />读书
+        </form>
+    </div>
+    <div>
+        <form>
+            学历：
+            <select name="degree">
+					<option value="0">--请选择--</option>
+					<option value="1">专科</option>
+					<option value="2">本科</option>
+					<option value="3">硕士</option>
+					<option value="4">博士及以上</option>
+					
+				</select>
+        </form>
+    </div>
+    <div>
+        <select>
+			<optgroup label="咖啡">
+				<option value="1">白咖啡</option>
+				<option value="2">黑咖啡</option>
+			</optgroup>
+			<optgroup label="茶">
+				<option value="a">红茶</option>
+				<option value="b">白茶</option>
+			</optgroup>
+		</select>
+    </div>
+    <div>
+        <select size="4" multiple="multiple">
+			<option value="1">果汁</option>
+			<option value="2">牛奶</option>
+			<option value="3">茶</option>
+			<option value="4">咖啡</option>
+		</select>
+    </div>
+    <div>
+        <form>
+            <textarea name="comment" rows="3" cols="30"></textarea>
+        </form>
+    </div>
+    <div>
+        <form name="input" action="html_form_action.jsp" method="get">
+            Username:<input type="text" name="user">
+            <input type="submit" value="提交">
+        </form>
+    </div>
+    <div>
+        <form>
+            <table border="1">
+                <tr>
+                    <th colspan="2" align="center">信息统计表</th>
+                </tr>
+                <tr>
+                    <td>姓名：</td>
+                    <td><input type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td>年龄</td>
+                    <td><input type="text" name="years"></td>
+                </tr>
+                <tr>
+                    <td>性别</td>
+                    <td>
+                        <form>
+                            <input type="radio" name="sex" value="man">男
+                            <input type="radio" name="sex" value="woman">女
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">爱好</td>
+                    <td>
+                        <form>
+                            <input type="checkbox" value="1">旅游
+                            <input type="checkbox" value="2">登山
+                            <input type="checkbox" value="3">健身
+                            <input type="checkbox" value="4">上网
+                            <input type="checkbox" value="5">游泳
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        学历
+                    </td>
+                    <td>
+                        <select name="degree">
+							<option value="0">--请选择--</option>
+							<option value="1">专科</option>
+							<option value="2">本科</option>
+							<option value="3">硕士</option>
+							<option value="4">博士及以上</option>
+						</select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>自我介绍：</td>
+                    <td><textarea rows="8" cols="10">自我介绍:</textarea></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="提交">
+                        <input type="reset" value="重置">
+                    </td>
+                </tr>
+            </table>
+    </div>
+    <h1>HTML5</h1>
+    <nav>
+        <ul>
+            <li><a href="http://www.baidu.com">百度</a></li>
+            <li><a href="http://www.sogou.com">搜狗</a></li>
+        </ul>
+    </nav>
+    <p>我们一般在晚上<time datetime="2019-11-23">21:00</time>睡觉</p>
+    <header>
+        <h1>Hello boys</h1>
+    </header>
+
+    <!--网页标题-->
+    <header>
+        <h1>360新闻网</h1>
+        <nav>
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">帮助</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--网页内容-->
+    <article>
+        <hgroup>
+            <h1>美国航天局发现第二个“地球”</h1>
+            <span><small><time>2015-07-25 09:11</time>
+                    <address>来源：咸宁日报 我有话说</address>
+                </small></span>
+        </hgroup>
+        <p>&ns据新华社洛杉矶7月23日电美国航天局23日在音频新闻发布会上宣布，天文学家通过开普勒太空望远镜确认在宜居带发现第一颗与地球大小相似、围绕类似太阳的恒星运行的太阳系外行星。</p>
+        <p>这颗被命名为开普勒-452b的行星比地球大60%，公转周期为385天，只比地球公转周期长5%。其围绕的恒星也与太阳相似。“年龄”为60亿年，比太阳大15亿年，它与太阳的温度类似，质量比太阳大4%，直径比太阳大10%，比太阳明亮20%</p>
+    </article>
+
+    <!--文章评论-->
+    <section>
+        <h2>评论</h2>
+        <p>匿名</p>
+        <p>就算用每秒30万千米的速度飞行，也需要1400年的时间，所以我们并不能过去。</p>
+    </section>
+
+    <!--脚注信息-->
+    <footer>版权所有：360新闻网</footer>
+
+    </article>
+</body>
+</form>
+
+</html>

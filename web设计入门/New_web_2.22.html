@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>网站注册界面</title>
+    <link rel="stylesheet" href="New_web.css" type="text/css">
+    <style type="text/css">
+        .hello {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 16pt;
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="new1">
+        <form>
+            <p>密码*<input type="password" name="密码" /></p>
+            <p>密码确认*<input type="password" name="密码" /></p>
+            <p>姓名<span style="font-family:正楷;font-size:12px;color:red">*</span><input type="text" /></p>
+            <p>证件类型*
+                <select name="passcard">
+            <optgroup label="居民身份证">
+            <option value="1">护照</option>
+            <option value="2">港澳台通行证</option>
+        </select>
+            </p>
+            <p>证件号码*<input type="text" name="card_number"></p>
+            <p>安全邮箱*<input type="text" name="mail">sohu邮箱无法接收本网邮件，请使用其他有效邮箱</p>
+            <p><input type="checkbox" name="confirm_changes" />我已阅读并同意服务条款</p>
+            <p><span><input type="submit" name="注册" value="立即注册"></span>
+                <span><a href="picture/">忘记密码？</a>|<a href="New_Web.html">忘记用户名？</a></span>
+            </p>
+        </form>
+    </div>
+</body>
+
+</html>
