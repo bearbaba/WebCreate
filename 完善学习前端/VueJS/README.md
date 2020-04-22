@@ -2306,3 +2306,81 @@ vue-cli 3.0 在vue.config.js下配置别名alias。
 
 ## 异步编程 promise使用
 
+JavaScript 是单线程工作，这意味着两段脚本不能同时运行，而是必须一个接一个地运行。Promise是抽象异步处理对象以及对其进行各种操作的组件。Promise是把类似的异步处理对象和处理规则进行规范化， 并按照采用统一的接口来编写，而采取规定方法之外的写法都会出错。
+
+也就是说，除promise对象规定的方法(这里的 then 或 catch)以外的方法都是不可以使用的， 而不会像回调函数方式那样可以自己自由的定义回调函数的参数，而必须严格遵守固定、统一的编程方式来编写代码。
+
+当我们开发中有异步操作时, 就可以给异步操作包装一个Promise
+异步操作之后会有三种状态：
+
+1. pending：等待状态，比如正在进行网络请求，或者定时器没有到时间。
+2. fulfill：满足状态，当我们主动回调了resolve时，就处于该状态，并且会回调.then()
+3. reject：拒绝状态，当我们主动回调了reject时，就处于该状态，并且会回调.catch()
+
+例：
+
+```js
+<script>
+    new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        resolve(data="传送成功");
+        reject(error="传送失败");
+      },1000)
+    }).then((data)=>
+    {
+      console.log(data);
+      console.log(data);
+      console.log(data);
+      return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+          resolve(data="传送成功2");
+          reject(error="传送失败2");
+        },1000)
+      }).then((data)=>{
+        console.log(data);
+        console.log(data);
+      })
+    }).catch((error)=>{
+      console.log(error);
+      console.log(error);
+    })
+  </script>
+```
+
+在上例中使用了`setTimeout()`函数，`setTimeout()`是属于 window 的方法，该方法用于在指定的毫秒数后调用函数或计算表达式。
+
+在上例中该函数在1秒中之后执行箭头函数：
+
+```js
+(resolve,reject)=>{
+      setTimeout(()=>{
+        resolve(data="传送成功");
+        reject(error="传送失败");
+      },1000)
+```
+
+该箭头函数正是三个状态的`pending`状态，如果满足了`resolve`的执行条件时，执行`then`部分的函数，如果不满足，则执行`reject`回调`catch`后的部分。`resolve`括号内的参数会传递给`then`部分（在`then`参数可以自定义），同样的`reject`内的括号传递给`catch`部分。
+
+如上例所见，可以有多个`then`，然后执行`then`的链式调用。`then`的链式调用可以使得传递进的数据能够层层被处理。
+
+可以不用`new promise`实例，而是改写成`Promise`的具体操作，例如，如果是要执行`Promise`的`resolve`，就可以用`Promise.resolve(参数)`来替代。这样就有更加清晰的层次关系。例：
+
+```js
+new Promise((resolve) => {
+        setTimeout(()=>{
+          resolve("传送成功");
+          // reject("传送失败")
+        },1000)
+    }).then((data)=>{
+      console.log(data);
+      return Promise.resolve(data+"传送次数2");
+    }).then((data)=>{
+      console.log(data);
+      return Promise.resolve(data+"传送次数3");
+    }).then(data=>{
+        console.log(data);
+        return Promise.reject("传送失败");
+    }).catch(error=>{
+        console.log(error);
+    });
+```
