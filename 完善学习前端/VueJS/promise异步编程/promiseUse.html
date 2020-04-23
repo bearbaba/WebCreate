@@ -29,26 +29,40 @@
     //   console.log(error);
     //   console.log(error);
     // })
-    new Promise((resolve) => {
+    // new Promise((resolve) => {
+    //     setTimeout(()=>{
+    //       resolve("传送成功");
+    //       // reject("传送失败")
+    //     },1000)
+    // }).then((data)=>{
+    //   console.log(data);
+    //   return Promise.resolve(data+"传送次数2");
+    // }).then((data)=>{
+    //   console.log(data);
+    //   return Promise.resolve(data+"传送次数3");
+    // }).then(data=>{
+    //     console.log(data);
+    //     return Promise.reject("传送失败");
+    // }).catch(error=>{
+    //     console.log(error);
+    //     //setTimeout((error) => {
+    //     // console.log(error);
+    //     //}, 1000);
+    // });
+    Promise.all([
+      new Promise((resolve, reject) => {
         setTimeout(()=>{
-          resolve("传送成功");
-          // reject("传送失败")
-        },1000)
-    }).then((data)=>{
+          resolve("第一次传送");
+        },1000);
+      }),
+      new Promise((resolve, reject) => {
+          setTimeout(()=>{
+            resolve("第二次传送");
+          },2000);
+      })
+    ]).then((data)=>{
       console.log(data);
-      return Promise.resolve(data+"传送次数2");
-    }).then((data)=>{
-      console.log(data);
-      return Promise.resolve(data+"传送次数3");
-    }).then(data=>{
-        console.log(data);
-        return Promise.reject("传送失败");
-    }).catch(error=>{
-        console.log(error);
-        //setTimeout((error) => {
-        // console.log(error);
-        //}, 1000);
-    });
+    })
   </script>
 </body>
 </html>

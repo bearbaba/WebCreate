@@ -2384,3 +2384,28 @@ new Promise((resolve) => {
         console.log(error);
     });
 ```
+
+### promise all方法
+
+Promise.all(promiseArray)方法是Promise对象上的静态方法，该方法的作用是将多个Promise对象实例包装，生成并返回一个新的Promise实例。例：
+
+```js
+    Promise.all([
+      new Promise((resolve, reject) => {
+        setTimeout(()=>{
+          resolve("第一次传送");
+        },1000);
+      }),
+      new Promise((resolve, reject) => {
+          setTimeout(()=>{
+            resolve("第二次传送");
+          },2000);
+      })
+    ]).then((data)=>{
+      console.log(data);
+    })
+```
+
+promise数组中任何一个promise为reject的话，则整个Promise.all调用会立即终止，并返回一个reject的新的promise对象。
+
+上例中，`promise`数组中所有的`promise`实例都变为`resolve`的时候，该方法才会返回，并将所有结果传递`data`数组中。
