@@ -2409,3 +2409,5 @@ Promise.all(promiseArray)方法是Promise对象上的静态方法，该方法的
 promise数组中任何一个promise为reject的话，则整个Promise.all调用会立即终止，并返回一个reject的新的promise对象。
 
 上例中，`promise`数组中所有的`promise`实例都变为`resolve`的时候，该方法才会返回，并将所有结果传递`data`数组中。
+
+## VueX的使用
