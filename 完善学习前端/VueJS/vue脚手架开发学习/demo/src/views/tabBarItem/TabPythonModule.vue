@@ -1,12 +1,12 @@
 <template>
-  <div id='tab-bar'>
-    <slot name='tab-bar'></slot>
+  <div id='tab-python-module'>
+    <h1>这是python页面</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'tabBar'
+  name: 'TabPythonModule'
 }
 </script>
 

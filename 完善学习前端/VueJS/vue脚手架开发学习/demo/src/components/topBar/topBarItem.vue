@@ -1,12 +1,12 @@
 <template>
-  <div id='tab-bar'>
-    <slot name='tab-bar'></slot>
+  <div>
+    <slot name='top-bar-item'></slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'tabBar'
+  name: 'topBarItem'
 }
 </script>
 

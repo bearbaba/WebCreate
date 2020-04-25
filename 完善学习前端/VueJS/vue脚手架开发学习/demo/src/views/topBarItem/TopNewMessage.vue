@@ -1,12 +1,12 @@
 <template>
-  <div id='tab-bar'>
-    <slot name='tab-bar'></slot>
+  <div id='top-new-message'>
+    <h1>新消息页面</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'tabBar'
+  name: 'TopNewMessage'
 }
 </script>
 
