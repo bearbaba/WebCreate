@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <p>{{$store.state.counter}}</p>
+    <p>{{this.$store.state.counter}}</p>
+    <h1>人名及分数</h1>
+    <div v-for="(item,index) in this.$store.state.stuList" :key="index">名字：{{item.name}}，
+      分数：{{item.score}}
+    </div>
+
     <button @click='add'>+</button>
     <button @click='sub'>-</button>
     <first-vuex></first-vuex>
