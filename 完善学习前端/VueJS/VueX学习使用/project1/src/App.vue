@@ -1,24 +1,26 @@
 <template>
   <div id="app">
-    <p>{{counter}}</p>
-    <button @click='counter++'></button>
-    <button @click='counter--'></button>
-    <router-link to="/projectVuex"></router-link>
-    <router-view :msg='counter'></router-view>
+    <p>{{$store.state.counter}}</p>
+    <button @click='add'>+</button>
+    <button @click='sub'>-</button>
+    <first-vuex></first-vuex>
   </div>
 </template>
 
 <script>
-const firstVue = () => import('./components/firstVuex');
+const firstVuex = () => import('./components/firstVuex');
 export default {
   name: 'App',
-  data() {
-    return {
-      counter: 1000,
-    };
+  methods: {
+    add() {
+      this.$store.commit('increment');
+    },
+    sub() {
+      this.$store.commit('subtraction');
+    },
   },
-  comments: {
-    firstVue,
+  components: {
+    firstVuex,
   },
 };
 </script>

@@ -7,18 +7,23 @@ Vue.use(Vuex);
 
 // 创建对象
 const store = new Vuex.Store({
-  state:{
-    counter:0,
+  state: {
+    counter: 1000,
   },
-  mutations:{
+  mutations: {
+    increment(state) {
+      state.counter += 1;
+    },
+    subtraction(state) {
+      state.counter -= 1;
+    },
+  },
+  getters: {
 
   },
-  getters:{
+  modules: {
 
   },
-  modules:{
-
-  }
 });
 
 // 导出store插件

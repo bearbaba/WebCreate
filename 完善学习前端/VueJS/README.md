@@ -8,7 +8,7 @@
 var app = new Vue({
     //选项
 })
-```  
+```
 
 变量app就代表Vue实例。
 必不可少的一个选项是`el`，`el`用于指定一个页面中已存在的DOM元素来挂载实例，它可以是HTML标签，也可以是css选择器，比如：  
@@ -18,7 +18,7 @@ var app = new Vue({
 var app = new Vue({
     el:document.getElementById('app');//或者直接写"#app"
 })
-```  
+```
 
 挂载后我们可以通过app.$el来访问该元素，通过Vue实例中的data选项，可以声明应用内需要双向绑定的数据。
 
@@ -1027,7 +1027,7 @@ const vm = Vue.extend({
 
  ```javascript
   Vue.component("cpn", vm);
-  ```
+ ```
 
 这句话是将vm的组件构造注册成名为“cpn”的组件，
 

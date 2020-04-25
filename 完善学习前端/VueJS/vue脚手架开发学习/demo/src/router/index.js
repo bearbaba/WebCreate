@@ -3,13 +3,13 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const TabJavaModule = () => import('views/tabBarItem/TabJavaModule')
-const TabPHPModule = () => import('views/tabBarItem/TabPHPModule')
-const TabPythonModule = () => import('views/tabBarItem/TabPythonModule')
-const TabJavaScriptModule = () => import('views/tabBarItem/TabJavaScriptModule')
-const TopNewMessage = () => import('views/topBarItem/TopNewMessage')
-const TopPersonalInformaiton = () => import('views/topBarItem/TopPersonalInformation')
-const TopSetting = () => import('views/topBarItem/TopSetting')
+const TabJavaModule = () => import('../views/tabBarItem/TabJavaModule')
+const TabPHPModule = () => import('../views/tabBarItem/TabPHPModule')
+const TabPythonModule = () => import('../views/tabBarItem/TabPythonModule')
+const TabJavaScriptModule = () => import('../views/tabBarItem/TabJavaScriptModule')
+const TopNewMessage = () => import('../views/topBarItem/TopNewMessage')
+const TopPersonalInformation = () => import('../views/topBarItem/TopPersonalInformation')
+const TopSetting = () => import('../views/topBarItem/TopSetting')
 
 export default new Router({
   routes: [
@@ -43,7 +43,7 @@ export default new Router({
     },
     {
       path: '/TopPersonalInformation',
-      component: TopPersonalInformaiton
+      component: TopPersonalInformation
     }
   ]
 })
