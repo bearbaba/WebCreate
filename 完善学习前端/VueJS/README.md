@@ -2654,4 +2654,40 @@ const store = new Vuex.Store({
 });
 ```
 
-在`state`中定义了一个学生列表`stuList`，然后又在`getters`中定义了一个计算属性`scoreExceed80`，这个计算属性
+在`state`中定义了一个学生列表`stuList`，然后又在`getters`中定义了一个计算属性`scoreExceed80`，这个计算属性使用了一个过滤器`filter`，用来筛选出`stuList`中所有`score`大于80的学生。
+
+同时这个在`getters`中定义的计算属性可以在组件内定义新的计算属性以使用它。例：
+
+```js
+export default {
+  name: 'firstVuex',
+  computed: {
+    selectScore() {
+      return this.$store.getters.scoreExceed80;
+    },
+  },
+};
+```
+
+`filter`过滤器用法是将可迭代对象的所有元素作为参数传递进函数内，过滤器的结果是生成一个新的列表。
+
+如果想要对`getters`内定义的计算属性进行处理，可以在`getters`内定义新的计算属性，将`getters`作为参数传递到新的计算属性内。在上例中如果我们想要知道有多少学生分数是大于80的，就可以这样写：
+
+```js
+stuNumberExceed80(state, getter) {
+      return getter.scoreExceed80.length;
+    },
+```
+
+该计算属性返回`getters`中的计算属性`scoreExceed80`返回值的长度。
+
+对于`getters`中的计算属性来说，`state`和`getters`是默认需要传递的，不能另外传递参数。如果想要另外传递参数给计算属性处理，需要在计算属性内返回一个函数，将需要传递给计算属性的参数作为函数的参数进行处理。例：需要新设一个计算属性通过传递进来的分数以返回大于该分数的学生信息，
+
+```js
+stuExceedNew(state) {
+      return newScore => state.stuList.filter(s => s.score > newScore);
+    },
+```
+
+需要使用该计算属性的地方通过`<div>{{this.$store.getters.stuExceedNew(90)}}</div>`进行使用。
+

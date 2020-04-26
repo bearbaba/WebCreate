@@ -45,13 +45,17 @@ const store = new Vuex.Store({
     },
   },
   getters: {
-    // eslint-disable-next-line no-unused-vars
     powerCounter(state) {
-      // eslint-disable-next-line no-undef
       return state.counter * state.counter;
     },
     scoreExceed80(state) {
       return state.stuList.filter(s => s.score > 80);
+    },
+    stuNumberExceed80(state, getter) {
+      return getter.scoreExceed80.length;
+    },
+    stuExceedNew(state) {
+      return newScore => state.stuList.filter(s => s.score > newScore);
     },
   },
   modules: {

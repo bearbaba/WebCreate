@@ -9,6 +9,8 @@
     <button @click='add'>+</button>
     <button @click='sub'>-</button>
     <first-vuex></first-vuex>
+    <div>{{this.$store.getters.stuNumberExceed80}}</div>
+    <div>{{this.$store.getters.stuExceedNew(90)}}</div>
   </div>
 </template>
 
@@ -19,6 +21,10 @@ import selectScoreSurpass80 from 'vuex';
 const firstVuex = () => import('./components/firstVuex');
 export default {
   name: 'App',
+  data() {
+
+  },
+
   methods: {
     add() {
       this.$store.commit('increment');
@@ -28,6 +34,7 @@ export default {
     },
   },
   computed: {
+
   },
   components: {
     firstVuex,
