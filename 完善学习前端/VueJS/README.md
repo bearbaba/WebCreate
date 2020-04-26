@@ -2410,4 +2410,199 @@ promise数组中任何一个promise为reject的话，则整个Promise.all调用�
 
 上例中，`promise`数组中所有的`promise`实例都变为`resolve`的时候，该方法才会返回，并将所有结果传递`data`数组中。
 
-## VueX的使用
+## Vuex的使用
+
+Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
+
+与路由`router`的配置类似，`Vuex`在`src`下新建一个`store`文件夹，然后在`store`文件夹中新建`index.js`文件用于配置`Vuex`。
+
+同样与`router`的配置相似，首先要用`import Vuex from 'vuex'`导入`Vuex`，然后通过`Vue.use(Vuex);`使用`Vuex`插件。
+
+之后创建如下的`store`对象：
+
+```js
+const store = new Vuex.Store({
+  state: {
+
+  },
+  mutations: {
+
+  },
+  getters: {
+  
+  },
+  modules: {
+
+  },
+});
+```
+
+如上`store`对象含有`state`,`mutations`,`getters`,`modules`四部分内容，这四个部分的功能会在后面讲述。
+
+然后通过`export default store`，导出`store`插件。
+
+完整格式如下：
+
+import Vue from 'vue';
+import Vuex from 'vuex';
+
+
+// 安装vuex插件
+Vue.use(Vuex);
+
+// 创建对象
+const store = new Vuex.Store({
+  state: {
+
+  },
+  mutations: {
+
+  },
+  getters: {
+
+  },
+  modules: {
+
+  },
+});
+
+// 导出store插件
+export default store;
+```
+
+导出的`store`需要在`main.js`中使用，如下所示：
+
+```js
+import Vue from 'vue';
+import App from './App';
+import store from './store/index';
+
+
+Vue.config.productionTip = false;
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  store,
+  components: { App },
+  template: '<App/>',
+});
+```
+
+### state的学习使用
+
+`Vuex`使用单一状态树，用一个对象就包含了全部的应用层级状态。至此它便作为一个“唯一数据源 ”而存在。这也意味着，每个应用将仅仅包含一个 `store` 实例。
+
+在`state`中所创建的数据可以用于全部组件，在各个组件中均可以使用该数据，并且可以使用在`mutations`中创建的函数改变该数据，并且`mutations`中所创建的函数可以在其它组件中通过`this.$store.commit(函数名)`调用函数。
+
+下面通过一个例子来讲述`state`中的用途。
+
+```js
+const store = new Vuex.Store({
+  state: {
+    counter: 1000,
+  },
+  mutations: {
+ 	increment(state) {
+      state.counter -= 1;
+    },
+    subtraction(state) {
+      state.counter += 1;
+    },
+  },
+  getters: {
+
+    },
+  },
+  modules: {
+
+  },
+});
+```
+
+如上我们在`state`中设置了一个数值为1000的计数器`counter`，并且在`mutations`中设置了两个函数`increment`和`substraction`用于改变计数器的数值。
+
+如果我们希望在组件中使用`counter`的数据就可以通过`this.$store.state.counter`来调用。例：
+
+```html
+<p>{{this.$store.state.counter}}</p>
+```
+
+这是在`App.vue`中对计数器数值的调用，在其它组件中也可以通过如上的方式调用该数值。
+
+如果希望改变这数值，就可以在组件内设置`methods`，然后设置函数，在函数内再使用`this.$store.commit(mutation内的函数名)`来调用`mutation`中的函数以动态更新`state`中的数值。例：
+
+```html
+<template>
+  <div id="app">
+    <p>{{this.$store.state.counter}}</p>
+    <button @click='add'>+</button>
+    <button @click='sub'>-</button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  methods: {
+    add() {
+      this.$store.commit('increment');
+    },
+    sub() {
+      this.$store.commit('subtraction');
+    },
+  },
+  components: {
+  
+  },
+};
+</script>
+
+<style>
+
+</style>
+```
+
+如上是名为`App`的组件，在`html`中设置了两个按钮，这两个按钮动态捆绑了`methodes`中的`add`方法和`sub`方法。
+
+在`add`和`sub`中又分别通过`this.$store.commit('increment');`与`this.$store.commit('subtraction');`捆绑了`mutations`中的方法。
+
+`state`中的数据被改变意味着所有使用`state`中的数据的组件所显示的数据也会被改变。
+
+### getters的学习使用
+
+我在不同的组件中想要使用`store`的`state`中的数据以用作不同的用途，又不想去改变`state`中的数据，此时我们就可以使用`getters`对数据进行不同的处理操作。
+
+就像计算属性一样，`getter` 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
+
+例如在`state`中设置的`counter`如果想要在组件中使用它的平方数就可以再在`store`中设置`getters`，例：
+
+```js
+const store = new Vuex.Store({
+  state: {
+    counter: 1000,
+  },
+  mutations: {
+  
+  },
+  getters: {
+    // eslint-disable-next-line no-unused-vars
+    powerCounter(state) {
+      // eslint-disable-next-line no-undef
+      return state.counter * state.counter;
+    },
+  },
+  modules: {
+
+  },
+});
+```
+
+该例中`getters`中设置了`powerCounter`函数，该函数以`state`作为参数，然后`return``state`中的`counter`的平方。
+
+在需要使用该函数（相当于计算属性的用法）的组件就可以直接通过插值语法调用该函数，例：
+
+```html
+<div>{{this.$store.getters.powerCounter}}</div>
+```
+

@@ -41,9 +41,10 @@ const store = new Vuex.Store({
     },
   },
   getters: {
-    selectScoreSurpass80() {
-      // eslint-disable-next-line no-unused-expressions
-      state => state.stuList.score > 80;
+    // eslint-disable-next-line no-unused-vars
+    powerCounter(state) {
+      // eslint-disable-next-line no-undef
+      return state.counter * state.counter;
     },
   },
   modules: {
