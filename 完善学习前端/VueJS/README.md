@@ -2472,7 +2472,7 @@ export default store;
 
 导出的`store`需要在`main.js`中使用，如下所示：
 
-```js
+​```js
 import Vue from 'vue';
 import App from './App';
 import store from './store/index';
@@ -2606,3 +2606,52 @@ const store = new Vuex.Store({
 <div>{{this.$store.getters.powerCounter}}</div>
 ```
 
+然而这种写法不好，一般我们要在组件的`computed`中重新定义一个新的计算属性，然后再另行调用`getters`中的方法。
+
+例：一个筛选学生分数大于80的例子
+
+```js
+const store = new Vuex.Store({
+  state: {
+    stuList: [
+      {
+        name: '小明',
+        score: 87,
+      },
+      {
+        name: '小红',
+        score: 98,
+      },
+      {
+        name: 'Mike',
+        score: 100,
+      },
+      {
+        name: '小赵',
+        score: 95,
+      },
+      {
+        name: '小晓',
+        score: 75,
+      },
+      {
+        name: '小赵',
+        score: 68,
+      },
+    ],
+  },
+  mutations: {
+
+  },
+  getters: {
+    scoreExceed80(state) {
+      return state.stuList.filter(s => s.score > 80);
+    },
+  },
+  modules: {
+
+  },
+});
+```
+
+在`state`中定义了一个学生列表`stuList`，然后又在`getters`中定义了一个计算属性`scoreExceed80`，这个计算属性

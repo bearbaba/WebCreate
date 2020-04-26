@@ -28,9 +28,6 @@ export default {
     },
   },
   computed: {
-    seletScore() {
-      return this.$store.getters.selectScoreSurpass80;
-    },
   },
   components: {
     firstVuex,

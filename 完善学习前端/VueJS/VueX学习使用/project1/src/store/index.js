@@ -30,6 +30,10 @@ const store = new Vuex.Store({
         name: '小晓',
         score: 75,
       },
+      {
+        name: '小赵',
+        score: 68,
+      },
     ],
   },
   mutations: {
@@ -45,6 +49,9 @@ const store = new Vuex.Store({
     powerCounter(state) {
       // eslint-disable-next-line no-undef
       return state.counter * state.counter;
+    },
+    scoreExceed80(state) {
+      return state.stuList.filter(s => s.score > 80);
     },
   },
   modules: {
