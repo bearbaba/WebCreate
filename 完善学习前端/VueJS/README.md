@@ -1719,7 +1719,7 @@ String、Number、Boolean、Array、Object、Date、Function、Symbol、
 
 在我们的源文件写完后，就可以使用`webpack src/main.js dist/bundle.js`来打包并在dist中生成`bundle.js`文件。
 
-### ES6导入与导出
+### ES6 module 语法（导入与导出）
 
 实际开发使用模块化的开发方式，因此需要导入与导出模块，方便实用。
 
@@ -1742,7 +1742,7 @@ sum:function(a,b){
 export default sum;
 ```
 
-export default每次只能导出一个值或函数，导出函数与值是一样的用法。
+export default每次只能导出一个值或函数，导出函数与值是一样的用法。它实际上还能导出类。
 
 #### 导入
 
@@ -1751,6 +1751,25 @@ export default每次只能导出一个值或函数，导出函数与值是一样
 ```javascript
 import {sum,a} from "./math"
 ```
+当`export`用的是`export default`即导出的知识一个变量时，`import`不必使用花括号，但是当`import`需要使用花括号时，说明`export`没用`default`，而是直接导出了变量，如：
+
+```js
+export var m = 1;
+// 或者
+var m = 1;
+export {m};
+//又或者
+var m = 1;
+export {m as n};
+```
+
+实际上，`export`导出的是接口，接口与变量的值一一对应。所以类似`export 1`的写法是错误的。使用花括号时，花括号内是可以存放多个变量的。
+
+使用`export default`时不能使用花括号是因为，实际上`export default`是将`default`后面的变量赋值给了`default`，而在使用`import`导入时允许为导出的`default`取任意变量名。
+
+如果像`export default var a = 1`使用`export default`是错误的，`export default`一定是把变量赋值给`default`的。
+
+无论是`import`还是`export`都允许为导出导入的模块使用`as`起别名。
 
 如果使用了npm安装了一些库，在webpack中可以直接导入，如
 
@@ -2796,3 +2815,117 @@ methods: {
     },
 ```
 
+#### 有关mutations代码规范
+
+在`mutation`中被声明的函数，在被组件中的`methods`方法提交时，函数名容易出错，Vue官方对此的代码规范是让我们在`store`文件夹下再新建一个`mutation-type.js`，把相关函数名在此定义成常数。例：
+
+```js
+export const INCREMENT = 'increment';
+```
+
+该例就把函数名`increment`定义成了常量`INCREMENT`然后再被导出，导出后在`mutation`中的导入：
+
+```js
+import { INCREMENT } from './mutation-type';
+```
+
+如果需要使用该函数名就如下使用：
+
+```js
+mutations: {
+    [INCREMENT](state) {
+      state.counter += 1;
+    },
+},
+```
+
+可以看到是我们这个函数名放在了`[ ]`中，这并不影响它的使用。
+
+如果想在组件中提交该`mutation`函数，就如下使用：
+
+```js
+  methods: {
+    add() {
+      this.$store.commit(INCREMENT);
+    },
+},
+```
+
+当然在该组件也需要使用`import { INCREMENT } from './store/mutation-type';`。
+
+### actions的学习使用
+
+Action 类似于 mutation，不同在于：
+
+1. Action 提交的是 mutation，而不是直接变更状态。
+2. Action 可以包含任意异步操作。
+
+举例：
+
+```js
+const store = new Vuex.Store({
+  state: {
+    colorAndName: {
+      name: 'sun',
+    },
+  },
+  mutations: {
+    changeName(state) {
+      state.colorAndName.name = 'moon';
+    },
+  },
+  actions: {
+    changeName(context) {
+      setTimeout(() => {
+        context.commit('changeName');
+      }, 1000);
+    },
+  },
+});
+```
+
+上例中`mutation`内声明了一个`changeName`的异步函数用来改变`state`中声明的`colorAndName`对象的`name`。
+
+`mutation`的方法要被`action`中的`changeName`提交才能动态地改变`state`内`colorAndName`的`name`值。`action`中的函数的参数是`context`而不是`state`。
+
+在组件内的方法也要提交给`action`才能改变`state`的变量。例：
+
+```js
+methods{
+    changeName() {
+      this.$store.dispatch('changeName');
+    },
+},
+```
+
+在`methods`的方法提交给`action`不像提交给`mutation`那样使用的是`commit`而是用`dispatch`提交。
+
+可以像为`mutation`传递参数那样，传递给`actions`参数，例：
+
+```js
+// 组件内methods相关函数的写法
+changeName() {
+  this.$store.dispatch('changeName', {
+    message: '要传递的参数',
+    success: () => {
+       console.log('传递成功');
+    },
+  },
+  );
+},
+```
+
+```js
+  actions: {
+    changeName(context, payload) {
+      setTimeout(() => {
+        context.commit('changeName');
+      }, 1000);
+      // eslint-disable-next-line no-unused-expressions
+      console.log(payload.message);
+      payload.success();
+    },
+  },
+  ```
+  
+同样类似`mutation`，传递进的参数是被封装进`payload`对象内的，再通过`payload`进行调用。

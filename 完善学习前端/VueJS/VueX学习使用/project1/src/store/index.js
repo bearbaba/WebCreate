@@ -59,6 +59,9 @@ const store = new Vuex.Store({
     deleteName(state) {
       Vue.delete(state.colorAndName, 'name');
     },
+    changeName(state) {
+      state.colorAndName.name = 'moon';
+    },
   },
   getters: {
     powerCounter(state) {
@@ -72,6 +75,16 @@ const store = new Vuex.Store({
     },
     stuExceedNew(state) {
       return newScore => state.stuList.filter(s => s.score > newScore);
+    },
+  },
+  actions: {
+    changeName(context, payload) {
+      setTimeout(() => {
+        context.commit('changeName');
+      }, 1000);
+      // eslint-disable-next-line no-unused-expressions
+      console.log(payload.message);
+      payload.success();
     },
   },
   modules: {

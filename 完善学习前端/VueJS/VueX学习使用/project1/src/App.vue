@@ -10,6 +10,7 @@
     <button @click='sub'>-</button>
     <button @click="addNumber(5)">+5</button>
     <button @click="pushStu">+人</button>
+    <button @click="changeName">changeName</button>
     <first-vuex></first-vuex>
     <div>{{this.$store.getters.stuNumberExceed80}}</div>
     <div>{{this.$store.getters.stuExceedNew(90)}}</div>
@@ -24,10 +25,6 @@ import { INCREMENT } from './store/mutation-type';
 const firstVuex = () => import('./components/firstVuex');
 export default {
   name: 'App',
-  data() {
-
-  },
-
   methods: {
     add() {
       this.$store.commit(INCREMENT);
@@ -49,9 +46,15 @@ export default {
         },
       );
     },
-  },
-  computed: {
-
+    changeName() {
+      this.$store.dispatch('changeName', {
+        message: '要传递的参数',
+        success: () => {
+          console.log('传递成功');
+        },
+      },
+      );
+    },
   },
   components: {
     firstVuex,
