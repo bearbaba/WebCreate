@@ -2750,3 +2750,49 @@ this.$store.commit({
   },
 );
 ```
+
+`mutation`在给`Vuex`的`state`中的对象添加新属性时，要使用`Vue.set`方法才能做到动态更新，例：
+
+```js
+import Vue from 'vue';
+import Vuex from 'vuex';
+
+
+// 安装vuex插件
+Vue.use(Vuex);
+
+// 创建对象
+const store = new Vuex.Store({
+  state: {
+    colorAndName: {
+      name: 'sun',
+    },
+  },
+  mutations: {
+    addColor(state) {
+      Vue.set(state.colorAndName, 'color', 'yellow');
+    },
+  },
+});
+
+// 导出store插件
+export default store;
+```
+
+```js
+// 组件中方法提交mutation：
+methods: {
+  addColor() {
+    this.$store.commit('addColor');
+   },
+},
+```
+
+如果想要删除`state`中对象属性并希望屏幕能动态更新则使用`Vue.delete()`方法。例：
+
+```js
+    deleteName(state) {
+      Vue.delete(state.colorAndName, 'name');
+    },
+```
+

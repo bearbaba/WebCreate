@@ -35,6 +35,9 @@ const store = new Vuex.Store({
         score: 68,
       },
     ],
+    colorAndName: {
+      name: 'sun',
+    },
   },
   mutations: {
     increment(state) {
@@ -48,6 +51,12 @@ const store = new Vuex.Store({
     },
     addNewStu(state, payload) {
       state.stuList.push({ name: payload.newStu, score: payload.newScore });
+    },
+    addColor(state) {
+      Vue.set(state.colorAndName, 'color', 'yellow');
+    },
+    deleteName(state) {
+      Vue.delete(state.colorAndName, 'name');
     },
   },
   getters: {
