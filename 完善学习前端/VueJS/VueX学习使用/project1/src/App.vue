@@ -8,6 +8,7 @@
     <div>{{this.$store.getters.powerCounter}}</div>
     <button @click='add'>+</button>
     <button @click='sub'>-</button>
+    <button @click="addNumber(5)">+5</button>
     <first-vuex></first-vuex>
     <div>{{this.$store.getters.stuNumberExceed80}}</div>
     <div>{{this.$store.getters.stuExceedNew(90)}}</div>
@@ -31,6 +32,9 @@ export default {
     },
     sub() {
       this.$store.commit('subtraction');
+    },
+    addNumber(number) {
+      this.$store.commit('incrementNumber', number);
     },
   },
   computed: {

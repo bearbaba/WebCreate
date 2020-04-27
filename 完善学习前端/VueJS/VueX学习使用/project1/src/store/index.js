@@ -38,10 +38,13 @@ const store = new Vuex.Store({
   },
   mutations: {
     increment(state) {
-      state.counter -= 1;
+      state.counter += 1;
     },
     subtraction(state) {
-      state.counter += 1;
+      state.counter -= 1;
+    },
+    incrementNumber(state, num) {
+      state.counter += num;
     },
   },
   getters: {
