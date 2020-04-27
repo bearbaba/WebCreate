@@ -46,6 +46,9 @@ const store = new Vuex.Store({
     incrementNumber(state, num) {
       state.counter += num;
     },
+    addNewStu(state, payload) {
+      state.stuList.push({ name: payload.newStu, score: payload.newScore });
+    },
   },
   getters: {
     powerCounter(state) {

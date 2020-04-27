@@ -2504,10 +2504,10 @@ const store = new Vuex.Store({
   },
   mutations: {
  	increment(state) {
-      state.counter -= 1;
+      state.counter += 1;
     },
     subtraction(state) {
-      state.counter += 1;
+      state.counter -= 1;
     },
   },
   getters: {
@@ -2689,5 +2689,64 @@ stuExceedNew(state) {
     },
 ```
 
+如上所示，传递进`getters`的参数实际上是`newScore`，但是它是作为`stuExceedNew`返回的箭头函数的参数传递进来的。
+
 需要使用该计算属性的地方通过`<div>{{this.$store.getters.stuExceedNew(90)}}</div>`进行使用。
 
+### mutations的学习使用
+
+更改 `Vuex` 的` store` 中的状态的唯一方法是提交 `mutation`。`Vuex` 中的 `mutation` 非常类似于事件：每个 `mutation` 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。这个回调函数就是我们实际进行状态更改的地方，并且它会接受 `state` 作为第一个参数。
+
+`mutations`中的函数允许传递进组件方法中提交的参数。但它依旧把`state`作为第一个参数。
+
+例依据组件中的方法传递进`state`中`counter`每次增加的次数：
+
+```js
+//mutations中定义的方法
+incrementNumber(state, num) {
+  state.counter += num;
+},
+```
+
+```html
+<!--组件内的HTML-->
+<button @click="addNumber(5)">+5</button>
+```
+
+```js
+//组件内的methods
+addNumber(number) {
+  this.$store.commit('incrementNumber', number);
+},
+```
+
+当有多个参数需要提交进`mutations`内的函数中时，可以将多个参数封装成`payload`对象，将`payload`作为`mutations`内的函数参数进行处理，例：
+
+```js
+// 组件中的向mutations提交参数的方法写法
+    pushStu(newStu, newScore) {
+      this.$store.commit('addNewStu', {
+        newStu: '小高',
+        newScore: 89,
+      });
+    },
+```
+
+而原本的`mutations`内的方法的第二个参数写为`payload`，例：
+
+```js
+    addNewStu(state, payload) {
+      state.stuList.push({ name: payload.newStu, score: payload.newScore });
+    },
+```
+
+提交 `mutation` 的另一种方式是直接使用包含 `type` 属性的对象：
+
+```js
+this.$store.commit({
+  type: 'addNewStu',
+  newStu: '小高',
+  newScore: 89,
+  },
+);
+```

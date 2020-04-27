@@ -9,6 +9,7 @@
     <button @click='add'>+</button>
     <button @click='sub'>-</button>
     <button @click="addNumber(5)">+5</button>
+    <button @click="pushStu">+人</button>
     <first-vuex></first-vuex>
     <div>{{this.$store.getters.stuNumberExceed80}}</div>
     <div>{{this.$store.getters.stuExceedNew(90)}}</div>
@@ -35,6 +36,17 @@ export default {
     },
     addNumber(number) {
       this.$store.commit('incrementNumber', number);
+    },
+    // eslint-disable-next-line no-unused-vars
+    pushStu(newStu, newScore) {
+      this.$store.commit(
+        // eslint-disable-next-line no-undef
+        'addNewStu',
+        {
+          newStu: '小高',
+          newScore: 89,
+        },
+      );
     },
   },
   computed: {
