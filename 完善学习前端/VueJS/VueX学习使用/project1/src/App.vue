@@ -19,6 +19,7 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import selectScoreSurpass80 from 'vuex';
+import { INCREMENT } from './store/mutation-type';
 
 const firstVuex = () => import('./components/firstVuex');
 export default {
@@ -29,7 +30,7 @@ export default {
 
   methods: {
     add() {
-      this.$store.commit('increment');
+      this.$store.commit(INCREMENT);
     },
     sub() {
       this.$store.commit('subtraction');
