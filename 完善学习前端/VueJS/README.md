@@ -2450,13 +2450,16 @@ const store = new Vuex.Store({
   getters: {
   
   },
+  actions: {
+  
+  },
   modules: {
 
   },
 });
 ```
 
-如上`store`对象含有`state`,`mutations`,`getters`,`modules`四部分内容，这四个部分的功能会在后面讲述。
+如上`store`对象含有`state`,`mutations`,`getters`,`modules`,`actions`五部分内容，这五个部分的功能会在后面讲述。
 
 然后通过`export default store`，导出`store`插件。
 
@@ -2926,6 +2929,80 @@ changeName() {
       payload.success();
     },
   },
-  ```
-  
+```
+
 同样类似`mutation`，传递进的参数是被封装进`payload`对象内的，再通过`payload`进行调用。
+
+### modules的学习使用
+
+由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，`store` 对象就有可能变得相当臃肿。
+
+为了解决以上问题，`Vuex`允许我们将 store 分割成模块（`module`）。每个模块拥有自己的 `state`、`mutation`、`action`、`getter`、甚至是嵌套子模块
+
+举个例子，我们在一个新的`js`文件内创建新的`module`：
+
+```js
+// eslint-disable-next-line import/prefer-default-export
+export const moduleA = {
+  state: {
+    thing: {
+      thingName: 'forest',
+      colorName: 'green',
+    },
+  },
+};
+```
+
+然后在`Vuex`的配置文件内，如果要使用该`module`，首先用`mport { moduleA } from './modules';`导入该模块。然后在`Vuex`的`store`对象的`modules`内配置该模块：
+
+```js
+  modules: {
+    a: moduleA,
+  },
+```
+
+如果在组件中要使用`moduleA`的`state`就可以用例如`<p>{{this.$store.state.a}}</p>`这样的方式使用`module`中的`state`。
+
+如果要在`module`中声明函数再进行使用，可用如下方式：
+
+```js
+// eslint-disable-next-line import/prefer-default-export
+export const moduleA = {
+  state: {
+    thing: [{
+      thingName: 'forest',
+      colorName: 'green',
+    }, {
+      thingName: 'flower',
+      colorName: 'red',
+
+    }, {
+      thingName: 'sun',
+      colorName: 'yellow',
+    }, {
+      thingName: 'apple',
+      colorName: 'red',
+    }],
+  },
+  getters: {
+    selectColor(state) {
+      return state.thing.filter(s => s.colorName === 'red');
+    },
+  },
+};
+```
+
+上例的`module`中的`state`内的`thing`对象含有`colorName`属性，我们在`module`内的`getters`中声明了`selectColor`计算属性，该计算属性虽然在`module`中，但是却可以直接调用该模块内的`state`（调用`store`内的`state`有另外的方式）。
+
+如果组件要使用这在`module`中声明的计算属性，与使用`store`的计算属性的方式一致，均可以通过组件内的计算属性调用：
+
+```js
+computed: {
+  selectColor() {
+    return this.$store.getters.selectColor;
+  },
+},
+```
+
+在组件的HTML中就能直接以插值语法使用该计算属性了。
+

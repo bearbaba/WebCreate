@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { INCREMENT } from './mutation-type';
+import { moduleA } from './modules';
 
 
 // 安装vuex插件
@@ -97,7 +98,7 @@ const store = new Vuex.Store({
     },
   },
   modules: {
-
+    a: moduleA,
   },
 });
 
