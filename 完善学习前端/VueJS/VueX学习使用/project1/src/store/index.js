@@ -82,9 +82,18 @@ const store = new Vuex.Store({
       setTimeout(() => {
         context.commit('changeName');
       }, 1000);
-      // eslint-disable-next-line no-unused-expressions
+      // eslint-disable-next-line no-unused-expressions,no-console
       console.log(payload.message);
       payload.success();
+    },
+    changeColor(context, payload) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          context.commit('changeName');
+          const res = payload.information;
+          resolve(res);
+        }, 1000);
+      });
     },
   },
   modules: {

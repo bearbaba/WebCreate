@@ -11,6 +11,7 @@
     <button @click="addNumber(5)">+5</button>
     <button @click="pushStu">+人</button>
     <button @click="changeName">changeName</button>
+    <button @click="changeColor">changeColor</button>
     <first-vuex></first-vuex>
     <div>{{this.$store.getters.stuNumberExceed80}}</div>
     <div>{{this.$store.getters.stuExceedNew(90)}}</div>
@@ -50,10 +51,19 @@ export default {
       this.$store.dispatch('changeName', {
         message: '要传递的参数',
         success: () => {
+          // eslint-disable-next-line no-console
           console.log('传递成功');
         },
       },
       );
+    },
+    changeColor() {
+      this.$store.dispatch('changeColor', {
+        information: '携带的信息',
+      }).then((res) => {
+        // eslint-disable-next-line no-console
+        console.log(res);
+      });
     },
   },
   components: {
