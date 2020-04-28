@@ -1751,6 +1751,7 @@ export default每次只能导出一个值或函数，导出函数与值是一样
 ```javascript
 import {sum,a} from "./math"
 ```
+
 当`export`用的是`export default`即导出的知识一个变量时，`import`不必使用花括号，但是当`import`需要使用花括号时，说明`export`没用`default`，而是直接导出了变量，如：
 
 ```js
@@ -2465,6 +2466,7 @@ const store = new Vuex.Store({
 
 完整格式如下：
 
+```js
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -2494,11 +2496,10 @@ export default store;
 
 导出的`store`需要在`main.js`中使用，如下所示：
 
-​```js
+```javascript
 import Vue from 'vue';
 import App from './App';
 import store from './store/index';
-
 
 Vue.config.productionTip = false;
 
@@ -2525,7 +2526,7 @@ const store = new Vuex.Store({
     counter: 1000,
   },
   mutations: {
- 	increment(state) {
+    increment(state) {
       state.counter += 1;
     },
     subtraction(state) {
@@ -2717,7 +2718,7 @@ stuExceedNew(state) {
 
 ### mutations的学习使用
 
-更改 `Vuex` 的` store` 中的状态的唯一方法是提交 `mutation`。`Vuex` 中的 `mutation` 非常类似于事件：每个 `mutation` 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。这个回调函数就是我们实际进行状态更改的地方，并且它会接受 `state` 作为第一个参数。
+更改 `Vuex` 的`store` 中的状态的唯一方法是提交 `mutation`。`Vuex` 中的 `mutation` 非常类似于事件：每个 `mutation` 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。这个回调函数就是我们实际进行状态更改的地方，并且它会接受 `state` 作为第一个参数。
 
 `mutations`中的函数允许传递进组件方法中提交的参数。但它依旧把`state`作为第一个参数。
 
@@ -2992,7 +2993,7 @@ export const moduleA = {
 };
 ```
 
-上例的`module`中的`state`内的`thing`对象含有`colorName`属性，我们在`module`内的`getters`中声明了`selectColor`计算属性，该计算属性虽然在`module`中，但是却可以直接调用该模块内的`state`（调用`store`内的`state`有另外的方式）。
+上例的`module`中的`state`内的`thing`对象含有`colorName`属性，我们在`module`内的`getters`中声明了`selectColor`计算属性，该计算属性虽然在`module`中，但是却可以直接调用该模块内的`state`。
 
 如果组件要使用这在`module`中声明的计算属性，与使用`store`的计算属性的方式一致，均可以通过组件内的计算属性调用：
 
@@ -3006,3 +3007,58 @@ computed: {
 
 在组件的HTML中就能直接以插值语法使用该计算属性了。
 
+在`module`中使用`mutation`与在`store`中使用`mutation`的方法一致，例：
+
+```javascript
+  mutations: {
+    selectName(state, payload) {
+      state.thing.push({ thingName: payload.name, colorName: payload.color });
+    },
+  },
+```
+
+如果希望模块内的`getters`的某个计算属性还能够使用该`getters`内的计算属性，我们将把`getter`作为该计算属性的第二个参数。
+
+而如果希望`getters`能够使用`store`中的`state`，则把`rootState`作为第三个参数传入`getters`的计算属性内。例：
+
+```javascript
+    getStoreState(state, getter, rootState) {
+      return state.thing[0].thingName + rootState.counter;
+    },
+```
+
+作为第二个参数的`getter`显然不能省略。
+
+同样组件中调用`module`中的`mutation`也与调用`store`中的`mutation`的途径是一致的：
+
+```javascript
+  methods: {
+    commitAddThing() {
+      const name = 'strawberry';
+      const color = 'red';
+      this.$store.commit('selectName', {
+        name, color,
+      });
+    },
+},
+```
+
+原因在于首先会去`store`中的`mutation`查找提交的方法，如果没找到就会去`module`中查找。
+
+`module`的`actions`对象本身就包含了`commit`，`rootState`等属性，如果想要使用，可以用类似下例中的方法：
+
+```js
+decRootStateCounter({ rootState, commit }) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          commit('addRootState', 1000);
+          // eslint-disable-next-line no-param-reassign
+          rootState.counter += 1000;
+          // eslint-disable-next-line no-param-reassign
+          resolve('已传递成功');
+        }, 1000);
+      });
+    },
+```
+
+即把要使用的属性包含在花括号内，然后在函数体内直接使用，注意`commit`不仅能调用该模块内，还能调用其他模块内的`mutation`方法。
