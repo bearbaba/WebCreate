@@ -16,6 +16,10 @@ new Vue({
 
 axios({
   url: 'https://api.coindesk.com/v1/bpi/currentprice.json',
+  params: {
+    page: 1,
+    data: 'cloths',
+  },
 },
 ).then((res) => {
   // eslint-disable-next-line no-console

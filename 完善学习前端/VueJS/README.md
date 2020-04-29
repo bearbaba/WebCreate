@@ -3062,3 +3062,61 @@ decRootStateCounter({ rootState, commit }) {
 ```
 
 即把要使用的属性包含在花括号内，然后在函数体内直接使用，注意`commit`不仅能调用该模块内，还能调用其他模块内的`mutation`方法。
+
+Vue官方建议我们将所有`Vuex`中除`state`外的`module`、`getter`、`action`、`mutation`都封装成单个文件，用导入导出语言在`index.js`文件内管理所有`store`部分。
+
+## axios的学习使用
+
+### axios的基本使用
+
+Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中。
+
+在`vue`的项目下在控制台上使用`npm install axios --save`为该项目安装`axios`框架，然后在项目下任意文件内使用`import`导入，就能使用该框架了。
+
+例在`main.js`文件下使用`axios`框架：
+
+```javascript
+import Vue from 'vue';
+import App from './App';
+// eslint-disable-next-line import/first
+import axios from 'axios';
+
+
+Vue.config.productionTip = false;
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  // router,
+  components: { App },
+  template: '<App/>',
+});
+
+axios({
+  url: 'https://api.coindesk.com/v1/bpi/currentprice.json',
+},
+).then((res) => {
+  // eslint-disable-next-line no-console
+  console.log(res);
+});
+```
+
+`axios`能够使用异步编程的操作，在`axios`的括号能传入`axios`的配置`config`对象，该例为`axios`传递的对象中包含了`url`属性。
+
+如果想要修改`axios`请求数据的方式为`post`，就能在`config`对象内多设置一个`mothod: 'post',`
+
+由于`axios`是基于`promise`的，因而它允许用异步操作。
+
+我们要为我们的请求添加些数据，可以在`config`对象内再添加一个`params`对象，在`params`中添加数据。
+
+上述代码也可以改写为：
+
+```javascript
+axios
+  .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+  .then((res) => {
+    // eslint-disable-next-line no-console
+    console.log(res);
+  });
+```
+
