@@ -3107,7 +3107,7 @@ axios({
 
 由于`axios`是基于`promise`的，因而它允许用异步操作。
 
-我们要为我们的请求添加些数据，可以在`config`对象内再添加一个`params`对象，在`params`中添加数据。
+我们要为我们的请求添加些数据，可以在`config`对象内再添加一个`params`对象，在`params`中添加数据（get请求用params）。对于`post`请求用的是`data`对象。
 
 上述代码也可以改写为：
 
@@ -3119,4 +3119,51 @@ axios
     console.log(res);
   });
 ```
+
+### axios发送并发请求
+
+由于`axios`是基于`promise`的，`axios`也能使用`promise`的并发请求，例：
+
+```javascript
+axios.all([
+  axios({
+    url: 'https://api.coindesk.com/v1/bpi/currentprice.json',
+  }),
+  axios({
+    url: 'https://api.66mz8.com/api/qq.state.php',
+    params: {
+      qq: '2200522850',
+    },
+  }),
+]).then((result) => {
+  // eslint-disable-next-line no-console
+  console.log(result);
+});
+```
+
+第二个`axios`调用的接口发送了参数为`qq`的请求。这两个请求的结果会被合并成一个数组在`then`中被输出来。
+
+如果不想放在一个数组中被使用，可以将这个数组展开然后使用。例：
+
+```javascript
+axios.all([
+  axios({
+    url: 'https://api.coindesk.com/v1/bpi/currentprice.json',
+  }),
+  axios({
+    url: 'https://api.66mz8.com/api/qq.state.php',
+    params: {
+      qq: '2200522850',
+    },
+  }),
+]).then(axios.spread((res1, res2) => {
+  // eslint-disable-next-line no-console
+  console.log(res1);
+  // eslint-disable-next-line no-console
+  console.log(res2);
+}),
+);
+```
+
+这里使用的是`axios.spread`将数组扩展开的。
 
