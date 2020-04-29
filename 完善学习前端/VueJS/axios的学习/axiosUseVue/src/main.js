@@ -32,7 +32,7 @@ axios
     // eslint-disable-next-line no-console
     console.log(res);
   });
-
+axios.defaults.timeout = 5000;
 axios.all([
   axios({
     url: 'https://api.coindesk.com/v1/bpi/currentprice.json',
