@@ -3204,3 +3204,61 @@ instance({
 为了方便对各个组件的`axios`的管理，要将`axios`的实例封装在一个`js`文件的`function`中，通过`import`与`export`导入导出。
 
 ```javascript
+import axios from 'axios';
+
+// eslint-disable-next-line import/prefer-default-export,no-unused-vars
+export function request(config) {
+  // eslint-disable-next-line no-unused-vars
+  return new Promise((resolve, reject) => {
+    // eslint-disable-next-line no-unused-vars
+    const instance = axios.create({
+      baseURL: 'https://api.66mz8.com/api/qq.state.php',
+      timeout: 10000,
+    });
+    // eslint-disable-next-line no-undef
+    instance(config)
+      .then((res) => {
+        // eslint-disable-next-line no-console
+        resolve(res);
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        reject(err);
+      });
+  });
+}
+```
+
+以上是`axios`实例化创建的一种方式，在`main.js`中导入`request`用于处理`resolve`与`reject`，例：
+
+```javascript
+request({
+  params: {
+    qq: '2200522850',
+  },
+}).then((res) => {
+  // eslint-disable-next-line no-console
+  console.log(res);
+}).catch((err) => {
+  // eslint-disable-next-line no-console
+  console.log(err);
+});
+```
+
+上述在`request.js`中的代码还可以精简成
+
+```javascript
+import axios from 'axios';
+
+// eslint-disable-next-line import/prefer-default-export,no-unused-vars
+export function request(config) {
+  const instance = axios.create({
+    baseURL: 'https://api.66mz8.com/api/qq.state.php',
+    timeout: 10000,
+  });
+    // eslint-disable-next-line no-undef
+  return instance(config);
+}
+```
+
+因为`instance`实际上就是`promise`的实例。
