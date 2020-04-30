@@ -3167,3 +3167,40 @@ axios.all([
 
 这里使用的是`axios.spread`将数组扩展开的。
 
+### 全局axios默认值
+
+我们可以为`axios`配置全局默认值设置。例：
+
+```javascript
+axios.defaults.baseURL = 'https://api.example.com';
+axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+```
+
+全局默认值设置了之后就不必更改了，方便全局管理，例如设置全局`timeout`后，每次跳状的`timeout`就都一致了。
+
+### axios创建实例
+
+可以使用`axios.create`创建`axios`实例
+
+```javascript
+const instance = axios.create({
+  baseURL: 'https://api.66mz8.com/api/qq.state.php',
+  timeout: 1000,
+});
+
+instance({
+  params: {
+    qq: '2200522850',
+  },
+}).then((res) => {
+  // eslint-disable-next-line no-console
+  console.log(res);
+});
+```
+
+在一个项目中要创建多个实例以用于各个组件的加载。
+
+为了方便对各个组件的`axios`的管理，要将`axios`的实例封装在一个`js`文件的`function`中，通过`import`与`export`导入导出。
+
+```javascript
