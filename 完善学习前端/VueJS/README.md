@@ -3307,3 +3307,20 @@ module.exports = {
 }
 ```
 
+### 项目风格配置
+
+由于项目有不同的分工，最终要求这些分工的代码风格要统一。在`.editorconfig`中配置代码的风格。
+
+例：
+
+```txt
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+```
