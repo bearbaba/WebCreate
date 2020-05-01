@@ -3262,3 +3262,48 @@ export function request(config) {
 ```
 
 因为`instance`实际上就是`promise`的实例。
+
+## vue实战案例
+
+### 目录划分
+
+在`assets`文件下新建`img`与`css`文件夹用于存放`css`和`img`文件，在`components`下新建`common`和`content`文件夹，`common`文件夹用于存放在多个项目中都可以使用的、具有可复用性的组件。`content`存放与当前项目紧密联系的组件。
+
+项目的`src`文件夹下新建`network`，`router`，`store`，文件夹分别用于网络请求、路由管理、`vuex`的相关文件。
+
+同样`src`文件夹下可增加`common`文件夹用于在多个项目内可复用的js文件。
+
+### css文件管理
+
+`Normalize.css`只是一个很小的css文件，但它在磨人的HTML元素样式上提供了跨浏览器的高度一致性。相比于传统的`CSS reset`，`Normalize.css`是一种现代的、为HTML5准备的优质替代方案。总之，`Normalize.css`是一种`CSS reset`的替代方案。
+
+使用方式：
+
+1. 安装
+
+`npm install --save normalize.css `
+
+2. main.js引入
+
+`import 'normalize.css/normalize.css'`
+
+### vue3.0 vue.config.js 配置基础的路径
+
+vue3在创建项目的时候默认没有`vue.config.js`，这就需要手动创建该文件，此处配置的文件内容用于基础的路径：
+
+```javascript
+module.exports = {
+  configureWebpack: {
+    resolve: {
+      alias: {
+        'assets': '@/assets',
+        'common': '@/common',
+        'components': '@/components',
+        'network': '@/network',
+        'views': '@/views',
+      }
+    }
+  }
+}
+```
+
