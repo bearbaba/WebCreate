@@ -30,7 +30,7 @@
       activeTextColor(){
         if(this.isActive===true){
           // eslint-disable-next-line no-undef
-          return {color:pink};
+          return {color: "#FF5777"};
         }
       }
     }
