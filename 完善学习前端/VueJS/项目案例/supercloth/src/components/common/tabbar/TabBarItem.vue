@@ -1,6 +1,6 @@
 <template>
-  <div id="tar-bar-item" @click="changeActive">
-    <div v-if="!isActive">
+  <div class="tar-bar-item" @click="multipleFun" >
+    <div v-if="isActive">
       <slot name="item-img"></slot>
     </div>
     <div v-else>
@@ -20,9 +20,24 @@
         isActive: false,
       }
     },
+    props:{
+      path:String,
+    },
     methods: {
+      multipleFun(){
+        this.changeActive();
+        this.changeSite();
+      },
       changeActive(){
-        this.isActive=!this.isActive;
+        if(this.$route.path.indexOf(this.path)!==-1){
+          this.isActive=true;
+        }
+        else{
+          this.isActive=false;
+        }
+      },
+      changeSite(){
+        this.$router.push(this.path);
       }
     },
     computed: {
@@ -38,5 +53,15 @@
 </script>
 
 <style scoped>
+.tar-bar-item{
+  text-align: center;
+}
+  img{
+    height: 24px;
+  }
+  p{
+    font-size: 14px;
+    margin-top: 0px;
+  }
 
 </style>
