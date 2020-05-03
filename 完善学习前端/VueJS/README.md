@@ -3263,6 +3263,10 @@ export function request(config) {
 
 因为`instance`实际上就是`promise`的实例。
 
+### axios拦截器的使用
+
+
+
 ## vue实战案例
 
 ### 目录划分
