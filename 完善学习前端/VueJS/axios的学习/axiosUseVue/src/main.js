@@ -66,14 +66,14 @@ new Vue({
 //   console.log(res);
 // });
 
-request({
-  params: {
-    qq: '2200522850',
-  },
-}).then((res) => {
-  // eslint-disable-next-line no-console
-  console.log(res);
-}).catch((err) => {
-  // eslint-disable-next-line no-console
-  console.log(err);
-});
+// request({
+//   params: {
+//     qq: '2200522850',
+//   },
+// }).then((res) => {
+//   // eslint-disable-next-line no-console
+//   console.log(res);
+// }).catch((err) => {
+//   // eslint-disable-next-line no-console
+//   console.log(err);
+// });

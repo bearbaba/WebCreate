@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view id="main"></router-view>
+    <router-view class="main"></router-view>
     <main-tabbar></main-tabbar>
   </div>
 </template>
@@ -19,5 +19,9 @@ export default {
 </script>
 
 <style>
-
+  .main{
+    z-index: 1;
+    height: 1000px;
+    margin-top: 36px;
+  }
 </style>

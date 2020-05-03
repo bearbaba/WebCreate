@@ -15,10 +15,13 @@
 <style scoped>
 .top-bar{
   width:100%;
-  height: 49px;
+  height: 44px;
   margin: 0;
   box-sizing: content-box;
   display: flex;
+  z-index: 1;
+  position: fixed;
+  top:-6px;
 }
 .left,
 .right{

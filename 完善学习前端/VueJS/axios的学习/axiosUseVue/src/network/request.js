@@ -6,7 +6,7 @@ export function request(config) {
   // return new Promise((resolve, reject) => {
   // eslint-disable-next-line no-unused-vars
   const instance = axios.create({
-    baseURL: 'https://api.66mz8.com/api/qq.state.php',
+    baseURL: 'http://152.136.185.210:8000/api/h8',
     timeout: 10000,
   });
     // eslint-disable-next-line no-undef
@@ -20,3 +20,4 @@ export function request(config) {
   //   reject(err);
   // });
 }
+
