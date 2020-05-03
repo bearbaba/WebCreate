@@ -21,6 +21,6 @@
   height: 49px;
   padding-bottom: 4px;
   padding-top: 5px;
-  border: 1px solid #ff8198;
+  background: #cccccc;
 }
 </style>
