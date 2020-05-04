@@ -12,9 +12,9 @@ export function request(config)
     console.log(error);
   });
 
-  instance.interceptors.response.use(config => {
-    console.log(config);
-    return config;
+  instance.interceptors.response.use(res => {
+    console.log(res.data);
+    return res;
   },error => {
     console.log(error);
   })
