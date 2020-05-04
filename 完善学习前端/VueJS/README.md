@@ -3265,7 +3265,29 @@ export function request(config) {
 
 ### axios拦截器的使用
 
+#### 请求时拦截
 
+```js
+  instance.interceptors.request.use(config => {
+    console.log(config);
+    return config;
+  },error => {
+    console.log(error);
+  });
+```
+
+请求拦截器中可以设置加载动画，设置token等。
+
+#### 响应时拦截
+
+```js
+instance.interceptors.response.use(config => {
+    console.log(config);
+    return config;
+  },error => {
+    console.log(error);
+  })
+```
 
 ## vue实战案例
 
@@ -3328,3 +3350,9 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 ```
+
+### 网络请求的设置
+
+在对项目的首页进行设置时，应当把有关这个界面的所有网络请求封装到一个文件中，在网络请求的文件夹中进行配置。
+
+在对项目文件进行处理时，谨记低耦合的原则。

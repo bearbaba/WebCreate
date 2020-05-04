@@ -1,6 +1,6 @@
 <template>
   <div id="cart">
-    <top-bar id="home-top-bar">
+    <top-bar class="top-bar-bg">
       <div slot="center" id="center">主页</div>
     </top-bar>
     <h1>主页</h1>
@@ -18,7 +18,7 @@
 </script>
 
 <style scoped>
-#home-top-bar{
+  .top-bar-bg{
   background: #ff5777;
 }
   #center{

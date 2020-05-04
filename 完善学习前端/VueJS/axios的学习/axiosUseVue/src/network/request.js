@@ -9,7 +9,22 @@ export function request(config) {
     baseURL: 'http://152.136.185.210:8000/api/h8',
     timeout: 10000,
   });
-    // eslint-disable-next-line no-undef
+
+  // eslint-disable-next-line no-shadow
+  instance.interceptors.request.use((config) => {
+    console.log(config);
+    return config;
+  }, (error) => {
+    console.log(error);
+  });
+
+  instance.interceptors.response.use((res) => {
+    console.log(res.data);
+    return res;
+  }, (error) => {
+    console.log(error);
+  });
+  // eslint-disable-next-line no-undef
   return instance(config);
   // .then((res) => {
   //   // eslint-disable-next-line no-console
