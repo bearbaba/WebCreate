@@ -3356,3 +3356,31 @@ trim_trailing_whitespace = true
 在对项目的首页进行设置时，应当把有关这个界面的所有网络请求封装到一个文件中，在网络请求的文件夹中进行配置。
 
 在对项目文件进行处理时，谨记低耦合的原则。
+
+```js
+import {request} from "@/network/request";
+
+export function getHomeMultipleData() {
+  return request({
+    url: "/home/multidata",
+  })
+}
+```
+
+然后在相关组件中导入该被封装的函数，在`Vue`实例内的生命周期函数`created`（组件被创建时调用）中调用该函数，函数中的数据会被回收机制回收掉，然后将请求的结果保存到组件的`data`中。
+
+```js
+    data(){
+      return {
+        result: null,
+      }
+    },
+    created() {
+      getHomeMultipleData().then( config => {
+        this.result=config;
+        console.log(config);
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+```
