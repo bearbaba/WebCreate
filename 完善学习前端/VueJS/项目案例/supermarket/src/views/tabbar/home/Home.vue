@@ -3,6 +3,7 @@
     <top-bar class="top-bar-bg">
       <div slot="center" id="center">主页</div>
     </top-bar>
+    <recommend-view :recommends="recommend"></recommend-view>
     <h1>主页</h1>
   </div>
 </template>
@@ -10,11 +11,13 @@
 <script>
   import TopBar from "../../../components/common/topBar/TopBar";
   import {getHomeMultipleData} from "@/network/home";
+  import RecommendView from "@/views/tabbar/home/childComps/RecommendView";
 
   export default {
     name: "Home",
     components: {
       TopBar,
+      RecommendView,
     },
     data() {
       return {
@@ -26,10 +29,10 @@
     },
     created() {
       getHomeMultipleData().then( config => {
-        this.banner=config.data.data.banner;
-        this.recommend=config.data.data.recommend;
-        this.keywords=config.data.data.keywords;
-        this.dKeyword=config.data.data.dKeyword;
+        this.banner=config.data.data.banner.list;
+        this.recommend=config.data.data.recommend.list;
+        this.keywords=config.data.data.keywords.list;
+        this.dKeyword=config.data.data.dKeyword.list;
         console.log(config);
       });
     }
