@@ -4,6 +4,7 @@
       <div slot="center" id="center">主页</div>
     </top-bar>
     <recommend-view :recommends="recommend"></recommend-view>
+    <feature-view></feature-view>
     <h1>主页</h1>
   </div>
 </template>
@@ -12,10 +13,12 @@
   import TopBar from "../../../components/common/topBar/TopBar";
   import {getHomeMultipleData} from "@/network/home";
   import RecommendView from "@/views/tabbar/home/childComps/RecommendView";
+  import FeatureView from "@/views/tabbar/home/childComps/FeatureView";
 
   export default {
     name: "Home",
     components: {
+      FeatureView,
       TopBar,
       RecommendView,
     },
