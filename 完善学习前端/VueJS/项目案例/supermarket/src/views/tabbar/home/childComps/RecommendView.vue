@@ -26,15 +26,21 @@
 <style scoped>
   #recommend{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
   }
   .recommend-image-box{
-    width:30%;
     text-align: center;
-    padding-top:5px;
 }
   .recommend-image-box>a>img{
-
-    height:60px;
+    width: 80%;
+    margin-top: 10px;
+  }
+  .recommend-image-box>a{
+    text-decoration: none;
+  }
+  .recommend-image-box>a p{
+    display: block;
+    margin: 5px;
+    color: #ff5777;
   }
 </style>
