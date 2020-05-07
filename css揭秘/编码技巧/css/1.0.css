@@ -1,0 +1,19 @@
+#button {
+  padding: .375rem 1rem;
+  border: 1px solid #446d88;
+  background:linear-gradient(#77a0bb, #58a);
+  border-radius: .25rem;
+  box-shadow: 0 .0625rem .3125rem gray;
+  color: white;
+  font-size: 1.25rem;
+  text-shadow: 0 -0.0625rem .0625rem #335166;
+  line-height: 1.5;
+}
+div{
+  background: 
+    url(../img/1.png) no-repeat top right / 2em 2em,
+    url(../img/2.png) no-repeat top left / 2em 2em,
+    url(../img/3.png) no-repeat bottom right / 2em 2em;
+  width: 200px;
+  height: 200px;
+}
