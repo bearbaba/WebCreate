@@ -19,6 +19,7 @@
 #feature-view{
 }
   #feature-view>img{
-    height:280px;
+    width:100%;
+    box-sizing: content-box;
   }
 </style>

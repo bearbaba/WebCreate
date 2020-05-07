@@ -20,7 +20,7 @@ export default {
 <style>
   .main{
     z-index: 1;
-    height: 1000px;
+    height: 1800px;
     margin-top: 36px;
   }
 </style>

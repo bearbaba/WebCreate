@@ -5,6 +5,7 @@
     </top-bar>
     <recommend-view :recommends="recommend"></recommend-view>
     <feature-view></feature-view>
+    <tab-control :tab-text="tabText" class="tab-control"></tab-control>
     <h1>主页</h1>
   </div>
 </template>
@@ -15,9 +16,12 @@
   import RecommendView from "@/views/tabbar/home/childComps/RecommendView";
   import FeatureView from "@/views/tabbar/home/childComps/FeatureView";
 
+  import TabControl from "@/components/content/tabControl/TabControl";
+
   export default {
     name: "Home",
     components: {
+      TabControl,
       FeatureView,
       TopBar,
       RecommendView,
@@ -28,6 +32,8 @@
         recommend: [],
         keywords: [],
         dKeyword: [],
+
+        tabText: ["流行", "新款", "精选"],
       }
     },
     created() {
@@ -51,5 +57,10 @@
     text-align: center;
     color: white;
     font-size: 20px;
+  }
+  .tab-control{
+    position: sticky;
+    top:40px;
+    background-color: white;
   }
 </style>
