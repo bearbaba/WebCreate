@@ -12,7 +12,7 @@
 
 <script>
   import TopBar from "../../../components/common/topBar/TopBar";
-  import {getHomeMultipleData} from "@/network/home";
+  import {getHomeMultipleData, getHomeGoods} from "@/network/home";
   import RecommendView from "@/views/tabbar/home/childComps/RecommendView";
   import FeatureView from "@/views/tabbar/home/childComps/FeatureView";
 
@@ -51,15 +51,25 @@
         }
       }
     },
+    methods:{
+      getHomeMultipleData() {
+        getHomeMultipleData().then(config => {
+          this.banner = config.data.data.banner.list;
+          this.recommend = config.data.data.recommend.list;
+          this.keywords = config.data.data.keywords.list;
+          this.dKeyword = config.data.data.dKeyword.list;
+        });
+      },
+      getHomeGoods(){
+        getHomeGoods('pop',1).then(config=>{
+          console.log(config);
+        })
+      }
+    },
     created() {
-      getHomeMultipleData().then( config => {
-        this.banner=config.data.data.banner.list;
-        this.recommend=config.data.data.recommend.list;
-        this.keywords=config.data.data.keywords.list;
-        this.dKeyword=config.data.data.dKeyword.list;
-        console.log(config);
-      });
-    }
+      this.getHomeGoods();
+      this.getHomeMultipleData();
+    },
   }
 </script>
 
