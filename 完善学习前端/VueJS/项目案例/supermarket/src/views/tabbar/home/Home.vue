@@ -34,6 +34,21 @@
         dKeyword: [],
 
         tabText: ["流行", "新款", "精选"],
+
+        goods:{
+          popular:{
+            page:0,
+            list:[],
+          },
+          new: {
+            page:0,
+            list: [],
+          },
+          selection: {
+            page:0,
+            list:[],
+          }
+        }
       }
     },
     created() {
