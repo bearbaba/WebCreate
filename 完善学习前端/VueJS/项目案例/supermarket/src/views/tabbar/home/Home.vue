@@ -6,7 +6,7 @@
     <recommend-view :recommends="recommend"></recommend-view>
     <feature-view></feature-view>
     <tab-control :tab-text="tabText" class="tab-control"></tab-control>
-    <h1>主页</h1>
+    <good-list :goods="goods['pop'].list"></good-list>
   </div>
 </template>
 
@@ -17,6 +17,7 @@
   import FeatureView from "@/views/tabbar/home/childComps/FeatureView";
 
   import TabControl from "@/components/content/tabControl/TabControl";
+  import GoodList from "@/components/content/goodsList/GoodList";
 
   export default {
     name: "Home",
@@ -25,6 +26,8 @@
       FeatureView,
       TopBar,
       RecommendView,
+      // eslint-disable-next-line vue/no-unused-components
+      GoodList
     },
     data() {
       return {
@@ -36,15 +39,15 @@
         tabText: ["流行", "新款", "精选"],
 
         goods:{
-          popular:{
+          'pop':{
             page:0,
             list:[],
           },
-          new: {
+          'new': {
             page:0,
             list: [],
           },
-          selection: {
+          'sell': {
             page:0,
             list:[],
           }
@@ -54,21 +57,27 @@
     methods:{
       getHomeMultipleData() {
         getHomeMultipleData().then(config => {
-          this.banner = config.data.data.banner.list;
-          this.recommend = config.data.data.recommend.list;
-          this.keywords = config.data.data.keywords.list;
-          this.dKeyword = config.data.data.dKeyword.list;
+          this.banner = config.data.banner.list;
+          this.recommend = config.data.recommend.list;
+          this.keywords = config.data.keywords.list;
+          this.dKeyword = config.data.dKeyword.list;
         });
       },
-      getHomeGoods(){
-        getHomeGoods('pop',1).then(config=>{
-          console.log(config);
+      getHomeGoods(type){
+        const page = this.goods[type].page+1;
+        getHomeGoods(type,page).then(config=>{
+          this.goods[type].list.push(...config.data.list);
+          console.log(this.goods[type].list);
         })
       }
     },
     created() {
-      this.getHomeGoods();
+
       this.getHomeMultipleData();
+
+      this.getHomeGoods("pop");
+      this.getHomeGoods("new");
+      this.getHomeGoods("sell");
     },
   }
 </script>
