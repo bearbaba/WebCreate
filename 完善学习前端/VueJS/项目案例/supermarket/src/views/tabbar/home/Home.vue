@@ -5,7 +5,7 @@
     </top-bar>
     <recommend-view :recommends="recommend"></recommend-view>
     <feature-view></feature-view>
-    <tab-control :tab-text="tabText" class="tab-control"></tab-control>
+    <top-control :top-text="topText" class="tab-control"></top-control>
     <good-list :goods="goods['pop'].list"></good-list>
   </div>
 </template>
@@ -16,17 +16,16 @@
   import RecommendView from "@/views/tabbar/home/childComps/RecommendView";
   import FeatureView from "@/views/tabbar/home/childComps/FeatureView";
 
-  import TabControl from "@/components/content/tabControl/TabControl";
+  import TopControl from "@/components/content/topControl/TopControl";
   import GoodList from "@/components/content/goodsList/GoodList";
 
   export default {
     name: "Home",
     components: {
-      TabControl,
+      TopControl,
       FeatureView,
       TopBar,
       RecommendView,
-      // eslint-disable-next-line vue/no-unused-components
       GoodList
     },
     data() {
@@ -36,8 +35,9 @@
         keywords: [],
         dKeyword: [],
 
-        tabText: ["流行", "新款", "精选"],
+        topText: ["流行", "新款", "精选"],
 
+        // eslint-disable-next-line vue/no-dupe-keys
         goods:{
           'pop':{
             page:0,
@@ -92,9 +92,9 @@
     color: white;
     font-size: 20px;
   }
-  .tab-control{
+  .top-control{
     position: sticky;
-    top:40px;
+    top:38.3px;
     background-color: white;
   }
 </style>

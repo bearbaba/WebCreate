@@ -21,6 +21,7 @@
   display: flex;
   z-index: 2;
   position: fixed;
+  position: -ms-device-fixed;
   top:-6px;
 }
 .left,

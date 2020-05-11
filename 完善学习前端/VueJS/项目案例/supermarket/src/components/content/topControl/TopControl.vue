@@ -1,7 +1,7 @@
 <template>
-  <div class="tab-control">
+  <div class="top-control">
     <span :class="{active:currentIndex === index}"
-          v-for="(item,index) in tabText"
+          v-for="(item,index) in topText"
           @click="changeActive(index)" :key="index">
       {{item}}</span>
   </div>
@@ -9,9 +9,9 @@
 
 <script>
   export default {
-    name: "TabControl",
+    name: "TopControl",
     props:{
-      tabText:{
+      topText:{
         type: Array,
       }
     },
@@ -33,17 +33,17 @@
 </script>
 
 <style scoped>
-  .tab-control{
+  .top-control{
     display: flex;
-    justify-content: space-evenly;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
     font-size: 18px;
     border:1px wheat dashed;
   }
-  .tab-control span{
+  .top-control span{
     display: block;
     padding-bottom: 5px;
     margin-top: 5px;
-
   }
 .active{
   color: #ff5777;
