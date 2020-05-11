@@ -101,3 +101,56 @@ background-repeat: no-repeat;
 
 * 在使用多列文本时，指定`column-width`(列宽),而不是指定列数，这样它能在较小屏幕自动显示为单列布局。
   
+## 背景与边框
+
+### 半透明边框
+
+如果用`hsla`为`<div></div>`设置一个半透明的边框，相关css设置（此处设置的是一个红色的`div`，`hsla`设置的是一个灰色的半透明色）：
+
+```css
+.box1{
+  width: 6.25rem;
+  height:6.25rem;
+
+  background: red;
+  border:10px solid hsla(0,0%,100%,.5);
+}
+```
+
+如果恰好`<html\>`的背景颜色也是默认的白色，你会发现此处设置的`<div>`并没有显示出灰色的半透明边框，而是一个偏红色的边框。
+
+![实例图片](2背景边框/img/1.png)
+
+这是因为在默认情况下背景会显示在边框的下层，而边框只是覆盖在了背景上而已，此时只需在原有的背景设置上多增加一个属性`background-clip: padding-box;`，使背景不显示边框区域的内容：
+
+```css
+.box1{
+  width: 6.25rem;
+  height:6.25rem;
+
+  background: red;
+  border:10px solid hsla(0,0%,100%,.5);
+  
+  background-clip: padding-box;
+}
+```
+
+然而这时得到的边框却又没有了：
+
+![实例图片](2背景边框/img/2.png)
+
+其实并不是没有，只是边框的色调比较低，再加上边框设置的透明度比较低，所以看不见而已，换一个比较深的颜色就能看见了，如：
+
+```css
+.box1{
+  width: 6.25rem;
+  height:6.25rem;
+
+  background: red;
+  border:10px solid hsla(240,80%,80%,.5);
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+}
+```
+
+![实例图片](2背景边框/img/3.png)
