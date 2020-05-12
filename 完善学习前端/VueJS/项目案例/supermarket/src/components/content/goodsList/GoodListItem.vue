@@ -23,6 +23,8 @@
 .good-list-item{
  width: 45%;
   display: block;
+  text-align: center;
+  height: calc(257px);
 
 }
   .good-list-item>img{
@@ -30,15 +32,22 @@
     margin-top: 20px;
   }
   .good-list-item .item-text{
-    width:100%;
-    /*padding: 1rem;*/
+    width:90%;
     text-align: center;
+    position: relative;
+    bottom:0;
   }
-  .title,
-  .cfav
+  .title
   {
+    /*width: 40%;*/
     display: block;
+    white-space: nowrap;
     font-size: 10px;
-
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 2rem;
+  }
+  .cfav{
+    display: block;
   }
 </style>
