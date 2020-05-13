@@ -34,8 +34,6 @@
   .good-list-item .item-text{
     width:90%;
     text-align: center;
-    position: relative;
-    bottom:0;
   }
   .title
   {
@@ -45,9 +43,11 @@
     font-size: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-left: 2rem;
+    margin-left: 1rem;
   }
   .cfav{
     display: block;
+    font-size: 10px;
+    text-align: center;
   }
 </style>

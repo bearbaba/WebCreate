@@ -21,6 +21,6 @@ export default {
   .main{
     z-index: 1;
     margin-top: 36px;
-    margin-bottom: 60px;
+    margin-bottom: 70px;
   }
 </style>

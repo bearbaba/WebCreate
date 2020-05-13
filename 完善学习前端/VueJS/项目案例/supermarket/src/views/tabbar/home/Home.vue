@@ -7,7 +7,7 @@
     <feature-view></feature-view>
     <top-control :top-text="topText"
                  @topClick="topClick" class="tab-control"></top-control>
-    <good-list :goods="goods['pop'].list"></good-list>
+    <good-list :goods="goods[currentType].list"></good-list>
   </div>
 </template>
 
@@ -39,26 +39,35 @@
         topText: ["流行", "新款", "精选"],
 
         // eslint-disable-next-line vue/no-dupe-keys
-        goods:{
-          'pop':{
-            page:0,
-            list:[],
+        goods: {
+          'pop': {
+            page: 0,
+            list: [],
           },
           'new': {
-            page:0,
+            page: 0,
             list: [],
           },
           'sell': {
-            page:0,
-            list:[],
+            page: 0,
+            list: [],
           }
-        }
+        },
+        currentType:'pop',
       }
     },
     methods:{
       //监听事件方法
       topClick(index){
-        console.log(index);
+        if (index === 0){
+          this.currentType= 'pop';
+        }
+        else if (index===1){
+          this.currentType= 'new';
+        }
+        else{
+          this.currentType = 'sell';
+        }
       },
       //网络请求方法
       getHomeMultipleData() {
