@@ -23,6 +23,8 @@
   position: fixed;
   position: -ms-device-fixed;
   top:-6px;
+  border: 2px solid #ff5777;
+  margin-bottom: -1px;
 }
 .left,
 .right{
