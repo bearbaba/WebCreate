@@ -154,3 +154,106 @@ background-repeat: no-repeat;
 ```
 
 ![实例图片](2背景边框/img/3.png)
+
+### 多重边框
+
+#### box-shadow方案
+
+`box-shadow`支持第四个参数（称作“扩张半径”），通过指定正值或负值来使投影面积增大或减小。一个正值的扩张半径加上两个为零的扩张偏移量以及为零的模糊值，得到的投影就像是一道实线的边框，来模拟出边框。
+
+```css
+.box2{
+  width: 6.25rem;
+  height: 6.25rem;
+  background-color: aqua;
+  box-shadow: 0 0 0 .625rem #ccc;
+}
+```
+
+![实例图片](2背景边框/img/4.png)
+
+最重要的是`box-shadow`支持逗号分隔法，通过设定多个参数就能得到多重边框。
+
+```css
+.box3{
+  margin: 10.25rem;
+  width: 6.25rem;
+  height: 6.25rem;
+  background-color: aqua;
+  box-shadow: 0 0 0 .625rem royalblue,
+              0 0 0 1.25rem red,
+              0 0 0 1.625rem palegreen;
+}
+```
+
+![实例图片](2背景边框/img/5.png)
+
+需要注意的一点是，`box-shadow`生成的边框是层层叠加的，所以第一个边框的扩张半径要小于第二个边框的扩张半径，否则第二个边框会覆盖第一个边框。
+
+#### outline方案
+
+在某些情况下只需要两层边框，并且不仅仅希望使用实线边框，希望使用更多丰富样式的边框，这时就可以先使用常规边框，然后再加一层`outline`生成的边框。
+
+```css
+.box4{
+  margin: 10rem;
+  width: 6.25rem;
+  height: 6.25rem;
+  background-color: aqua;
+  border: .625rem solid greenyellow;
+  outline: .625rem solid green;
+}
+```
+
+![实例图片](2背景边框/img/6.png)
+
+`outline`不仅支持`solid`样式，也支持其它诸如`dashed`之类的样式。
+
+描边的另外好处是可以用`outline-offset`属性来控制它与元素边缘的距离，甚至可以是负值。
+
+```css
+.box5{
+  width: 6.25rem;
+  height: 6.25rem;
+  background-color: black;
+  outline: .0625rem dashed white;
+  outline-offset: -.625rem;
+}
+```
+
+![实例图片](2背景边框/img/7.png)
+
+不过需要注意的是`outline`不支持逗号分隔法，因此它是无法像`box-shadow`那样生成多重边框，另外它也没有`radius`属性，不能像普通边框`border`那样生成圆角边框。
+
+### 背景定位
+
+#### 难题
+
+有时我们希望图片能和背景之间有一定空隙，而且不仅仅只是针对背景的右上角作为偏移的原点。我们给出以下解决方案。
+
+#### background-position
+
+`background-position`的扩展语法允许我们指定背景图片距离任意角的偏移量，只要我们在偏移量前面指定关键字。举例来说，如果想让背景图片跟右边缘保持20px的偏移量，同时跟底边保持10px的偏移量，以如下方式做：
+
+```css
+.box6{
+  width: 300px;
+  height: 200px;
+  background:url(./img/8.png) no-repeat #58a;
+  background-position: right 20px bottom 10px;
+}
+```
+
+在不支持`background-position`扩展语法的浏览器中，可以把定位值`bottom right`写进`background`的简写属性中。
+
+```css
+.box6{
+  width: 300px;
+  height: 200px;
+  background:url(./img/8.png) no-repeat bottom right #58a;
+  background-position: right 20px bottom 10px;
+}
+```
+
+#### background-origin方案
+

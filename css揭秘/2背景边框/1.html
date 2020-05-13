@@ -14,9 +14,58 @@
         background-clip: padding-box;
         -webkit-background-clip: padding-box;
       }
+      .box2{
+        margin-top: 6.25rem;
+        width: 6.25rem;
+        height: 6.25rem;
+        background-color: aqua;
+        box-shadow: 0 0 0 .625rem #ccc;
+      }
+      .box3{
+        margin: 10.25rem;
+        width: 6.25rem;
+        height: 6.25rem;
+        background-color: aqua;
+        box-shadow: 0 0 0 .625rem royalblue,
+                    0 0 0 1.25rem red,
+                    0 0 0 1.625rem palegreen;
+      }
+      .box4{
+        margin: 10rem;
+        width: 6.25rem;
+        height: 6.25rem;
+        background-color: aqua;
+        border: .625rem solid greenyellow;
+        outline: .625rem dashed green;
+      }
+      .box5{
+        width: 6.25rem;
+        height: 6.25rem;
+        background-color: black;
+        outline: .0625rem dashed white;
+        outline-offset: -.625rem;
+      }
+      .box6{
+        width: 300px;
+        height: 200px;
+        background:url(./img/8.png) no-repeat #58a;
+        background-position: right 20px bottom 10px;
+      }
+      .box6{
+        width: 300px;
+        height: 200px;
+        background:url(./img/8.png) no-repeat bottom right #58a;
+        background-position: right 20px bottom 10px;
+      }
     </style>
   </head>
   <body>
     <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+    <div class="box5"></div>
+    <div class="box6"></div>
+    <div id="box7"></div>
   </body>
 </html>

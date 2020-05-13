@@ -5,7 +5,8 @@
     </top-bar>
     <recommend-view :recommends="recommend"></recommend-view>
     <feature-view></feature-view>
-    <top-control :top-text="topText" class="tab-control"></top-control>
+    <top-control :top-text="topText"
+                 @topClick="topClick" class="tab-control"></top-control>
     <good-list :goods="goods['pop'].list"></good-list>
   </div>
 </template>
@@ -55,6 +56,11 @@
       }
     },
     methods:{
+      //监听事件方法
+      topClick(index){
+        console.log(index);
+      },
+      //网络请求方法
       getHomeMultipleData() {
         getHomeMultipleData().then(config => {
           this.banner = config.data.banner.list;

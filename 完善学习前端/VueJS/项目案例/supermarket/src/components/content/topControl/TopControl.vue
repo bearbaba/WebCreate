@@ -27,6 +27,7 @@
     methods:{
       changeActive(index){
           this.currentIndex=index;
+          this.$emit("topClick",index);
         }
       }
     }
