@@ -229,11 +229,11 @@ background-repeat: no-repeat;
 
 #### 难题
 
-有时我们希望图片能和背景之间有一定空隙，而且不仅仅只是针对背景的右上角作为偏移的原点。我们给出以下解决方案。
+有时我们希望图片能和背景之间有一定空隙，而且不仅仅只是针对背景的左上角作为偏移的原点。我们给出以下解决方案。
 
 #### background-position
 
-`background-position`的扩展语法允许我们指定背景图片距离任意角的偏移量，只要我们在偏移量前面指定关键字。举例来说，如果想让背景图片跟右边缘保持20px的偏移量，同时跟底边保持10px的偏移量，以如下方式做：
+`background-position`的扩展语法允许我们指定背景图片距离任意角的偏移量，只要我们在偏移量前面指定关键字。举例来说，如果想让背景图片跟右边缘保持20px的偏移量，同时跟底边保持10px的偏移量，可以使用如下方式做到：
 
 ```css
 .box6{
@@ -243,6 +243,8 @@ background-repeat: no-repeat;
   background-position: right 20px bottom 10px;
 }
 ```
+
+![实例图片](2背景边框/img/10.png)
 
 在不支持`background-position`扩展语法的浏览器中，可以把定位值`bottom right`写进`background`的简写属性中。
 
@@ -257,3 +259,35 @@ background-repeat: no-repeat;
 
 #### background-origin方案
 
+在给背景图片设置距离某个角的偏移量时，如果希望偏移量始终与容器的内边距一致，那么在我们修改内边距的值时，每次都需要在三个地方更新这个值，代码就不够DRY。
+
+在默认情况下，`background-position`是以`padding-box`为基准的，因此`top left`默认指的是`padding box`左上角。`background-origin`属性可以修改这种基准，默认情况下它的值是`padding-box`，如果把它的值改成`content-box`，我们在`background-position`属性中使用的边角将以内容区边缘作为基准。
+
+我们希望偏移量始终与容器内边距保持一致时，就可以把`background-origin`的值赋为`content-box`。
+
+```css
+.box7{
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+  background: url(./img/8.png) no-repeat #58a top left;
+  background-origin: content-box;
+}
+```
+
+![实例图片](2背景边框/img/9.png)
+
+#### calc()方案
+
+把背景图片定位到距离底边10px且距离右边20px的位置，以背景图片左上角偏移的思路来考虑，其实是希望它能有一个100%-20px的水平偏移量，以及100%-10px的垂直偏移量，而`calc()`函数允许我们执行此类运算：
+
+```css
+.box8{
+  width: 300px;
+  height: 200px;
+  background: url(./img/8.png) no-repeat #58a;
+  background-position: calc(100% - 20px) calc(100% - 10px);
+}
+```
+
+![示例图片](2背景边框/img/11.png)

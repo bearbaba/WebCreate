@@ -45,17 +45,34 @@
         outline: .0625rem dashed white;
         outline-offset: -.625rem;
       }
-      .box6{
+      /* .box6{
+        margin: 10px;
         width: 300px;
         height: 200px;
         background:url(./img/8.png) no-repeat #58a;
         background-position: right 20px bottom 10px;
-      }
+      } */
       .box6{
+        margin: 10px;
         width: 300px;
         height: 200px;
         background:url(./img/8.png) no-repeat bottom right #58a;
         background-position: right 20px bottom 10px;
+      }
+      .box7{
+        margin: 20px;
+        width: 200px;
+        height: 200px;
+        padding: 10px;
+        background: url(./img/8.png) no-repeat #58a top left;
+        background-origin: content-box;
+      }
+
+      .box8{
+        width: 300px;
+        height: 200px;
+        background: url(./img/8.png) no-repeat #58a;
+        background-position: calc(100% - 20px) calc(100% - 10px);
       }
     </style>
   </head>
@@ -66,6 +83,7 @@
     <div class="box4"></div>
     <div class="box5"></div>
     <div class="box6"></div>
-    <div id="box7"></div>
+    <div class="box7"></div>
+    <div class="box8"></div>
   </body>
 </html>
