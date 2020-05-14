@@ -1,13 +1,18 @@
 <template>
-  <div id="cart">
-    <top-bar class="top-bar-bg">
-      <div slot="center" id="center">主页</div>
-    </top-bar>
-    <recommend-view :recommends="recommend"></recommend-view>
-    <feature-view></feature-view>
-    <top-control :top-text="topText"
-                 @topClick="topClick" class="tab-control"></top-control>
-    <good-list :goods="goods[currentType].list"></good-list>
+  <div id="home">
+<!--    <top-bar class="top-bar-bg">-->
+<!--      <div slot="center" id="center">主页</div>-->
+<!--    </top-bar>-->
+
+    <div slot="center" id="center">主页</div>
+    <scroll class="content">
+      <recommend-view :recommends="recommend"></recommend-view>
+      <feature-view></feature-view>
+      <top-control :top-text="topText"
+                   @topClick="topClick" class="tab-control"></top-control>
+
+      <good-list :goods="goods[currentType].list"></good-list>
+    </scroll>
   </div>
 </template>
 
@@ -20,6 +25,8 @@
   import TopControl from "@/components/content/topControl/TopControl";
   import GoodList from "@/components/content/goodsList/GoodList";
 
+  import Scroll from "@/components/common/scroll/Scroll";
+
   export default {
     name: "Home",
     components: {
@@ -27,7 +34,8 @@
       FeatureView,
       TopBar,
       RecommendView,
-      GoodList
+      GoodList,
+      Scroll
     },
     data() {
       return {
@@ -98,6 +106,9 @@
 </script>
 
 <style scoped>
+  #home{
+    height: 100vh;
+  }
   .top-bar-bg{
   background: #ff5777;
 }
@@ -111,5 +122,11 @@
     position: sticky;
     top:38.3px;
     background-color: white;
+  }
+  .content{
+    margin-top: 44px;
+    margin-bottom: 0px;
+    height: calc(100vh - 106px);
+    overflow: hidden;
   }
 </style>
