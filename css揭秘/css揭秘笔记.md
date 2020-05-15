@@ -291,3 +291,212 @@ background-repeat: no-repeat;
 ```
 
 ![示例图片](2背景边框/img/11.png)
+
+### 边框内圆角
+
+如果我们需要一个容器，它只在内侧有圆角，而在边框或描边的四个角在外部仍然保持直角的形状，可以用两个容器实现：
+
+```html
+<div class="box9">
+  <div>
+    hello World!
+  </div>
+</div>
+```
+
+```css
+.box9{
+  width: 12.5rem;
+  margin: 1.25rem;
+  background-color: #655;
+  padding: .8em;
+}
+.box9>div{
+  background: tan;
+  border-radius: .8em;
+  padding:1em;
+}
+```
+
+![示例图片](./2背景边框/img/12.png)
+
+如果只需要一个元素去实现这个效果，下面的解决方案或许有所帮助：
+
+#### 解决方案
+
+```css
+.box10{
+  width: 12.5em;
+
+  background: tan;
+  border-radius: .8em;
+  padding: 1em;
+  box-shadow: 0 0 0 .6em #665;
+  outline: .6em solid #665;
+}
+```
+
+![示例图片](2背景边框/img/13.png)
+
+这个的视觉效果首先是通过`border-radius`获得边框的圆角效果，`outline`使图形拥有描边效果，但是描边效果是没有圆角的，此时`border`与`outline`之间存在着空隙：
+
+![示例图片](2背景边框/img/14.png)
+
+这个空隙就要依靠`box-shadow`来填补，`box-shadow`的颜色与`outline`颜色一致就会融为一体，形成内圆角外直角的视觉效果。
+
+### 条纹背景
+
+现在我们需要条纹的背景，而且不通过加载图片的方式，而是以css的方式形成，现给出以下解决方案：
+
+#### 解决方案
+
+通过线性渐变可以很好地得到条纹背景效果：
+
+```css
+.box11{
+  margin: 1.25em;
+  width: 12.5rem;
+  height: 12.5rem;
+  background: linear-gradient(#fb3,#58a);
+}
+```
+
+![实例图片](2背景边框/img/15.png)
+
+还可以通过百分比的方式来控制两种颜色过渡时占据的空间大小。
+
+```css
+.box12{
+  margin: 1.25em;
+  width: 12.5rem;
+  height: 12.5rem;
+  background: linear-gradient(yellow 25%, skyblue 75%);
+}
+```
+
+![实例图片](2背景边框/img/16.png)
+
+`background: linear-gradient(yellow 25%, skyblue 75%);`，`yellow 25%`意味着从开始到25%的位置是黄色，而`skyblue 75%`则意味着从75%到结束位置是天蓝色，中间从25%到75%则是从黄色过渡到蓝色的空间。
+
+如果使过渡的空间位置为0，即能生成条纹状背景：
+
+```css
+.box13{
+  margin: 1.25em;
+  width: 12.5rem;
+  height: 12.5rem;
+  background: linear-gradient(yellow 50%, skyblue 50%);
+}
+```
+
+![示例图片](2背景边框/img/17.png)
+
+我们可以通过`background-size`来控制背景条纹的大小，`background-size`为两个值时，第一个值用于指定背景图片宽度，第二个值用于指定背景图片高度：
+
+```css
+.box14{
+  margin: 1.25em;
+  width: 12.5rem;
+  height: 12.5rem;
+  background: linear-gradient(yellow 50%, skyblue 50%);
+  background-size: 100% 30px;
+}
+```
+
+由于背景默认是重复的，所以背景会被多条条纹填充完：
+
+![示例图片](./2背景边框/img/18.png)
+
+我们如果想要得到不等宽的条纹，只需修改颜色的起始位置或者结束位置。
+
+```css
+.box15{
+  margin: 1.25em;
+  width: 12.5rem;
+  height: 12.5rem;
+  background: linear-gradient(yellow 25%, skyblue 25%);
+  background-size: 100% 30px;
+}
+```
+
+![实例图片](2背景边框/img/19.png)
+
+如果后一个颜色的位置值设置的要比前一个颜色的位置值要小，那么它始终将以前一个颜色结束的位置作为起始位置。
+
+```css
+.box16{
+  margin: 1.25em;
+  width: 12.5rem;
+  height: 12.5rem;
+  background: linear-gradient(yellow 20%, skyblue 0);
+  background-size: 100% 30px;
+}
+```
+
+![实例图片](./img/../2背景边框/img/20.png)
+
+在`linear-gradient`中善用后一颜色位置值为0可以得到多条条纹。
+
+```css
+.box17{
+  margin: 1.25em;
+  width: 12.5rem;
+  height: 12.5rem;
+  background: linear-gradient(yellow 20%,skyblue 0, skyblue 60%,purple 0);
+  background-size: 100% 30px;
+}
+```
+
+![实例图片](2背景边框/img/21.png)
+
+#### 垂直条纹
+
+垂直条纹与水平条纹类似，只需要在线性渐变的参数前添加方向值：
+
+```css
+.box18{
+  margin: .625rem;
+  width: 12.5rem;
+  height: 12.5rem;
+  background: linear-gradient(to right,yellow 40%,skyblue 0);
+  background-size:30px 100%;
+}
+```
+
+![实例图片](2背景边框/img/22.png)
+
+水平条纹是因为线性渐变的方向值默认是`to bottom`，除了`to right`，也可以用`95deg`这样的角度值。
+
+修改了方向值还需要修改`background-size`，这个属性决定背景在宽度与高度上占据的大小。
+
+#### 斜向条纹
+
+如果你以为想要得到45度斜向的条纹,只需要把`linear-gradient`第一个有关方向的参数设定为`45deg`就行了，那么就错了：
+
+```css
+.box19{
+  margin: .625rem;
+  width: 12.5rem;
+  height: 12.5rem;
+  background: linear-gradient(45deg,yellow 40%,skyblue 0);
+  background-size:30px 30px;
+}
+```
+
+![实例图片](2背景边框/img/23.png)
+
+从上图中可以看到生成的背景实际上是重复的三角形拼合而成。
+
+如果想要得到重复的斜向条纹，可以使用`repeating-linear-gradient`设置。
+
+```css
+.box20{
+  margin: .625rem;
+  width: 6.25rem;
+  height: 6.25rem;
+  background: repeating-linear-gradient(45deg,yellow 0, yellow 15px,skyblue 0,skyblue 30px);
+}
+```
+
+![示例图片](2背景边框/img/24.png)
+
