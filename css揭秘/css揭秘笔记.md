@@ -499,4 +499,3 @@ background-repeat: no-repeat;
 ```
 
 ![示例图片](2背景边框/img/24.png)
-

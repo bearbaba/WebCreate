@@ -17,12 +17,15 @@
     },
     mounted() {
       this.scroll = new BScroll(this.$refs.wrapper,{
-
+        click: true,
       })
     }
   }
 </script>
 
 <style scoped>
-
+  .wrapper{
+    position: relative;
+    margin-top: 42px;
+  }
 </style>

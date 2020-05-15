@@ -1,16 +1,14 @@
 <template>
   <div id="home">
-<!--    <top-bar class="top-bar-bg">-->
-<!--      <div slot="center" id="center">主页</div>-->
-<!--    </top-bar>-->
+    <top-bar class="top-bar-bg">
+      <div slot="center" id="center">主页</div>
+    </top-bar>
 
-    <div slot="center" id="center">主页</div>
     <scroll class="content">
       <recommend-view :recommends="recommend"></recommend-view>
       <feature-view></feature-view>
       <top-control :top-text="topText"
                    @topClick="topClick" class="tab-control"></top-control>
-
       <good-list :goods="goods[currentType].list"></good-list>
     </scroll>
   </div>
@@ -124,9 +122,7 @@
     background-color: white;
   }
   .content{
-    margin-top: 44px;
-    margin-bottom: 0px;
-    height: calc(100vh - 106px);
+    height: calc(100vh - 100px);
     overflow: hidden;
   }
 </style>
