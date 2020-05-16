@@ -499,3 +499,61 @@ background-repeat: no-repeat;
 ```
 
 ![示例图片](2背景边框/img/24.png)
+
+### 复杂背景图案
+
+#### 网格
+
+把水平条纹与垂直条纹叠加起来就能得到各种样式的网格：
+
+```css
+.box1{
+  width: calc(210px - 15px);
+  height: calc(210px - 15px);
+  background: white;
+  background-image:
+    linear-gradient(90deg, rgba(200,0,0,.5) 50% ,transparent 0),
+    linear-gradient(rgba(200,0,0,.5) 50%,transparent 0);
+  background-size: 30px 30px;
+}
+```
+
+![示例图片](2背景边框/img/25.png)
+
+在一些情况下，我们希望每个格子的大小可以调整，而网格线的粗细可以调整：
+
+```css
+.box2{
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  background: #58a;
+  background-image: 
+    linear-gradient(white 1px, transparent 0),
+    linear-gradient(90deg, white 1px,transparent 0);
+  background-size: 30px 30px;
+}
+```
+
+![示例图片](2背景边框/img/26.png)
+
+我们甚至可以把两幅不同线宽、不同颜色的网格叠加起来，得到更加逼真的蓝图网格：
+
+```css
+.box3{
+  margin: 20px;
+  width:200px;
+  height: 200px;
+  background: #58a;
+  background-image: 
+    linear-gradient(white 2px, transparent 0),
+    linear-gradient(90deg, white 2px,transparent 0),
+    linear-gradient(hsla(0,0%,100%,.3) 1px,transparent 0),
+    linear-gradient(90deg,hsla(0,0%,100%,.3) 1px,transparent 0);
+  background-size: 
+    100% 75px ,75px 100%,
+    100% 15px, 15px 100%;
+}
+```
+
+![示例图片](2背景边框/img/27.png)
