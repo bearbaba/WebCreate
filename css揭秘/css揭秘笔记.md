@@ -557,3 +557,38 @@ background-repeat: no-repeat;
 ```
 
 ![示例图片](2背景边框/img/27.png)
+
+#### 波点
+
+径向渐变允许我们创建圆形、椭圆或是它们中的一部分，能够创建的最简单图案是圆点的阵列：
+
+```css
+.box4{
+  width: 100px;
+  height: 100px;
+  background: #655;
+  background-image: radial-gradient(tan 30%,transparent 0);
+  background-size: 30px 30px;
+}
+```
+
+![实例图片](2背景边框/img/28.png)
+
+然而此时生成的波点还不够实用，可以生成两层圆点阵列图案，并把它们错开。
+
+```css
+.box5{
+  margin: 10px;      
+  width: 100px;
+  height: 100px;
+  background: #655;
+  background-image: 
+    radial-gradient(tan 30%,transparent 0),
+    radial-gradient(tan 30%,transparent 0);
+  background-size: 30px 30px;
+  background-position: 0 0,15px 15px;
+}
+```
+
+![示例图片](2背景边框/img/29.png)
+
