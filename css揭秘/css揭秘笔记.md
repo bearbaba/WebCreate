@@ -587,8 +587,91 @@ background-repeat: no-repeat;
     radial-gradient(tan 30%,transparent 0);
   background-size: 30px 30px;
   background-position: 0 0,15px 15px;
-}
 ```
 
 ![示例图片](2背景边框/img/29.png)
 
+#### 棋盘图案
+
+我们可以利用两个45度线性渐变形成的三角形图案拼合形成小正方形形状的背景：
+
+```css
+.box5{
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  background: #655;
+  background-image:
+    radial-gradient(tan 30%,transparent 0),
+    radial-gradient(tan 30%,transparent 0);
+  background-size: 30px 30px;
+  background-position: 0 0,15px 15px;
+}
+```
+
+![实例图片](2背景边框/img/30.png)
+
+第二层渐变的位置值之所以是75%，是因为小三角形占据大方块的四分之一，而其余均为大方块的背景色，又用于线性渐变从底往上，所以首先要设定透明背景色。
+
+此时尚未到达我们想要的效果，只需将第二层渐变在水平和垂直方向均移动贴片长度的一半，就可以将它们拼合成完整的方块：
+
+```css
+.box7{
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+
+  background-color: #eee;
+  background-image:
+    linear-gradient(45deg,#bbb 25%, transparent 0),
+    linear-gradient(45deg, transparent 75%, #bbb 0);
+  background-position: 0 0,15px 15px;
+  background-size: 30px 30px;
+}
+```
+
+![示例图片](2背景边框/img/31.png)
+
+可以看到两个小三角形之间依然存在着空隙，可以稍稍调整三角形颜色的位置值（`transparent`前的参数`）。
+
+但实际上这依然只是我们想要的棋盘效果的一半，这时我们可以根据这一半的效果复刻出另一半，只需要稍稍调整它的背景位置值`background-position`。
+
+```css
+.box8{
+  margin: 10px;
+  width: 120px;
+  height: 120px;
+
+  background-color: #eee;
+  background-image:
+    linear-gradient(45deg,#bbb 25%, transparent 0),
+    linear-gradient(45deg, transparent 74%, #bbb 0),
+    linear-gradient(45deg, #bbb 25%, transparent 0),
+    linear-gradient(45deg, transparent 75%,#bbb 0);
+  background-position: 
+    0 0, 15px 15px,
+    15px 15px, 30px 30px;
+  background-size: 30px 30px;
+}
+```
+
+![示例图片](2背景边框/img/32.png)
+
+当你看到这个效果形成的小正方形左上角并不是（0，0），可能会对`background-position`从（0,0）开始感到疑惑，因为这是`background-position`决定的是整个背景的起始位置，而由于线性渐变默认从底部网上，所以（0，0）是属于线性渐变透明色的，而灰色则处于背景的底部。
+
+这个代码还可以进行优化，比如把处在贴片顶角的三角形两两组合起来（即把第一组和第二组合并成一层渐变，把第三组和第四组合并成一组渐变），然后还可以把深灰色改成半透明的黑色，这样只需修改底色就能改变整个棋盘的色调。
+
+```css
+.box9{
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+
+  background: #eee;
+  background-image: 
+    linear-gradient(45deg,rgba(0,0,0,.25) 25%,transparent 0, transparent 76%, rgba(0,0,0,.25) 0),
+    linear-gradient(45deg, rgba(0,0,0,.25) 25%,transparent 0, transparent 74%, rgba(0,0,0,.25) 0);
+  background-position: 0 0, 15px 15px;
+  background-size: 30px 30px;
+}
+```

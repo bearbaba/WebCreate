@@ -22,7 +22,6 @@ export default {
 
 <style>
   .main{
-    z-index: 1;
-    margin-bottom: 58px;
+
   }
 </style>

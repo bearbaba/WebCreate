@@ -3,14 +3,15 @@
     <top-bar class="top-bar-bg">
       <div slot="center" id="center">主页</div>
     </top-bar>
-
-    <scroll class="content">
+    <back-top @click.native="backClick"></back-top>
+    <scroll class="content" ref="scroll">
       <recommend-view :recommends="recommend"></recommend-view>
       <feature-view></feature-view>
       <top-control :top-text="topText"
                    @topClick="topClick" class="tab-control"></top-control>
       <good-list :goods="goods[currentType].list"></good-list>
     </scroll>
+
   </div>
 </template>
 
@@ -24,10 +25,13 @@
   import GoodList from "@/components/content/goodsList/GoodList";
 
   import Scroll from "@/components/common/scroll/Scroll";
+  import BackTop from "@/components/common/backTop/BackTop";
 
   export default {
     name: "Home",
     components: {
+      // eslint-disable-next-line vue/no-unused-components
+      BackTop,
       TopControl,
       FeatureView,
       TopBar,
@@ -75,6 +79,9 @@
           this.currentType = 'sell';
         }
       },
+      backClick(){
+        this.$refs.scroll.scrollTo(0,0);
+      },
       //网络请求方法
       getHomeMultipleData() {
         getHomeMultipleData().then(config => {
@@ -117,12 +124,15 @@
     font-size: 20px;
   }
   .top-control{
-    position: sticky;
-    top:38.3px;
+    /*position: sticky;*/
+    /*top:38.3px;*/
     background-color: white;
   }
   .content{
-    height: calc(100vh - 100px);
+    position:absolute;
+    width:100%;
+    bottom:58px;
+    height: calc(100vh - 102px);
     overflow: hidden;
   }
 </style>

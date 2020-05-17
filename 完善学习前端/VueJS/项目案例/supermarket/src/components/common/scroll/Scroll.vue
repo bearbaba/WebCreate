@@ -19,13 +19,21 @@
       this.scroll = new BScroll(this.$refs.wrapper,{
         click: true,
       })
+    },
+    methods: {
+      scrollTo(x, y, timeOut=300){
+        this.scroll.scrollTo(x,y,timeOut);
+      }
     }
   }
 </script>
 
 <style scoped>
   .wrapper{
-    position: relative;
+
     margin-top: 42px;
   }
+  /*.content{*/
+  /*  height: 100vh;*/
+  /*}*/
 </style>
