@@ -675,3 +675,131 @@ background-repeat: no-repeat;
   background-size: 30px 30px;
 }
 ```
+
+### 伪随机背景
+
+css本身并不提供生成随机数的方法，所以我们只能尽量去模拟出伪随机背景
+
+#### 解决方案
+
+为了更加真实地模拟出条纹的随机性，我们要使用多种条纹，一种颜色作为底色，另外三种颜色作为条纹，然后再让条纹以不同的间隔进行重复平铺：
+
+```css
+.box1{
+  width: 250px;
+  height: 100px;
+
+  background: hsl(20,40%,90%);
+  background-image:
+    linear-gradient(90deg,#fb3 10px, transparent 0),
+    linear-gradient(90deg, #ab4, 20px, transparent 0),
+    linear-gradient(90deg, #655, 20px, transparent 0);
+  background-size: 80px 100%, 60px 100%, 40px 100%;
+}
+```
+
+![实例图片](2背景边框/img/33.png)
+
+该图案生成的原理是通过线性渐变生成的贴片叠加，`background-size`控制了每个贴片的间隔，最先生成的`#fb3`贴片位于最上层，之后依赖于`transparent`的透明效果能够显示下层的贴片，最下层则是整个的背景色`hsl(20,40%,90%)`。
+
+但是这种方案实现的效果依然不够随机，因为80px、60px、40px的公倍数是240px，意味着该图案每隔240px就会重复一遍。
+
+应当尽量减少公倍数的出现，所以应当为这些贴片的间隔使用`素数`作为值的大小，因为素数的公倍数出现的情况比较少。
+
+```css
+.box2{
+  width: 250px;
+  height: 100px;
+  margin: 10px;
+  
+  background: hsl(20,40%,90%);
+  background-image: 
+    linear-gradient(90deg,#fb3 10px, transparent 0),
+    linear-gradient(90deg, #ab4, 20px, transparent 0),
+    linear-gradient(90deg, #655, 20px, transparent 0);
+  background-size: 83px 100%, 67px 100%, 41px 100%;
+}
+```
+
+![示例图片](2背景边框/img/34.png)
+
+这个技巧被称作“蝉原则”。
+
+## 椭圆
+
+### 自适应的椭圆
+
+为任何正方形元素设置一个足够大的`border-radius`，就可以把它变成一个圆：
+
+```css
+background: #fb3;
+width: 200px;
+height: 200px;
+border-radius: 100px;
+```
+
+`border-radius`指定了我们要得到的圆的半径，但是这一数值在大于一半容器大小的情况下，依然会得到一个圆。
+
+然而我们更希望它能根据其内容自动调整并适应。在这个案例中，我们希望得到一个能依据宽高变形为椭圆或圆的自适应圆。
+
+`border-radius`存在一个效果：它可以单独指定水平与垂直的半径，只需要用一个斜杠（/）分隔这两个值即可。这个特性允许我们在拐角处创建椭圆圆角。
+
+如果`border-radius`的宽高是容器的宽高的一半，那么将得到一个精确的椭圆，恰好`border-radius`允许使用百分比值：
+
+```css
+border-radius: 50% / 50%;
+```
+
+然而由于`border-radius`的宽高被设置成了同样的50%，我们可以使用更加简洁的方式。
+
+```css
+border-radius: 50%;
+```
+
+### 半椭圆
+
+现在我们能够生成一个自适应的椭圆了，接下来我们要生成的是半椭圆形。
+
+`border-radius`允许我们用展开的方式，分别设置它每个角的值：
+
+* `border-top-left-radius`
+
+* `border-top-right-radius`
+
+* `border-bottom-right-radius`
+
+* `border-bottom-left-radius`
+
+我们仍可以使用`border-radius`这个简写方式，只是需要用空格来隔开为每个角设置的值，另外，这四个值会分别从左上角开始以顺时针顺序应用到元素的拐角。
+
+如果要为四个角设置不同的水平和垂直半径，方法是在斜杠前指定1~4个值，在斜杠后指定另外1~4个值。斜杆前设置的垂直半径，斜杠后是水平半径。
+
+如果我们需要得到一个垂直的半椭圆形，就需要考虑为元素每个角设置的`border-radius`的情况，由于这个半椭圆形是垂直的，则它的左右两边对称，唯一需要注意的应当是下面两个角的垂直半径设置成0，上边两角设置成100%，水平的半径每个角都为50%（要多想）。
+
+```css
+.box1{
+  width: 100px;
+  height: 200px;
+  border-radius: 50% / 100% 100% 0 0;
+  background-color: #ffcc33;
+}
+```
+
+![示例图片](3图形/img/35.png)
+
+### 四分之一椭圆
+
+和半椭圆形的设置是一样的，无非是每个角的`border-radius`设置的不一样。
+
+```css
+.box2{
+  margin: 10px;
+  width:200px;
+  height:100px;
+  background-color: #fcc;
+  border-radius: 0 100% 100% 0 / 0 0 100% 100%;
+}
+```
+
+![示例图片](3图形/img/36.png)
+
