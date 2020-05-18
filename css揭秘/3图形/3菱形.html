@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1{
+      width:180px;
+      transform: rotate(45deg);
+      overflow: hidden;
+    }
+    .box1>img{
+      max-width: 100%;
+      transform: rotate(-45deg);
+    }
+
+    .box2{
+      width: 180px;
+      transform: rotate(45deg);
+      overflow: hidden;
+    }
+    .box2>img{
+      max-width: 100%;
+      transform: rotate(-45deg) scale(1.43);
+    }
+
+    
+    .box3>img{
+      clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%);
+      transition: 1s clip-path;
+    }
+
+    img{
+      clip-path: polygon(50% 0,100% 50%,50% 100%, 0 50%);
+      transition: 1s clip-path;
+    }
+    img:hover{
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+  </style>
+</head>
+<body>
+  <!-- <div class="box1">
+    <img src="./img/cart.png" alt="">
+  </div> -->
+  <!-- <div class="box2">
+    <img src="./img/cart.png" alt="">
+  </div> -->
+  <!-- <div class="box3">
+    <img src="./img/cart.png" alt="">
+  </div> -->
+
+  <div class="box4">
+    <img src="./img/cart.png" alt="">
+  </div>
+</body>
+</html>

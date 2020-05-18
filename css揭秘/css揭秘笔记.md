@@ -803,3 +803,164 @@ border-radius: 50%;
 
 ![示例图片](3图形/img/36.png)
 
+## 平行四边形
+
+我们可以使用`skew()`的变形属性来对矩形进行斜向拉伸。
+
+```css
+.box1{
+  width: 100px;
+  height: 50px;
+  margin: 20px;
+
+  background-color: #0ffcc0;
+  transform: skewX(45deg);
+}
+```
+
+![实例图片](3图形/img/37.png)
+
+但是这会导致它的内部内容也会发生倾斜：
+
+```html
+<div class="box1">HELLO</div>
+```
+
+![实例图片](3图形/img/38.png)
+
+以下提供解决方案
+
+### 嵌套元素方案
+
+可以对内容再应用一次反向的`skew()`变形，从而抵消容器变形的效果，但这意味着还需要再添加额外的一层HTML元素。
+
+```html
+<div class="box2">
+  <div>Hello</div>
+</div>
+```
+
+```css
+.box2{
+  margin: 20px;
+  width: 100px;
+  height: 60px;
+
+  background-color: #5588aa;
+  transform: skewX(-45deg);
+}
+.box2>div{
+  transform: skewX(45deg);
+}
+```
+
+![示例图片](3图形/img/39.png)
+
+### 伪元素方案
+
+另一种思路是把所有样式（背景、边框）应用到伪元素上，然后对伪元素进行变形。而我们的文字内容则被包含在宿主元素中，因而内容不受伪元素的影响。
+
+我们希望伪元素能保持良好的灵活性，伪元素可以自动继承其宿主元素尺寸，甚至宿主元素是由内容决定时也能保持。一个简单的办法是给宿主元素应用`position: relative`，并为伪元素设置`position: absolute`，然后把所有的偏移量设置为零，以便能让它在水平和垂直方向上都被拉伸到宿主元素尺寸。
+
+```css
+.box3{
+  margin: 80px;
+  position: relative;
+  width: 80px;
+  height: 50px;
+  text-align: center;
+  padding-top: calc(50px - 16px);
+}
+.box3::before{
+  content: '';
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #554433;
+  transform: skewX(45deg);
+}
+```
+
+![实例图片](3图形/img/40.png)
+
+## 菱形
+
+现在我们想要把图片裁切成菱形，有两种解决方案：
+
+### 基于变形的方案
+
+把图片用一个`<div>`包裹起来，然后对其应用相反的`rotate()`变形样式：
+
+```css
+.box1{
+  width:180px;
+  transform: rotate(45deg);
+  overflow: hidden;
+}
+
+.box1>img{
+  max-width: 100%;
+  transform: rotate(-45deg);
+}
+```
+
+```html
+<div class="box1">
+  <img src="./img/cart.png" alt="">
+</div>
+```
+
+![实例图片](3图形/img/41.png)
+
+然而这并不是我们想要的效果，原因在于`max-width: 100%`，100%会被解析为容器（`.box1`）的边长。但是我们实际上想要让图片与容器的对角线相等，而不是与边长相等。
+
+因而我们要用`scale()`变形样式把图片放大（`scale`是以图片的中心点进行缩放的）。
+
+```css
+.box2{
+  width: 180px;
+  transform: rotate(45deg);
+  overflow: hidden;
+}
+.box2>img{
+  max-width: 100%;
+  transform: rotate(-45deg) scale(1.43);
+}
+```
+
+以上的放缩`scale()`的值是由勾股定理计算得出，放缩的大小等于图片的对角线与图片的边之比，如果`scale()`的值大于这个比值图片会放大，但不影响菱形效果。
+
+#### 裁切路径方案
+
+我们还可以用`clip-path`裁切路径属性来裁切任何我们想要的形状。这个例子中将用`polygon()`多边形函数来指定一个菱形。
+
+```css
+.box3>img{
+  clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%);
+  transition: 1s clip-path;
+}
+```
+
+![示例图片](3图形/img/42.png)
+
+`polygon()`函数中的每个以逗号分隔开的数值都是多边形要取的点。
+
+`clip-path`这个属性甚至可以参与动画，只要我们的动画是在同一种形状函数之间进行的。
+
+比如，我们希望图片在鼠标在悬停时平滑地扩展为完整的面积，只需要这样做：
+
+```css
+img{
+  clip-path: polygon(50% 0,100% 50%,50% 100%, 0 50%);
+  transition: 1s clip-path;
+}
+img:hover{
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+```
+
+![示例图片](3图形/img/43.gif)
