@@ -964,3 +964,132 @@ img:hover{
 ```
 
 ![示例图片](3图形/img/43.gif)
+
+## 切角效果
+
+### 普通切角
+
+假设我们只需要一个角被切掉的效果，以右下角为例。渐变可以接受一个角度（45deg）作为方向，而且色标的位置信息可以是绝对的长度值。因而我们可以用一个线性渐变就能完成右下角被切掉的效果，只需要把一个透明色标放在切角处。
+
+```css
+.box1{
+  width:200px;
+  height: 100px;
+  background: 
+    linear-gradient(45deg, transparent 15px, #58a 0);
+}
+```
+
+![示例图片](3图形/img/44.png)
+
+现在我们想要两个角被切掉的效果，以底部的两个角为例，只用一层渐变是不够的，还需要再加一层。
+
+```css
+.box2{
+  margin: 20px;
+  width: 200px;
+  height: 100px;
+  background: 
+    linear-gradient(-45deg, transparent 15px, #58a 0) right,
+    linear-gradient(45deg, transparent 15px, #655 0) left;
+}
+```
+
+然而这两层渐变会相互覆盖，最终得到的效果是：
+
+![示例图片](3图形/img/45.png)
+
+所以我们用`background-size`使两层渐变分开。
+
+```css
+.box3{
+  margin: 20px;
+  width: 200px;
+  height: 100px;
+  background: 
+    linear-gradient(-45deg, transparent 15px, #58a 0) right,
+    linear-gradient(45deg, transparent 15px, #655 0) left;
+  background-size: 50% 100%;
+}
+```
+
+![示例图片](3图形/img/46.png)
+
+然后这依然不是想要的效果，原因在于`background`默认是`repeat`的，需要把`background-repeat`设置成`no-repeat`。
+
+```css
+.box4{
+  margin: 20px;
+  width: 200px;
+  height: 100px;
+  background:
+    linear-gradient(-45deg, transparent 15px, #58a 0) right,
+    linear-gradient(45deg, transparent 15px, #655 0) left;
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+}
+```
+
+![示例图片](3图形/img/47.png)
+
+如果我们想要四个角都被切掉的效果，就可以用四层渐变：
+
+```css
+.box5{
+  margin: 20px;
+  width: 200px;
+  height: 100px;
+  background: 
+    linear-gradient(-45deg, transparent 15px, #58a 0) bottom right,
+    linear-gradient(45deg, transparent 15px, #58a 0) bottom left,
+    linear-gradient(-135deg, transparent 15px, #58a 0) top right,
+    linear-gradient(135deg, transparent 15px, #58a 0) top left;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+}
+```
+
+![实例图片](3图形/img/48.png)
+
+### 弧形切角
+
+上述渐变还有一个变种，可以用来创建弧形切角（也叫“内凹圆角”）。我们使用径向渐变来达到这种效果：
+
+```css
+.box6{
+  width: 200px;
+  height: 100px;
+
+  background: 
+    radial-gradient(circle at top left, transparent 15px, #58a 0) top left,
+    radial-gradient(circle at top right, transparent 15px, #58a 0) top right,
+    radial-gradient(circle at bottom right, transparent 15px, #58a 0) bottom right,
+    radial-gradient(circle at bottom left, transparent 15px, #58a 0) bottom left;
+  background-size:50% 50%;
+  background-repeat: no-repeat;
+}
+```
+
+![示例图片](3图形/img/49.png)
+
+### 裁切路径方案
+
+可以使用`clip-path`将一个元素切出20px大小（以水平方向度量）的斜面切角：
+
+```css
+.box7{
+  width: 200px;
+  height: 100px;
+  background-color: #58a;
+  clip-path:
+    polygon(
+      20px 0, calc(100% - 20px) 0, 100% 20px,
+      100% calc(100% - 20px), calc(100% - 20px) 100%,
+      20px 100%, 0 calc(100% - 20px), 0 20px
+    );
+}
+```
+
+![示例图片](3图形/img/50.png)
+
+这个方案的不足在于，它会连容器中的文字一并裁切掉，如上图所示。
