@@ -1093,3 +1093,48 @@ img:hover{
 ![示例图片](3图形/img/50.png)
 
 这个方案的不足在于，它会连容器中的文字一并裁切掉，如上图所示。
+
+## 梯形标签页
+
+### 3D旋转模拟
+
+并没有一组2D变形属性能生成一个梯形，但是我们可以利用透视关系在css中用3D旋转来模拟出这个效果：
+
+```css
+.box1{
+  width: 100px;
+  height: 50px;
+  margin: 20px;
+  background-color: #58a;
+  transform: perspective(.5em) rotateX(5deg);
+}
+```
+
+![实例图片](3图形/img/51.png)
+
+但是如图所示，它依然有瑕疵，容器中的文字也跟着变形了。然而，与2D图形不同的是，它的内部的变形效果是不可逆转的，不能使用逆向变形的来抵消外部变形。
+
+因此我们可以用伪元素的方案把变形效果作用在伪元素上。
+
+```css
+.box2{
+  position: relative;
+  display: inline-block;
+  padding: .5em 1em .35em;
+  color: white;
+}
+.box2::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #58a;
+  transform: perspective(.5em) rotateX(5deg);
+}
+```
+
+![示例图片](3图形/img/52.png)
+
