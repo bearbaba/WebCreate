@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1{
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: yellowgreen;
+      background-image:
+        linear-gradient(to right, transparent 50%, #655 0);
+    }
+    .box1::before{
+      content: '';
+      display: block;
+      margin-left: 50%;
+      height: 100%;
+      border-radius: 0 100% 100% 0 / 50%;
+      background-color: inherit;
+      transform-origin: left;
+      transform: rotate(.2turn);
+    }
+
+    .box2{
+      margin: 20px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: yellowgreen;
+      background-image:
+      linear-gradient(to right, transparent 50%, #655 0);
+    }
+    .box2::before{
+      content: '';
+      display: block;
+      margin-left: 50%;
+      height: 100%;
+      border-radius: 0 100% 100% 0 / 50%;
+      background-color: #655;
+      transform-origin: left;
+      transform: rotate(.1turn);
+    }
+
+    .box3{
+      margin: 20px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: yellowgreen;
+      background-image:
+      linear-gradient(to right, transparent 50%, #655 0);
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(.5turn);
+      }
+    }
+    @keyframes bg{
+      50% {
+        background: #655;
+      }
+    }
+    .box3::before{
+      content: '';
+      display: block;
+      margin-left: 50%;
+      height: 100%;
+      border-radius: 0 100% 100% 0 / 50%;
+      background-color: inherit;
+      transform-origin: left;
+      animation: 
+        spin 3s linear infinite, 
+        bg 6s step-end infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="box1"></div>
+  <div class="box2"></div>
+  <div class="box3"></div>
+  <div class="box4" style="animation-delay: -20s;"></div>
+</body>
+</html>

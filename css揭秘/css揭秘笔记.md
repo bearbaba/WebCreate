@@ -1138,3 +1138,196 @@ img:hover{
 
 ![示例图片](3图形/img/52.png)
 
+然而这个方案依然存在着问题，我们还未设置`transform-origin`，因此应用的变形效果会让这个元素以它自身的中心线为轴进行空间上的旋转，它的尺寸会比较难以掌握。
+
+为了让它的尺寸更好掌握，可以为它指定`transform-origin: bottom;`，当它在3D空间中旋转时，可以把它的底边固定住，致使它只会有高度上发生变化。在垂直方向的缩放程度（也就是`scaleY()`变形属性到达130%时，可以弥补变形时高度上的缩水。
+
+```css
+.box3{
+  position: relative;
+  display: inline-block;
+  padding: .5em 1em .35em;
+  color: white;
+  }
+.box3::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #58a;
+  transform-origin: bottom;
+  transform: perspective(.5em) rotateX(5deg) scaleY(1.3) perspective(.5em);
+}
+```
+
+![示例图片](3图形/img/53.png)
+
+我们把`transform-origin`修改成`bottom left`或`bottom right`，就可以立即得到左侧倾斜或右侧倾斜的梯形。
+
+然而需要注意的是以上的效果中的斜边角度依赖于元素的宽度，对于内容长度不等却想要得到斜度一致的梯形就不合适了。
+
+## 简单的饼图
+
+### 基于`transform`的解决方案
+
+这个方案在结构层面是最佳的选择：它只需要一个元素作为容器，而其他部分是由伪元素、变形属性和css渐变来实现的。
+
+假设我们目前需要一个简单的饼图，其展示的比率是固定的20%，首先把这个元素设置为一个圆形，以它为背景。然后使用棕色来显示比率。
+
+把圆形的左右两部分指定为上述两种颜色，然后用伪元素覆盖上去，通过旋转决定露出多大的扇区。
+
+```css
+.box1{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: yellowgreen;
+  background-image:
+    linear-gradient(to right, transparent 50%, #655 0);
+}
+```
+
+![示例图片](3图形/img/54.png)
+
+我们可以继续设置伪元素的样式，让它起到遮盖层的作用：
+
+```css
+.box1::before{
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+}
+```
+
+然而此时它只是一个透明的矩形，我们还需要继续考虑为它设置其它的属性以达到我们想要的效果。
+
+我们希望它能遮盖圆形的棕色部分，因此应该给它指定绿色的背景，这里使用`background-color: inherit`让它与其宿主颜色保持一致。
+
+我们希望它是绕着圆形的圆心来旋转，对它来说，这个点就是它左边缘的中心点，因此我们应该把它的`transform-origin`设置为`0 50%`，或者干脆写成`left`。
+
+我们不希望它呈现出矩形的形状，否则它会突破整个饼图的圆形范围，因此要么给`.box`设置`overflow: hidden`的样式，要么给这个伪元素指定合适的`border-radius`属性来把它变成一个半圆。
+
+把上述思路转换成css则是：
+
+```css
+.box1{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: yellowgreen;
+  background-image:
+    linear-gradient(to right, transparent 50%, #655 0);
+}
+.box1::before{
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  background-color: inherit;
+  transform-origin: left;
+}
+```
+
+然后通过设置`rotate()`变形属性来让这个伪元素转起来。例如，我们要显示出20%的比率，可以指定旋转角度为72deg(0.2*360=72)，写成`.2turn`更加直观。
+
+```css
+.box1{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: yellowgreen;
+  background-image:
+    linear-gradient(to right, transparent 50%, #655 0);
+}
+.box1::before{
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  background-color: inherit;
+  transform-origin: left;
+  transform: rotate(.2turn);
+}
+```
+
+![实例图片](3图形/img/55.png)
+
+然而由于一开始为圆形设置一半棕色一半绿色，所以当`rotate()`的值超过`.5turn`时，它就是完整的绿圆形状。
+
+我们可以使用上述技巧的反向版本来实现这个范围的比率：设置一个棕色的伪元素，让它在0至.5turn的范围内旋转。
+
+因此一个60%比率的饼图的形状就是：
+
+```css
+.box2{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: yellowgreen;
+  background-image:
+  linear-gradient(to right, transparent 50%, #655 0);
+}
+.box2::before{
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  background-color: #655;
+  transform-origin: left;
+  transform: rotate(.1turn);
+}
+```
+
+![示例图片](3图形/img/56.png)
+
+甚至可以用一个css动画来实现一个饼图从0到100%的动画，从而得到一个酷炫的进度指示器。
+
+```css
+.box3{
+  margin: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: yellowgreen;
+  background-image:
+  linear-gradient(to right, transparent 50%, #655 0);
+}
+@keyframes spin {
+  to {
+    transform: rotate(.5turn);
+  }
+}
+@keyframes bg{
+  50% {
+    background: #655;
+  }
+}
+.box3::before{
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  background-color: inherit;
+  transform-origin: left;
+  animation: 
+    spin 3s linear infinite, 
+    bg 6s step-end infinite;
+}
+```
+
+![示例图片](3图形/img/57.gif)
+
+我们可以通过以上的动画中的任意时间点状态得到我们想要的比率，比如说动画持续时间是6s，饼图上显示的比率就是我们`animation-delay`设置为-1.2s，就能显示出20%的比率。这里的动画是处于暂定状态的，因此不会有副作用。
+
+我们可以用内联的方式为`div`设置`anitmation-delay: inherit`属性，因此我们让饼图显示为20%和60%的结构代码为：
+
+```html
+<div class=>
