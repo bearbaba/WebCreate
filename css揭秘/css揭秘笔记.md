@@ -1327,7 +1327,58 @@ img:hover{
 
 我们可以通过以上的动画中的任意时间点状态得到我们想要的比率，比如说动画持续时间是6s，饼图上显示的比率就是我们`animation-delay`设置为-1.2s，就能显示出20%的比率。这里的动画是处于暂定状态的，因此不会有副作用。
 
-我们可以用内联的方式为`div`设置`anitmation-delay: inherit`属性，因此我们让饼图显示为20%和60%的结构代码为：
+我们可以用内联的方式为`div`设置`anitmation-delay: inherit`属性，因此我们让饼图显示为20%的结构代码为：
 
 ```html
-<div class=>
+<div class="box5" style="animation-delay: -20s">
+</div>
+```
+
+我们为动画准备的css代码就会变成这样：
+
+```css
+.box4{
+  margin: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: yellowgreen;
+  background-image:
+  linear-gradient(to right, transparent 50%, #655 0);
+}
+@keyframes spin{
+  to {
+    transform: rotate(.5turn);
+  }
+}
+@keyframes bg{
+  50% {
+    background: #655;
+  }
+}
+.box4::before{
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  background-color: inherit;
+  transform-origin: left;
+  animation: 
+    spin 50s linear infinite,
+    bg 100s step-end infinite;
+  animation-play-state: paused;
+  animation-delay: inherit;
+}
+```
+
+![示例图片](3图形/img/58.png)
+
+我们希望把比率文字放到饼图的中心处，从而方便用户选中它，为了实现这一点，应该考虑一步骤：
+
+* 把饼图的`height`换成`line-height`
+
+* 通过绝对定位完成伪元素的尺寸设置和定位操作，使文字不会推到下面。
+
+* 添加`text-align: center;`来使文字水平居中。
+

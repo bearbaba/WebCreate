@@ -73,14 +73,89 @@
       transform-origin: left;
       animation: 
         spin 3s linear infinite, 
-        bg 6s step-end infinite;
+        bg 6  s step-end infinite;
+    }
+
+    .box4{
+      margin: 20px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: yellowgreen;
+      background-image:
+      linear-gradient(to right, transparent 50%, #655 0);
+    }
+    @keyframes spin{
+      to {
+        transform: rotate(.5turn);
+      }
+    }
+    @keyframes bg{
+      50% {
+        background: #655;
+      }
+    }
+    .box4::before{
+      content: '';
+      display: block;
+      margin-left: 50%;
+      height: 100%;
+      border-radius: 0 100% 100% 0 / 50%;
+      background-color: inherit;
+      transform-origin: left;
+      animation: 
+        spin 50s linear infinite,
+        bg 100s step-end infinite;
+      animation-play-state: paused;
+      animation-delay: inherit;
+    }
+
+    .box5{
+      position: relative;
+      width: 100px;
+      line-height: 100px;
+      border-radius: 50%;
+      background-color: yellowgreen;
+      background-image:
+        linear-gradient(to right, transparent 50%, #655 0) ;
+      color:transparent;
+      text-align: center;
+    }
+    @keyframes spin{
+      to {
+        transform: rotate(.5turn);
+      }
+    }
+    @keyframes bg{
+      50% {
+        background-color: #655;
+      }
+    }
+    .box5::before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 50%; height: 100%;
+      border-radius: 0 100% 100% 0 / 50%;
+      background-color: inherit;
+      transform-origin: left;
+      animation:
+        spin 50S linear infinite,
+        bg 100s step-end infinite ;
+      animation-play-state: paused;
+      animation-delay: inherit;
     }
   </style>
 </head>
 <body>
-  <div class="box1"></div>
+  <!-- <div class="box1"></div>
   <div class="box2"></div>
-  <div class="box3"></div>
-  <div class="box4" style="animation-delay: -20s;"></div>
+  <div class="box3"></div> -->
+  <!-- <div class="box4" style="animation-delay: -20s"></div> -->
+  <div class="box5" style="animation-delay: -20s">20%</div>
+  <script>
+    
+  </script>
 </body>
 </html>

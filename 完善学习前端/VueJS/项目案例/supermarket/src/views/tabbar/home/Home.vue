@@ -3,8 +3,8 @@
     <top-bar class="top-bar-bg">
       <div slot="center" id="center">主页</div>
     </top-bar>
-    <back-top @click.native="backClick"></back-top>
-    <scroll class="content" ref="scroll">
+    <back-top @click.native="backClick" v-show="isShow"></back-top>
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
       <recommend-view :recommends="recommend"></recommend-view>
       <feature-view></feature-view>
       <top-control :top-text="topText"
@@ -45,6 +45,8 @@
         recommend: [],
         keywords: [],
         dKeyword: [],
+
+        isShow: false,
 
         topText: ["流行", "新款", "精选"],
 
@@ -95,8 +97,16 @@
         const page = this.goods[type].page+1;
         getHomeGoods(type,page).then(config=>{
           this.goods[type].list.push(...config.data.list);
-          console.log(this.goods[type].list);
+          // console.log(this.goods[type].list);
         })
+      },
+      contentScroll(position){
+        if(-position.y > 1000){
+          this.isShow=true;
+        }
+        else{
+          this.isShow = false;
+        }
       }
     },
     created() {
@@ -106,6 +116,10 @@
       this.getHomeGoods("pop");
       this.getHomeGoods("new");
       this.getHomeGoods("sell");
+    },
+
+    mounted() {
+
     },
   }
 </script>
