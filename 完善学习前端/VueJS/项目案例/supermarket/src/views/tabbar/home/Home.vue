@@ -3,13 +3,25 @@
     <top-bar class="top-bar-bg">
       <div slot="center" id="center">主页</div>
     </top-bar>
-    <back-top @click.native="backClick" v-show="isShow"></back-top>
-    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
-      <recommend-view :recommends="recommend"></recommend-view>
+    <back-top
+      @click.native="backClick"
+      v-show="isShow"></back-top>
+    <scroll
+      class="content"
+      ref="scroll"
+      :probe-type="3"
+      :pull-up-load="true"
+      @scroll="contentScroll"
+      @pullingUp="loadMore">
+      <recommend-view
+        :recommends="recommend"></recommend-view>
       <feature-view></feature-view>
-      <top-control :top-text="topText"
-                   @topClick="topClick" class="tab-control"></top-control>
-      <good-list :goods="goods[currentType].list"></good-list>
+      <top-control
+        :top-text="topText"
+        @topClick="topClick"
+        class="tab-control"></top-control>
+      <good-list
+        :goods="goods[currentType].list"></good-list>
     </scroll>
 
   </div>
@@ -98,6 +110,7 @@
         getHomeGoods(type,page).then(config=>{
           this.goods[type].list.push(...config.data.list);
           // console.log(this.goods[type].list);
+          this.$refs.scroll.finishPullUp();
         })
       },
       contentScroll(position){
@@ -107,6 +120,11 @@
         else{
           this.isShow = false;
         }
+      },
+
+      //上拉加载更多
+      loadMore(){
+        this.getHomeGoods(this.currentType);
       }
     },
     created() {
