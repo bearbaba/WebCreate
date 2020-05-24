@@ -1,6 +1,6 @@
 <template>
   <div class="good-list-item">
-    <img :src="goodListItem.show.img" alt="">
+    <img :src="goodListItem.show.img" alt="" @load="imageLoad">
     <div class="item-text">
       <span class="title">{{goodListItem.title}}</span>
       <span class="cfav">收藏：{{goodListItem.cfav}}</span>
@@ -11,9 +11,14 @@
 <script>
   export default {
     name: "GoodListItem",
-    props:{
-      goodListItem:{
-        type:Object,
+    props: {
+      goodListItem: {
+        type: Object,
+      }
+    },
+    methods: {
+      imageLoad() {
+        this.$bus.$emit('itemImageLoad');
       }
     }
   }
