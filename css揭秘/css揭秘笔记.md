@@ -1459,3 +1459,70 @@ box-shadow: 2px 2px 4px rgba(0,0,0,.5);
 
 ## 不规则投影
 
+`box-shadow`能为`border-radius`生成的形状添加投影，但是如果元素添加了一些伪元素或半透明的装饰之后，`border-radius`却会忽视透明部分，这类情况包括：
+
+1. 半透明图像、背景图像、或者`border-image`;
+
+2. 元素设置了点状、虚线或半透明的边框，但没有背景（或者当`background-clip`不是`border-box`时）；
+
+3. 伪元素在原有元素上添加的形状
+
+4. 切角效果中的切角形状
+
+5. 折角效果中的折角形状
+
+6. `clip-path`生成的形状，比如菱形形状
+
+以下提供解决方案：
+
+### 解决方案
+
+滤镜效果规范提供一个叫做`filter`的新属性，这个属性是从svg那里借鉴过来的。`filter`的相关属性包括`blur()`、`grayscale()`、`drop-shadow()`，可以使用空格分割法一次设置多个`filter`的属性值。
+
+```css
+filter: blur() grayscale() drop-shadow();
+```
+
+`drop-shadow()`滤镜可接受的参数基本上与`box-shadow()`一致，但不包括扩张半径和`inset`关键字，也不支持逗号分割的多层投影语法。
+
+```css
+bos-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
+```
+
+可以改写成：
+
+```css
+filter: drop-shadow(2px 2px 10px rgba(0,0,0,.5));
+```
+
+`drop-shadow`在平行四边形效果上的使用：
+
+```css
+.box3{
+   margin: 80px;
+   position: relative;
+   width: 80px;
+   height: 50px;
+   text-align: center;
+   padding-top: calc(50px - 16px);
+   -webkit-filter: drop-shadow(10px 10px 10px rgba(0,0,0,.5));
+   filter: drop-shadow(10px 10px 10px rgba(0,0,0,.5));
+
+ }
+.box3::before{
+   content: '';
+   position: absolute;
+
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: -1;
+   background-color: #554433;
+   transform: skewX(45deg);
+}
+```
+
+![示例图片](4视觉效果/img/65.png)
+
+需要注意的是如果文字效果使用了`text-shadow`，而容器又使用了`drop-shadow()`，那么`drop-shadow`的效果又会重复叠加到设置了`text-shadow`的文字上。

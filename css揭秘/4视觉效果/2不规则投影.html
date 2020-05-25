@@ -4,9 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .box3{
+      margin: 80px;
+      position: relative;
+      width: 80px;
+      height: 50px;
+      text-align: center;
+      padding-top: calc(50px - 16px);
+      -webkit-filter: drop-shadow(10px 10px 10px rgba(0,0,0,.5));
+      filter: drop-shadow(10px 10px 10px rgba(0,0,0,.5));
+
+    }
+    .box3::before{
+      content: '';
+      position: absolute;
+
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      background-color: #554433;
+      transform: skewX(45deg);
+    }
+    /* .box1{
+      width: 200px;
+      height: 100px;
+      background-color: #58a;
+      
+      -webkit-filter: drop-shadow(10px 10px 10px rgba(0,0,0,.5));
+      filter: drop-shadow(10px 10px 10px rgba(0,0,0,.5));
+    } */
+  </style>
 </head>
 <body>
-  <div class="box1"></div>
-  
+  <div class="box3"></div>
 </body>
 </html>
