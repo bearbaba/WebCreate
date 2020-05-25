@@ -112,6 +112,7 @@
         getHomeGoods(type,page).then(config=>{
           this.goods[type].list.push(...config.data.list);
           // console.log(this.goods[type].list);
+          this.goods[type].page += 1;
           this.$refs.scroll.finishPullUp();
         })
       },
