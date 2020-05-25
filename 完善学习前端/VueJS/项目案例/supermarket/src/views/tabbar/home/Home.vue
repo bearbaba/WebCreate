@@ -125,6 +125,17 @@
       //上拉加载更多
       loadMore(){
         this.getHomeGoods(this.currentType);
+      },
+      //防抖动设置
+      debounce(func,delay){
+        let timer = null;
+          return function (...args) {
+            if(timer)
+              clearTimeout(timer);
+            timer = setTimeout( () => {
+              func.apply(this, args)
+            },delay);
+        }
       }
     },
     created() {
@@ -135,13 +146,14 @@
       this.getHomeGoods("new");
       this.getHomeGoods("sell");
 
-      this.$bus.$on('itemImageLoad',()=>{
-        this.$refs.scroll.refresh();
-      })
+
     },
 
     mounted() {
-
+      const refresh = this.debounce(this.$refs.scroll.refresh, 500);
+      this.$bus.$on('itemImageLoad',()=>{
+        refresh();
+      })
     },
   }
 </script>
