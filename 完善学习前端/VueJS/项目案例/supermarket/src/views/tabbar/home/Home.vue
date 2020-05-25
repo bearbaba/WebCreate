@@ -39,6 +39,8 @@
   import Scroll from "@/components/common/scroll/Scroll";
   import BackTop from "@/components/common/backTop/BackTop";
 
+  import {debounce} from "@/components/common/utils/utils";
+
   export default {
     name: "Home",
     components: {
@@ -127,16 +129,7 @@
         this.getHomeGoods(this.currentType);
       },
       //防抖动设置
-      debounce(func,delay){
-        let timer = null;
-          return function (...args) {
-            if(timer)
-              clearTimeout(timer);
-            timer = setTimeout( () => {
-              func.apply(this, args)
-            },delay);
-        }
-      }
+
     },
     created() {
 
@@ -150,7 +143,7 @@
     },
 
     mounted() {
-      const refresh = this.debounce(this.$refs.scroll.refresh, 500);
+      const refresh = debounce(this.$refs.scroll.refresh, 500);
       this.$bus.$on('itemImageLoad',()=>{
         refresh();
       })

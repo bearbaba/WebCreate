@@ -7,6 +7,7 @@
 </template>
 
 <script>
+
   import BScroll from 'better-scroll';
   export default {
     name: "Scroll.vue",
@@ -37,7 +38,12 @@
       });
       this.scroll.on('pullingUp',() => {
         this.$emit('pullingUp');
-      })
+      });
+      if(this.pullUpLoad){
+        this.scroll.on('pullingUp',() => {
+          this.$emit('pullingUp');
+        })
+      }
     },
     methods: {
       scrollTo(x, y, timeOut=300){
