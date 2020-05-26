@@ -1526,3 +1526,83 @@ filter: drop-shadow(2px 2px 10px rgba(0,0,0,.5));
 ![示例图片](4视觉效果/img/65.png)
 
 需要注意的是如果文字效果使用了`text-shadow`，而容器又使用了`drop-shadow()`，那么`drop-shadow`的效果又会重复叠加到设置了`text-shadow`的文字上。
+
+## 染色效果
+
+染色效果，为一幅灰度图片（或是被转换为灰度模式的彩色图片）添加染色效果，可以为不同风格的额照片带来视觉上的一致性。
+
+### 基于滤镜的解决方案
+
+`sepia()`，降低饱和度的橙黄色染色效果，几乎像素的色相值会被收敛到35~40.
+
+使用`saturate()`滤镜可以给像素提升饱和度，具体饱和度取决于实际情况。
+
+`hue-rotate`滤镜可以为每个像素的色相以指定度数进行偏移。
+
+![实例图片](4视觉效果/img/66.png)
+
+```css
+.box1{
+  filter: sepia(1) saturate(3) hue-rotate(290deg);
+}
+```
+
+```html
+<div class="box1">
+ <img src="./img/66.png" alt="">
+</div>
+```
+
+上述代码的作用效果是：
+
+![示例图片](4视觉效果/img/67.png)
+
+### 混合模式解决方案
+
+混合模式控制了上层元素的颜色与下层颜色进行混合的方式，用它来实现染色效果，需要用到的混合模式是`luminosity`，这种`luminosity`混合模式会保留上层元素的HSL高度信息，并从它的下层吸取色相饱和度信息。把下层元素设置成我们想要的主色调，而把待处理的图片放在上层并设置成这种混合模式，本质上就是在染色。
+
+如果要对一个元素设置混合模式，有两个属性可以发挥作用：`min-blend-mode`可以为整个元素设置混合模式，`background-blend-mode`可以为每层背景单独设置混合模式。
+
+有两种方式可以处理我们的图片：
+
+1. 第一种选择，把需要处理的图片包裹进一个容器中，并把容器的背景色设置成我们想要的主色调。
+
+2. 第二种选择，不用图片元素，而是用`<div>`元素，把这个元素第一层背景设置成要染色的图片，并把第二层背景设置我们想要的主色调。
+
+针对第一种情况，假如这个图片是个超链接，那么它会被包裹进`<a>`元素中，为`<a>`元素的背景颜色设置成主色调颜色，在为图片`<img>`使用混合模式就能得到染色的图片效果。
+
+```css
+.box2{
+  display: inline-block;
+  background: hsl(355, 100%, 50%);
+}
+.box2>img{
+  mix-blend-mode: luminosity;
+}
+```
+
+![实例图片](4视觉效果/img/68.png)
+
+我们如果想要给混合模式的图片设置一个从单色样式变化到彩色样式的css过渡效果，可以考虑使用`background-blend-mode`为图片设置混合模式后，先让过渡前的图片与我们想要的主色调的颜色混合，再让过渡后的图片与透明色混合，以此形成一个过渡效果。
+
+```css
+.box3{
+   width: 220px;
+   height: 150px;
+   background-size: cover;
+   background-color: hsl(355, 100%, 50%);
+   background-blend-mode: luminosity;
+   background-image: url(./img/66.png);
+   transition: .5s background-color;
+}
+.box3:hover{
+   background-color: transparent;
+}
+```
+
+![示例图片](4视觉效果/img/69.gif)
+
+需要注意的是这种方式不够理想，图片大小会被写死，语义上这个元素不是图片，不会被读屏器读出来。
+
+
+

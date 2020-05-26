@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1{
+      filter: sepia(1) saturate(3) hue-rotate(290deg);
+    }
+
+    .box2{
+      display: inline-block;
+      background: hsl(355, 100%, 50%);
+    }
+    .box2>img{
+      mix-blend-mode: luminosity;
+    }
+
+    .box3{
+      width: 220px;
+      height: 150px;
+      background-size: cover;
+      background-color: hsl(355, 100%, 50%);
+      background-blend-mode: luminosity;
+      background-image: url(./img/66.png);
+      transition: .5s background-color;
+    }
+    .box3:hover{
+      background-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <!-- <div class="box1">
+    <img src="./img/66.png" alt="">
+  </div>
+  <a href="#" class="box2">
+    <img src="./img/66.png" alt="">
+  </a> -->
+  <div class="box3">
+
+  </div>
+</body>
+</html>
