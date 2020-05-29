@@ -13,6 +13,7 @@
       :pull-up-load="true"
       @scroll="contentScroll"
       @pullingUp="loadMore">
+      <home-swiper :banners="banners"/>
       <recommend-view
         :recommends="recommend"></recommend-view>
       <feature-view></feature-view>
@@ -41,6 +42,7 @@
 
   import {debounce} from "@/components/common/utils/utils";
 
+  import HomeSwiper from "@/views/tabbar/home/childComps/HomeSwiper";
   export default {
     name: "Home",
     components: {
@@ -51,11 +53,12 @@
       TopBar,
       RecommendView,
       GoodList,
-      Scroll
+      Scroll,
+      HomeSwiper
     },
     data() {
       return {
-        banner: [],
+        banners: [],
         recommend: [],
         keywords: [],
         dKeyword: [],
@@ -101,7 +104,7 @@
       //网络请求方法
       getHomeMultipleData() {
         getHomeMultipleData().then(config => {
-          this.banner = config.data.banner.list;
+          this.banners = config.data.banner.list;
           this.recommend = config.data.recommend.list;
           this.keywords = config.data.keywords.list;
           this.dKeyword = config.data.dKeyword.list;
