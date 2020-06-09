@@ -54,7 +54,6 @@
         this.scroll.finishPullUp();
       },
       refresh() {
-        console.log("加载图片");
         this.scroll.refresh();
       }
     }

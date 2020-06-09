@@ -1,11 +1,21 @@
 <template>
   <div id="home">
+
     <top-bar class="top-bar-bg">
       <div slot="center" id="center">主页</div>
     </top-bar>
+
+    <top-control
+      :top-text="topText"
+      @topClick="topClick"
+      class="tab-control"
+      ref="tabControl1"
+      v-show="showControl"></top-control>
+
     <back-top
       @click.native="backClick"
       v-show="isShow"></back-top>
+
     <scroll
       class="content"
       ref="scroll"
@@ -13,14 +23,19 @@
       :pull-up-load="true"
       @scroll="contentScroll"
       @pullingUp="loadMore">
-      <home-swiper :banners="banners"/>
+
+      <home-swiper :banners="banners" @swiperImageLoad="imageLoad"/>
+
       <recommend-view
         :recommends="recommend"></recommend-view>
+
       <feature-view></feature-view>
+
       <top-control
         :top-text="topText"
         @topClick="topClick"
-        class="tab-control"></top-control>
+        ref="tabControl2"></top-control>
+
       <good-list
         :goods="goods[currentType].list"></good-list>
     </scroll>
@@ -46,7 +61,6 @@
   export default {
     name: "Home",
     components: {
-      // eslint-disable-next-line vue/no-unused-components
       BackTop,
       TopControl,
       FeatureView,
@@ -67,7 +81,6 @@
 
         topText: ["流行", "新款", "精选"],
 
-        // eslint-disable-next-line vue/no-dupe-keys
         goods: {
           'pop': {
             page: 0,
@@ -83,24 +96,34 @@
           }
         },
         currentType:'pop',
+        offsetTop: 0,
+        showControl: false,
+        currentIndex:0,
       }
     },
+
     methods:{
       //监听事件方法
       topClick(index){
-        if (index === 0){
+        this.currentIndex = index;
+        if (this.currentIndex === 0){
           this.currentType= 'pop';
+
         }
-        else if (index===1){
+        else if (this.currentIndex===1){
           this.currentType= 'new';
         }
         else{
           this.currentType = 'sell';
         }
+        this.$refs.tabControl1.currentIndex=index;
+        this.$refs.tabControl2.currentIndex=index;
       },
+
       backClick(){
         this.$refs.scroll.scrollTo(0,0);
       },
+
       //网络请求方法
       getHomeMultipleData() {
         getHomeMultipleData().then(config => {
@@ -114,43 +137,47 @@
         const page = this.goods[type].page+1;
         getHomeGoods(type,page).then(config=>{
           this.goods[type].list.push(...config.data.list);
-          // console.log(this.goods[type].list);
           this.goods[type].page += 1;
           this.$refs.scroll.finishPullUp();
         })
       },
+
       contentScroll(position){
+        //判断什么时候出现回到的顶部的图标
         if(-position.y > 1000){
           this.isShow=true;
         }
         else{
           this.isShow = false;
         }
+
+        this.showControl = -position.y>this.offsetTop;
       },
 
       //上拉加载更多
       loadMore(){
         this.getHomeGoods(this.currentType);
       },
-      //防抖动设置
 
+      //获取offsetTop，banner距离顶部高度
+      imageLoad(){
+        this.offsetTop=this.$refs.tabControl2.$el.offsetTop;
+      }
     },
+
     created() {
-
       this.getHomeMultipleData();
-
       this.getHomeGoods("pop");
       this.getHomeGoods("new");
       this.getHomeGoods("sell");
-
-
     },
 
     mounted() {
       const refresh = debounce(this.$refs.scroll.refresh, 500);
       this.$bus.$on('itemImageLoad',()=>{
         refresh();
-      })
+      });
+
     },
   }
 </script>
@@ -168,9 +195,10 @@
     color: white;
     font-size: 20px;
   }
-  .top-control{
-    /*position: sticky;*/
-    /*top:38.3px;*/
+  .tab-control{
+    position: relative;
+    top:43px;
+    z-index:19;
     background-color: white;
   }
   .content{
