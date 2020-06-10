@@ -24,7 +24,6 @@
     data() {
       return {
         scroll:null,
-        // eslint-disable-next-line vue/no-dupe-keys
       };
     },
     mounted() {
@@ -48,13 +47,19 @@
     },
     methods: {
       scrollTo(x, y, timeOut=300){
-        this.scroll.scrollTo(x,y,timeOut);
+        this.scroll && this.scroll.scrollTo(x, y, timeOut);
       },
+
       finishPullUp(){
-        this.scroll.finishPullUp();
+        this.scroll && this.scroll.finishPullUp();
       },
+
       refresh() {
-        this.scroll.refresh();
+        this.scroll && this.scroll.refresh();
+      },
+
+      getScrollY(){
+        return this.scroll ? this.scroll.y : 0;
       }
     }
   }
