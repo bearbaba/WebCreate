@@ -24,8 +24,8 @@
 </template>
 
 <script>
-  import TabBar from "../common/tabbar/TabBar";
-  import TabBarItem from "../common/tabbar/TabBarItem";
+  import TabBar from "../common/topControl/TopControl";
+  import TabBarItem from "../common/topControl/TopControlItem";
   export default {
     name: "MainTabbar",
     components: {

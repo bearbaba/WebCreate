@@ -14,7 +14,7 @@
 
 <script>
   export default {
-    name: "TabBarItem",
+    name: "TopControlItem",
     props:{
       path:String,
     },

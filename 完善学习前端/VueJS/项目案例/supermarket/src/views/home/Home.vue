@@ -44,10 +44,10 @@
 </template>
 
 <script>
-  import TopBar from "../../../components/common/topBar/TopBar";
+  import TopBar from "../../components/common/topBar/TopBar";
   import {getHomeMultipleData, getHomeGoods} from "@/network/home";
-  import RecommendView from "@/views/tabbar/home/childComps/RecommendView";
-  import FeatureView from "@/views/tabbar/home/childComps/FeatureView";
+  import RecommendView from "@/views/home/childComps/RecommendView";
+  import FeatureView from "@/views/home/childComps/FeatureView";
 
   import TopControl from "@/components/content/topControl/TopControl";
   import GoodList from "@/components/content/goodsList/GoodList";
@@ -57,7 +57,7 @@
 
   import {debounce} from "@/components/common/utils/utils";
 
-  import HomeSwiper from "@/views/tabbar/home/childComps/HomeSwiper";
+  import HomeSwiper from "@/views/home/childComps/HomeSwiper";
   export default {
     name: "Home",
     components: {
