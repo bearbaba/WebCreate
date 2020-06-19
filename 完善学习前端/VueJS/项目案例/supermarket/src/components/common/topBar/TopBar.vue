@@ -17,20 +17,17 @@
   width:100%;
   margin: 0;
   height: 44px;
-  box-sizing: content-box;
+  box-sizing: border-box;
   display: flex;
   z-index: 2;
   position: fixed;
   position: -ms-device-fixed;
-  top:-6px;
-  border: 2px solid #ff5777;
-  margin-bottom: -1px;
 }
 .left,
 .right{
-  width:50px;
+width:50px;
 }
   .center{
-    flex: 1;
+    flex:1;
   }
 </style>

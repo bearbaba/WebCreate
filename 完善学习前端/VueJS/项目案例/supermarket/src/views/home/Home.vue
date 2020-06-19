@@ -203,8 +203,8 @@
   background: #ff5777;
 }
   #center{
-    margin-top: calc(22px - 10px);
     text-align: center;
+    margin-top: 6px;
     color: white;
     font-size: 20px;
   }

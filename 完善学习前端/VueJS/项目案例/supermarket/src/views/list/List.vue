@@ -3,7 +3,9 @@
     <top-bar class="top-bar-bg">
       <div slot="center" id="center">分类</div>
     </top-bar>
-    <div class="wrapper" ref="wrapper">
+
+    <scroll
+      class="content">
       <ul class="content">
         <li>列表1</li>
         <li>列表2</li>
@@ -1010,13 +1012,15 @@
         <li>列表899</li>
         <li>列表900</li>
       </ul>
-    </div>
+    </scroll>
   </div>
 </template>
 
 <script>
   import TopBar from "@/components/common/topBar/TopBar";
   import BScroll from "better-scroll";
+  import Scroll from "@/components/common/scroll/Scroll"
+
 
   export default {
     name: "List",
@@ -1026,7 +1030,7 @@
       }
     },
     components: {
-      // eslint-disable-next-line vue/no-unused-components
+      Scroll,
       TopBar,
     },
     mounted() {
@@ -1058,29 +1062,16 @@
   }
 
   #list{
-    position: fixed;
-    top: 39px;
-    bottom: 55px;
     width:100%;
     margin:0;
   }
-  .wrapper{
-    height: 100%;
-    /*width: 100%;*/
-    /*background-color: red;*/
-    overflow: hidden;
-  }
-  .content{
 
-    /*height:300px;*/
-    width: 100%;
-    /*overflow: hidden;*/
-    background-color: wheat;
-    /*overflow-y: scroll;*/
-    box-sizing: content-box;
-    padding: 0;
-    display: block;
-    border: wheat;
+  .content{
+    position:absolute;
+    width:100%;
+    bottom:58px;
+    height: calc(100vh - 102px);
+    overflow: hidden;
   }
   .content>li{
     list-style-type: none;

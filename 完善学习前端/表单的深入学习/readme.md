@@ -1,4 +1,7 @@
-## 有关表单内容的学习  
+## 表单
+
+
+
 `fieldset`可将表单的相关元素进行分组  
 `legend`标签可为`fieldset`设置标题  
 
@@ -34,15 +37,6 @@
 
 ### 日期设置
 `input`的`type`设置成`date`，表示可以选择日期，如果设置了`min`和`max`，表示可以设置的日期的上限和下限，`step`属性可以为日期设置一个间隔数。同时日期`type`还支持`week`、`datetime-local`等日期类型。  
-  
+
 ###  搜索框
 将`input`的`type`设置成`search`会出现搜索框，我们可以为搜索框手动添加数据来源，我们进行搜索时一般会留有搜索历史，如果不想显示搜索历史，只需将`search`的`input`中添加`autocomplete="off"`即能关闭搜索历史。  
-
-###  三种列表
-1.  有序列表
-使用HTML中的`<ol><li>`进行设置
-2.  无序列表
-使用HTML中的`<ul><li>`设置  
-无序列表与有序列表的装饰都可以通过修改CSS中的`list-style:none;`取消掉，或者使用`list-style-type:cirle;/*这里是圆圈，还可以是别的样式*/`设置成其他装饰。
-3.  描述性列表
-`<dl><dt><dd>`，`dl`表示要描述的列表，`dt`表示定义名（definition title）， `dd`表示要描述的内容（definition data）。

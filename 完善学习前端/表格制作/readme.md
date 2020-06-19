@@ -1,5 +1,7 @@
 #   表格制作  
+
 ##  css定制表格  
+
 通常情况下，我们使用HTML中的`table`,`thead`,`tbody`,`tfooter`,`tr`,`th`,`td`等标签完成一个表格的制作，但是我们也可以用css样式为内容添加样式定制出我们想要的表格出来。为一个简单的块级元素如`section`等添加`display:table-header-group`即可以模拟`thead`，然后为`section`中包裹的`ul`添加`display:table-row`即可模拟`tr`的作用，再为`li`添加`display:table-cell`即可模拟`td`的作用。  
 与`table-header-group`类似的还有`table-row-group`、`table-footer-group`。  
 我们在为这些块级元素添加上边框属性、内边距属性就能很好地定制出我们想要的表格出来。  
@@ -18,8 +20,6 @@
 
 `table`的`empty-cells`用来控制空单元格，如果设置成`empty-cells:hide`则空单元格会被隐藏。  
 
-
-
 ##  为表格添加背景图像及隔行变色  
 
 隔行变色可以为`tr`添加伪类`nth-of-type()`实现，括号中可以用`odd`表示奇数行，`even`表示偶数行。  
@@ -32,17 +32,9 @@ backgroup:url(img.png) 50% 50%/100px 50px no-repeat;
 
 注意如果要在`background`中添加颜色只能包含在最后一层。  
 
-
-
 ##  边框渐变效果
 
 边框渐变效果的设置可以使用`background`中的`radial-grandient()`来实现，只需将背景高度设置极短，并控制它出现在元素底部即可实现，括号中可以选填颜色值，各个颜色值以逗号分开，渐变效果默认是以椭圆形状向外辐射，颜色值越先设置，则越靠近重心位置，越往后设置，越远离重心位置。渐变的形状位置是可控的，例如`background:radial-grandient(circle at top,red,yellow),radial-grandient(circle at bottom, yellow,red)`的背景颜色就是以两个圆形向外辐射。  
 
 ![说明图](Snipaste_2020-03-10_22-15-48.png)
-
-
-
-
-
-
 
