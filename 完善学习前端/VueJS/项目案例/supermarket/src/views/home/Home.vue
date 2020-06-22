@@ -200,8 +200,8 @@
     height: 100vh;
   }
   .top-bar-bg{
-  background: #ff5777;
-}
+    background: #ff5777;
+  }
   #center{
     text-align: center;
     margin-top: 6px;
@@ -216,6 +216,7 @@
   }
   .content{
     position:absolute;
+    top: 2px;
     width:100%;
     bottom:58px;
     height: calc(100vh - 102px);

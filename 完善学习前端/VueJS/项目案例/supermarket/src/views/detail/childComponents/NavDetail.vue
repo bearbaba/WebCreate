@@ -1,6 +1,6 @@
 <template>
   <top-bar class="top-bar">
-    <div slot="left" class="top-bar-left">&lt;</div>
+    <div slot="left" class="top-bar-left" @click="backClick">&lt;</div>
     <div
       slot="center"
       class="top-bar-center"
@@ -33,6 +33,9 @@
     methods: {
       itemClick(index){
         this.currentIndex = index;
+      },
+      backClick() {
+        this.$router.go(-1);
       }
     }
   }
