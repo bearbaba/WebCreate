@@ -6,6 +6,11 @@
       <span class="o-price">{{goods.oldPrice}}</span>
       <span class="discount" v-if="goods.discount">{{goods.discount}}</span>
     </div>
+    <div>
+      <span>{{goods.columns[0]}}</span>
+      <span>{{goods.columns[1]}}</span>
+      <span>{{goods.services[goods.services.length-1].name}}</span>
+    </div>
   </div>
 </template>
 
@@ -16,7 +21,7 @@
       goods:{
         type: Object,
         default(){
-
+          return {};
         }
       }
     }

@@ -24,16 +24,16 @@
       return {
         iid: null,
         topImages:[],
+        data:null
       }
     },
     created() {
       this.iid=this.$route.params.iid;
       getDetail(this.iid).then(res => {
-        const data = res.result;
-        this.topImages=data.itemInfo.topImages;
-        console.log(res);
+        this.data = res.result;
+        this.topImages=this.data.itemInfo.topImages;
 
-        this.goods=new Goods(data.itemInfo,data.columns,data.shopInfo.services);
+        this.goods=new Goods(this.data.itemInfo,this.data.columns,this.data.shopInfo.services);
       });
     }
   }
