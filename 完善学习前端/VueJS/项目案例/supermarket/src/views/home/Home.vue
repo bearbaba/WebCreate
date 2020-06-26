@@ -152,7 +152,7 @@
           this.isShow = false;
         }
 
-        this.showControl = -position.y>this.offsetTop;
+        this.showControl = -(position.y+5)>this.offsetTop;
       },
 
       //上拉加载更多
