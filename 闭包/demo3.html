@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script>
+  for(var i=0;i<9;i++){
+  (function(i){setTimeout(function foo(){
+      console.log(i);
+    },1000*i)})(i);
+  }
+  // var i=5;
+  // function foo(){
+  //   function fun(){
+  //     console.log(i);
+  //   }
+  //   fun();
+  // }
+  // foo()
+</script>
+<body>
+  
+</body>
+</html>
