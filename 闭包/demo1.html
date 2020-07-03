@@ -12,18 +12,27 @@
     // }
     // foo();
     // console.log("b: "+b);
-    var a=5;
+    // var a=5;
     // (function foo(a){
     //   a=4;
     //   console.log(a);
     // })(a);
     // console.log(a);
-    function fun1(a){
-      a=7;
-      console.log(a);
-    }
-    fun1(a);
-    console.log(a);
+    // for(var i=0;i<5;i++){
+    //   function foo(i){
+    //     var j=i;
+    //     setTimeout(function timer(){
+    //       console.log(j);
+    //     }, 1000);
+    //   }
+    //   foo(i)
+    // }
+        setTimeout(function(){
+        console.log("here");
+        }, 10000);
+        var i = 0;
+        //具体数值根据你的计算机CPU来决定，达到延迟效果就好
+        while (i < 300000) { console.log(i); i++;} 
   </script>
 </head>
 <body>
