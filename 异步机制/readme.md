@@ -27,3 +27,93 @@ console.log("d");
 ```
 
 ![运行结果](./img/1.png)
+
+所以当我们给`setTimeout`设置了一个等待的时间，当同步任务还没有结束时，即使`setTimeout`函数的等待时间到了，它依然是不会执行的，它只会在同步任务结束再去计算时间后执行`setTimeout`内的函数。
+
+## 宏任务与微任务
+
+现在运行如下代码：
+
+```js
+console.log('script start');
+
+setTimeout(function() {
+  console.log('setTimeout');
+}, 0);
+
+Promise.resolve().then(function() {
+  console.log('promise1');
+}).then(function() {
+  console.log('promise2');
+});
+
+console.log('script end');
+```
+
+它的运行结果如下图所示：
+
+![运行结果](./img/2.png)
+
+你可能会疑惑`Promise.resolve()`是什么，它是同步任务吗？为什么先执行它后执行`setTimeout`，实际上它是异步任务里的微任务，这里就得介绍下宏任务与微任务了。
+
+异步任务还可分为宏任务与微任务，并且它们也有着不同的任务队列，它们的执行顺序是先执行宏任务队列中的一个宏任务，再去清空微任务队列，再去根据代码顺序执行宏任务队列中的下一个任务，如果中间遇到新的微任务，会把它放进微任务队列，待这个宏任务被执行完，再去清空一遍微任务，一直不停地重复上述步骤，直到所有任务被执行完（这里只说浏览器中的执行顺序，如果是node运行时的环境还会有所不同。
+
+> 除了上述的`Promise.resolve()`外，微任务还有：原生`Promise`(有些实现的`promise`将`then`方法放到了宏任务中)、`process`.`nextTick`、`Object.observe`(已废弃)、 `MutationObserver`记住就行了。
+>
+> 宏任务有包括整体代码`script`，`setTimeout`，`setInterval`、`setImmediate`。
+
+整体代码就是一个宏任务，所以上述代码在`setTimeout()`之前已经执行过一次宏任务了，因此才会先输出`Promise.resolve()`的代码，后执行`setTimeout`。
+
+### 案例
+
+现在我们再通过如下代码来再次感受下宏任务、微任务的处理过程：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+    Promise.resolve().then(()=>{
+    console.log('Promise1');
+    setTimeout(()=>{
+    console.log('setTimeout2')
+    },0)
+    })
+
+    setTimeout(()=>{
+      console.log('setTimeout1')
+      Promise.resolve().then(()=>{
+      console.log('Promise2')
+    })
+    },0)
+  </script>
+<body>
+  
+</body>
+</html>
+```
+
+`script`里面只有`promise`和`setTimeout()`，不存在其它函数，所以找不到同步任务去执行异步任务（是的，想要执行异步任务里面的同步任务就得先执行异步任务）。
+
+`script`总体是一个宏任务，所以先执行了一个宏任务，然后寻找微任务进行执行，第一层的`Promise.resolve()`与`setTimeout()`显然`promise`是微任务，进入到`then()`里面，遇到`console.log('Promise1')`，它是个同步任务立即执行，然后又遇到`setTimeout(()=>{console.log('setTimeout2')},0)`，这是个宏任务，把他放进宏任务队列。
+
+然后去执行宏任务队列中的第一个任务，也就是:
+
+```js
+setTimeout(()=>{
+  console.log('setTimeout1');
+  Promise.resolve().then(()=>{
+  console.log('Promise2')
+  })
+},0)
+```
+
+进入到该函数里面，遇到`console.log('setTimeout1');`，立即执行，然后又遇到`Promise.resolve().then(()=>{console.log('Promise2')})`，把他放进微任务队列。执行完宏任务后，再去清空微任务队列。因此输出结果是：
+
+![运行结果](./img/3.png)
+
+## Event Loop
+
+像上述那样不断地把任务（包括先执行同步任务后执行异步任务）放进主线程去执行的过程称为事件循环（Event Loop）

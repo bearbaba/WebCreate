@@ -5,19 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script>
-    console.log("a");
-    function fun1(){
-      console.log("b");
-      function fun2(){
-        console.log("c");
-      }
-      fun2();
-    }
-    fun1();
+    // console.log("a");
+    // function fun1(){
+    //   console.log("b");
+    //   function fun2(){
+    //     console.log("c");
+    //   }
+    //   fun2();
+    // }
+    // fun1();
+    // setTimeout(function(){
+    //   console.log("setTimeout");
+    // }, 1000);
+    // console.log("d");
     setTimeout(function(){
-      console.log("setTimeout");
-    }, 1000);
-    console.log("d");
+      console.log("aaa");
+    },3000);
+    for(var i=0;i<3000;i++)
+    {
+      console.log(i);
+    }
   </script>
 </head>
 <body>
