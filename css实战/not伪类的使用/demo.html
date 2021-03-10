@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul {
+      width: 690px;
+      margin: 20px auto;
+      letter-spacing: -4px;
+      word-spacing: -4px;
+      font-size: 0;
+    }
+
+    li {
+      font-size: 16px;
+      letter-spacing: normal;
+      word-spacing: normal;
+      zoom: 1;
+      list-style: none outside none;
+      display: inline-block;
+    }
+
+    .demo-filter:not(:hover) {
+      filter: blur(5px);
+    }
+
+    .demo-filter1:not(:hover) {
+      filter: grayscale(1);
+    }
+
+    /*     .demo-filter:hover{
+      filter: none;
+    } */
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>
+      <img src="./demo.jpg" class="demo-filter">
+    </li>
+    <li><img src="./demo.jpg" alt="" class="demo-filter1"></li>
+  </ul>
+</body>
+
+</html>
